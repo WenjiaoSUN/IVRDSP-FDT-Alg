@@ -1,0 +1,24 @@
+//instance 108 nbCities:3; nbDepots:2; size:90 90;nbTrips:100;nbCombinedTrips25;maxFolderTimeSlotAsTimeWindow2;planningHorizon:0-1440;maxDriving:540;maxWorking:720,
+//nbNodes 106, nbArcs: 1725, maxPerCombined: 0.25, timeWindow20, nbDriverAvailable: 23, solution gap: 0.3132224625252782, 
+//The final integer value is: 67045.0
+//The elapsed time is: 400.0 sec
+//Total time in milli second of cplex solving pricing problem: 0.0 milli sec
+//Schedules: driver idDriver idDepot indexStarting tripWithWorkingStatus indexEnding 
+driver 0 0 100 45 true 790 27 true 865 28 true 925 29 true 985 102
+driver 1 1 101 81 true 335 11 true 395 67 true 475 72 true 575 103
+driver 2 0 100 70 true 265 71 false 360 85 true 440 42 true 535 65 true 595 83 true 655 51 true 770 52 true 830 102
+driver 3 1 101 77 true 105 99 true 215 96 true 290 97 true 365 54 true 450 42 false 535 103
+driver 4 0 100 63 true 240 64 true 315 102
+driver 5 1 101 39 true 65 98 true 125 15 true 225 16 true 310 17 true 400 41 true 470 42 false 535 103
+driver 6 0 100 34 true 505 35 true 565 43 false 625 3 true 685 22 true 755 61 true 870 62 true 930 102
+driver 7 0 100 21 true 510 86 true 570 24 true 630 50 true 690 26 true 750 36 true 825 37 true 890 38 true 950 102
+driver 8 0 100 23 true 520 31 true 595 32 true 695 92 true 770 93 true 850 94 true 915 95 true 975 102
+driver 9 1 101 14 true 155 15 false 225 78 false 315 19 true 375 20 true 435 91 true 515 103
+driver 10 1 101 10 true 300 71 true 360 49 true 445 42 false 535 65 false 595 66 false 665 26 false 750 46 true 870 75 true 945 103
+driver 11 0 100 7 true 40 8 true 115 9 true 190 40 true 265 82 true 400 58 true 475 59 true 550 43 true 625 44 true 705 102
+driver 12 0 100 79 true 505 55 true 585 68 true 665 33 true 800 57 true 860 47 true 970 48 true 1055 102
+driver 13 0 100 78 true 315 30 true 395 12 true 455 13 true 515 73 true 575 66 true 665 74 true 765 69 true 865 53 true 930 76 true 990 102
+driver 14 1 101 84 true 225 71 false 360 0 true 420 1 true 480 80 true 580 60 true 695 4 true 765 5 true 830 6 true 890 103
+driver 15 1 101 18 true 505 2 true 590 25 true 680 56 true 785 87 true 865 88 true 935 89 true 1000 90 true 1060 103
+
+

@@ -1,0 +1,42 @@
+//instance 135 nbCities:3; nbDepots:2; size:90 90;nbTrips:150;nbCombinedTrips37;maxFolderTimeSlotAsTimeWindow1;planningHorizon:0-1440;maxDriving:540;maxWorking:720,
+//nbNodes 156, nbArcs: 3660, maxPerCombined: 0.25, timeWindow10, nbDriverAvailable: 34, solution gap: 36.3833672098397, 
+//The final integer value is: 145135.0
+//The elapsed time is: 505.0 sec
+//Total time in milli second of cplex solving pricing problem: 0.0 milli sec
+//Schedules: driver idDriver idDepot indexStarting tripWithWorkingStatus indexEnding 
+driver 0 1 151 0 true 410 1 true 490 2 true 600 3 true 675 4 true 775 5 true 840 6 true 900 153
+driver 1 0 150 7 true 30 8 true 105 9 true 190 10 true 290 11 true 390 12 true 465 13 true 525 152
+driver 2 1 151 14 true 145 15 true 235 16 true 320 17 true 410 18 true 495 2 false 600 153
+driver 3 1 151 19 true 365 20 true 430 21 true 520 3 false 675 22 true 765 153
+driver 4 0 150 23 true 510 24 true 620 25 true 690 26 true 755 27 true 870 28 true 930 29 true 990 152
+driver 5 1 151 30 true 385 23 false 510 31 true 590 32 true 705 33 true 810 153
+driver 6 0 150 34 true 495 35 true 555 32 false 705 36 true 815 37 true 900 38 true 960 152
+driver 7 1 151 39 true 55 9 false 190 40 true 275 17 false 410 41 true 480 42 true 545 153
+driver 8 0 150 43 true 630 44 true 715 45 true 800 46 true 880 47 true 980 48 true 1065 152
+driver 9 1 151 49 true 455 24 false 620 50 true 695 51 true 780 52 true 840 53 true 940 153
+driver 10 0 150 54 true 460 55 true 575 44 false 715 56 true 795 57 true 870 152
+driver 11 0 150 58 true 475 59 true 560 43 false 630 60 true 705 36 false 815 61 true 880 62 true 940 152
+driver 12 0 150 63 true 230 64 true 310 21 false 520 65 true 585 66 true 675 152
+driver 13 0 150 67 true 485 55 false 575 68 true 675 33 false 810 69 true 875 152
+driver 14 0 150 70 true 255 71 true 370 18 false 495 72 true 585 50 false 695 152
+driver 15 0 150 73 true 565 66 false 675 74 true 775 57 false 870 75 true 940 76 true 1000 152
+driver 16 1 151 77 true 95 15 false 235 78 true 325 0 false 410 79 true 495 80 true 570 153
+driver 17 1 151 81 true 325 82 true 410 73 false 565 83 true 650 56 false 795 153
+driver 18 1 151 84 true 215 71 false 370 85 true 450 72 false 585 153
+driver 19 1 151 86 true 580 22 false 765 87 true 855 88 true 945 89 true 1010 90 true 1070 153
+driver 20 0 150 91 true 525 60 false 705 92 true 780 87 false 855 93 true 920 152
+driver 21 0 150 94 true 400 95 true 485 96 true 595 92 false 780 97 true 865 152
+driver 22 0 150 98 true 260 49 false 455 99 true 530 100 true 610 101 true 670 152
+driver 23 1 151 102 true 275 54 false 460 103 true 540 68 false 675 104 true 745 153
+driver 24 0 150 105 true 210 30 false 385 106 true 455 83 false 650 152
+driver 25 0 150 107 true 555 104 false 745 108 true 835 53 false 940 109 true 1035 152
+driver 26 0 150 110 true 190 111 true 270 85 false 450 112 true 540 113 true 605 114 true 665 152
+driver 27 0 150 115 true 30 116 true 140 78 false 325 117 true 390 118 true 460 119 true 520 152
+driver 28 0 150 120 true 475 121 true 555 122 true 655 123 true 750 108 false 835 124 true 905 125 true 965 152
+driver 29 1 151 126 true 190 127 true 275 128 true 350 129 true 410 130 true 505 131 true 595 153
+driver 30 1 151 138 true 180 139 true 250 140 true 340 141 true 405 142 true 485 143 true 570 153
+driver 31 0 150 144 true 105 145 true 180 146 true 270 147 true 335 152
+driver 32 1 151 148 true 45 149 true 110 153
+driver 33 0 150 132 true 565 133 true 675 134 true 765 135 true 885 136 true 960 137 true 1035 152
+
+

@@ -1,0 +1,2658 @@
+package Solver;
+
+
+import InputSchedulesAndRoutesInforms.*;
+import ilog.concert.*;
+import ilog.cplex.IloCplex;
+import Instance.Vehicle;
+import Instance.Instance;
+import Instance.InstanceReader;
+import Instance.Trip;
+import Instance.Depot;
+import Instance.Driver;
+import Solution.Solution;
+import Solution.PathForVehicle;
+import Solution.TripWithStartingInfos;
+import Solution.PathForDriver;
+import Solution.TripWithDriveInfos;
+import InputSchedulesAndRoutesInforms.InputInforms;
+import Instance.TripWithWorkingStatusAndDepartureTime;
+
+
+import java.io.*;
+
+public class SolverWithFormulationBasedOnDriverSchedule {
+    private Instance instance;
+    private IloCplex cplex;
+    private IloNumVar[] varVehicleUse;
+
+    private IloNumVar[] varDriverUse;
+    //-------------------------------------------------------
+    private IloNumVar[][] varVehicleSourceDepotArc;
+
+    private IloNumVar[][] varVehicleDepotSinkArc;
+
+    private IloNumVar[][] varDriverSourceDepotArc;
+
+    private IloNumVar[][] varDriverDepotSinkArc;
+    //-------------------------------------------------------
+    private IloNumVar[][][] varVehicleArc; //here is the vehicle variable
+    private IloNumVar[][][] varDriverArc; //here is the variable x d i j
+    private IloNumVar[][] varDriving; //here is the variable o i d
+    private IloNumVar[][] varLeading; // here is the variable l v i
+    private IloNumVar[][][] varChangeOver; // here is the variable y d i j describe whether the driver leaving his own place to other place
+
+    // new variables to deal with the time window
+    private IloNumVar[][] varWhetherDriverShortArc; //b_ij^DS
+
+//    private IloNumVar varWhetherGreaterThanMinP[][];//20245.2.5
+//    private IloNumVar varWhetherLessThanDriverShort[][];//20245.2.5
+    private IloNumVar[][] varWhetherVehicleShortArc;//b_ij^VS
+    private IloNumVar[] varStartingTimeOfDriverSchedule;//s^d
+    private IloNumVar[] varEndingTimeOfDriverSchedule;//e^d
+
+    // Here are the new variables to deal with the time window 2024.9.18
+    private IloNumVar[] varTripStartTime;//t_i
+    private IloNumVar[][] varVehicleWaitingTimeForNotAllComb;//t^V_ij
+
+    private IloNumVar[][][] varVehicleWaitingTimeForAllComb;//t^v_ij
+    private IloNumVar[][][] varDriverWaitingTime;//t^d_ij
+
+
+    // above are the new variables to deal with the time window 2024.9.18
+    private int nbVehicle;
+    private int nbDriver;
+    private int nbTrip;
+    private int nbNodes;  // what is this nbNodes For? give all the vehicle a starting and ending node.....if not use this, what would happen?
+    private int nbDepot;
+    private double timeInMilliSec;
+    private double lowerBound;
+    private double upperBound;
+    private String warmStartFilePath;
+    //warmStartFilePath;
+    private boolean whetherSolveRelaxationProblem;
+
+    // Here are the new attributes to deal with the time window 2024.9.12
+    private int timeUnitSlot;
+    private int startHorizon;
+    private int endHorizon;
+
+    //    private int nbMaxWaitingUnits;
+//
+    private int minPlanTime;
+    // Above are the attributes added to  deal with the time window 2024.9.12
+
+
+    private int M;
+
+    private InputInforms inputInforms;
+    private int nbDriverValidInSchedules;
+
+    private int nbVehicleValidInRoutes;
+
+    public SolverWithFormulationBasedOnDriverSchedule(Instance instance, InputInforms inputInforms) throws IloException {
+        this.instance = instance;
+        this.inputInforms = inputInforms;//Z2025.1.15
+        this.nbVehicle = instance.getMaxNbVehicleAvailable();
+        this.nbVehicleValidInRoutes = this.inputInforms.getVehicleRoutes().size();
+        this.nbDriver = instance.getMaxNbDriverAvailable();
+        this.nbDriverValidInSchedules = this.inputInforms.getDriverSchedules().size();
+        // change to schedules size 2025.1.15
+        this.nbTrip = instance.getNbTrips();
+        this.nbDepot = instance.getNbDepots();
+        this.nbNodes = nbTrip + 2 * nbDepot;  //this is to avoid the path become a circle
+        this.warmStartFilePath = null;
+        this.whetherSolveRelaxationProblem = false;
+        // here are the attributes to deal with the time window
+        this.timeUnitSlot = instance.getTimeSlotUnit();
+        this.startHorizon = instance.getStartingPlanningHorizon();
+        this.endHorizon = instance.getEndingPlaningHorizon();
+        this.minPlanTime = instance.getMinPlanTurnTime();
+        this.M = instance.getEndingPlaningHorizon();
+    }
+
+    public SolverWithFormulationBasedOnDriverSchedule(Instance instance, InputInforms inputInforms, Boolean whetherSolveRelaxationProblem) throws IloException {
+        this(instance, inputInforms);
+        this.whetherSolveRelaxationProblem = whetherSolveRelaxationProblem;
+    }
+
+
+    public Solution solveWithCplexBasedOnGivenSchedules() {
+        try {
+            cplex = new IloCplex();
+            //cplex.setParam(IloCplex.Param.MIP.Strategy.File, 2);//give a warm start value from an outside file
+            defineDecisionVariables();
+            defineObjectiveFunction();
+
+            // for vehicle
+            cnstRelationshipOfVehicleUseAndSourceDepot(); //（2）
+            cnstRelationshipOfVehicleSourceDepotArcAndVehicleDepotSinkArc(); //（3）****
+            cnstRelationshipOfVehicleSourceDepotArcAndVehicleDepotTripArc(); //（4）
+            cnstRelationshipOfVehicleDepotSinkArcAndVehicleDepotTripArc(); //（5）*****
+            cnstVehicleFlowConstraintForTrip();//(6) Vehicle flow constraint for trip
+            cnstnbVehicleInTrip(); //constraint (7)
+            cnstOneLeadingVehicleInCombTrip();//constraint (8)
+            cnstRelationshipOfVehicleLeadingAndTripArc();//constraint (9)
+            cnstUseVehicleOrder();// constraints(10)
+
+            // for driver
+            cnstDriving();//(19)
+            cnstDrivingTime();//(20)
+            cnstWorkStatusFirst();//(22)
+            cnstWorkStatusSecond();//(23)
+
+            //Here are the original linking constraints
+            cnstChangeVehicleBetweenNormalTrips();//(27) count changeover when the driving driver change vehicle
+            cnstChangeVehicleFromNormalToCombinedTrips();//(28)
+            cnstVehicleChangeFromCombinedToNormalTrip();//(29)
+            cnstChangeVehicleFromCombinedToCombinedTrips();//(30)
+            cnstChangeVehicleFromCombinedToCombinedTripsCorrespoindingVerLeadingOrder();//(31)
+            cnstChangeOverDuringCombineToCombineWhenNotSuccessiveToVehicle();//(32)
+
+            //=============================================================================2025.1.16 Formulation Extra Constraints TW cause====================
+            cnstStartingTimeRange1();//(33)-1
+            cnstStartingTimeRange2();//(33)-1
+            cnstDetectDriverShortConnectionArc();//(42) replace by the following as it couldnt detect when t==20 (not include by short connection
+
+//            cnstWhetherGreaterThanMinPlan1();//2025.2.5
+//            cnstWhetherGreaterThanMinPlan2();//2025.2.5
+//            cnstWhetherLessThanDriverShort1();//2025.2.5
+//            cnstWhetherLessThanDriverShort2();//2025.2.5
+//
+//            cnstWhetherIsShortLinkWhetherGreaterThanMinPlan();//2025.2.5
+//            cnstWhetherIsShortLinkWhetherLessThanShortDriver();//2025.2.5
+//            cnstWhetherIsShortLinkMinAndShortDriver();//2025.2.5
+
+
+            cnstStartingTimeOfSchedule();//(44)
+            cnstEndingTimeOfSchedule();//(45)
+            cnstWorkingTimeLimitation();//(46)
+            cnstDriverWaitingTime_M1();//(38)-1
+            cnstDriverWaitingTime_M2();//(38)-2
+            cnstDriverWaitingTime_1();//(39)-1
+            cnstDriverWaitingTime_2();//(39)-2
+
+
+            cnstVehicleWaitingTimeForNotAllCombinedArc_M1();//(34)-1
+            cnstVehicleWaitingTimeForNotAllCombinedArc_M2();//(34)-2
+            cnstVehicleWaitingTimeForNotAllCombinedArc_1();//(35)-1
+            cnstVehicleWaitingTimeForNotAllCombinedArc_2();//(35)-2
+
+            cnstVehicleWaitingTimeForAllCombinedArc_M1();//(36)-1
+            cnstVehicleWaitingTimeForAllCombinedArc_M2();//(36)-2
+            cnstVehicleWaitingTimeForAllCombinedArc_1();//(37)-1
+            cnstVehicleWaitingTimeForAllCombinedArc_2();//(37)-2
+
+            cnstDetectVehicleShortConnectionArc();//(40)
+            cnstKeepSameVehiclesDuringShortConnectionInCombinedArc();//(41)//  目前还是这个约束阻挡了解无法实现
+            cnstProhibitChangeVehicleDuringDriverShortConnection();//(43)
+
+//            //接下来这个3个约束是希望当combined 的时候不要更换leading 但是不允许driver change leading  when driver short connection, for sure will cause infeasiblity,
+//            thus, those following threee we dont add and in the model we give the good explaination
+            //cnstFromNormalEnterACombinedInDriverShortConnection();//add 2025.7.10//short connection for normal to combine
+            //cnstFromACombinedLeaveToANormalInDriverShortConnection();//add 2025.7.10// short connection for combine to normal
+            //cnstFromCombinedToCombinedInDriverShortConnection();//add 2025.7.10// short connection from combine to combine
+
+            // 5. export the model
+            cplex.exportModel("modelOfRoutingAndScheduling.lp");
+
+            cplex.setParam(IloCplex.Param.TimeLimit, 3600);//
+            cplex.setParam(IloCplex.Param.Threads, 1);
+            //here parameter for gap is only for the small instance which gap is 0.01 but in a very short time
+            cplex.setParam(IloCplex.Param.MIP.Tolerances.MIPGap, 1e-06);
+            //cplex.setParam(IloCplex.Param.Parallel, 1);
+            //cplex.setParam(IloCplex.Param.MIP.Strategy.PresolveNode,0);//Node presolve strategy.
+            // Set the HeurFreq parameter to -1 to turn off the node heuristic
+            // cplex.setParam(IloCplex.Param.MIP.Strategy.HeuristicFreq, -1);
+            // cplex.setParam(IloCplex.Param.MIP.Strategy.VariableSelect, 4);//try a less expensive variable selection strategy pseudo reduced costs.
+            // cplex.setParam(IloCplex.Param.Emphasis.MIP, 1);//this emphasize feasibility over optimality
+            // ----------------------------------------------here is for the warm start
+            // Create a warm start according to a solution file
+            // ----------------------------------------------here is after the warm start
+
+            int numVars = cplex.getNcols();  // Total variables
+            int numBinaryVars = cplex.getNbinVars();  // Binary variables
+            int numIntegerVars = cplex.getNintVars();  // Integer variables (excluding binary)
+            int numContinuousVars = numVars - numBinaryVars - numIntegerVars;  // Continuous variables
+            int numConstraints = cplex.getNrows(); // Count constraints before solving
+
+            System.out.println("nbTotal variables " + numVars);
+            System.out.println("nbBinaryVars " + numBinaryVars);
+            System.out.println("nbIntegerVars " + numIntegerVars);
+            System.out.println("nbConstraints " + numConstraints);
+            System.out.println("nbNodes " + instance.getNbNodes());
+            System.out.println("nbPossibleArcs " + instance.getMaxNbPossibleArc());
+
+            // 6. solve
+            long startTime = System.currentTimeMillis();
+            if (cplex.solve()) {
+                this.timeInMilliSec = (int) (System.currentTimeMillis() - startTime);
+                this.lowerBound = this.cplex.getBestObjValue();  //getBestObjValue will give the low bound
+                this.upperBound = this.cplex.getObjValue();
+                System.out.println("problem solved !");
+                if (this.whetherSolveRelaxationProblem == false) {
+                    printSolutionAfterSolve();// need to be modified 2025.1.15
+                    return getSolutionFromCplex();
+                } else {
+                    return null;
+                }
+            } else {
+                System.out.println("lp problem not be solved");
+                System.out.println(cplex.getStatus());
+                this.timeInMilliSec = (int) (System.currentTimeMillis() - startTime);
+                this.lowerBound = 0;
+                this.upperBound = Integer.MAX_VALUE;
+                return null;
+            }
+        } catch (IloException e) {
+            System.out.println("exception");
+            e.printStackTrace();
+            System.exit(-1);
+        }
+
+        cplex.close();
+        cplex.end();
+
+        return null;
+
+    }
+
+    //need to be modified the method printSolution 2025.1.15
+    private void printSolutionAfterSolve() throws IloException {
+        // 7. print
+        System.out.println("The mini cost of routing and scheduling is " + cplex.getObjValue());
+
+        for (int v = 0; v < nbVehicle; v++) {
+            if (cplex.getValue(varVehicleUse[v]) > 0.9999) {
+                //System.out.println("vehicle" + v + " is used in the planing");
+            }
+        }
+
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+
+            //System.out.println("driver" + d + " is used in the planing");
+
+        }
+
+        for (int v = 0; v < nbVehicle; v++) {
+            Vehicle vehicle = instance.getVehicle(v);
+            for (int k = 0; k < instance.getNbDepots(); k++) {
+                Depot depot = instance.getDepot(k);
+
+                if (cplex.getValue(varVehicleSourceDepotArc[v][k]) > 0.99) {
+
+                    // System.out.println("vehicle" + v + "_source_" + depot.getIndexOfDepotAsStartingPoint() + "=1.0");
+                }
+                if (cplex.getValue(varVehicleDepotSinkArc[v][k]) > 0.9999) {
+                    //System.out.println("vehicle" + v + "_" + depot.getIndexOfDepotAsEndingPoint() + "_sink=1.0");
+                }
+            }
+            for (int i = 0; i < nbTrip; i++) {
+                if (instance.whetherVehicleCanStartWithTrip(v, i)) {
+                    for (int k = 0; k < nbDepot; k++) {
+                        Depot depot = instance.getDepot(k);
+                        if (instance.getTrip(i).getIdOfStartCity() == depot.getIdOfCityAsDepot()) {
+                            if (cplex.getValue(varVehicleArc[v][depot.getIndexOfDepotAsStartingPoint()][i]) > 0.9999) {
+                                // System.out.println("vehicle" + v + "_" + depot.getIndexOfDepotAsStartingPoint() + "_" + i + "=1.0");
+                            }
+                        }
+                    }
+                }
+
+                if (instance.whetherVehicleCanEndAtTrip(v, i)) {
+                    for (int k = 0; k < nbDepot; k++) {
+                        Depot depot = instance.getDepot(k);
+                        if (instance.getTrip(i).getIdOfEndCity() == depot.getIdOfCityAsDepot()) {
+                            if (cplex.getValue(varVehicleArc[v][i][depot.getIndexOfDepotAsEndingPoint()]) > 0.999) {
+                                //System.out.println("vehicle" + v + "_" + i + "_" + depot.getIndexOfDepotAsEndingPoint() + "=1.0");
+                            }
+                        }
+                    }
+                }
+
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        //check whether there is arc before let cplex get the value
+                        //here pay attention: if the value is not less than infinitive, then we couldn't get the value of this variable, because it is not show up in the model
+                        // System.out.println("trip_"+i+"trip_"+j);
+                        if (cplex.getValue(varVehicleArc[v][i][j]) > 0.999) {
+
+                            System.out.println("vehicle_" + v + "perform arc " + i + "_" + j + "=" + cplex.getValue(varVehicleArc[v][i][j]));
+                        }
+
+                    }
+                }
+            }
+//
+        }
+        // here is to print out the solution of the driver solution
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        if (driverSchedule.whetherArcExist(i, j)) {//2025.1.15
+                            //System.out.println("driver" + d + "_" + i + "_" + j + "=" + cplex.getValue(varDriverArc[d][i][j]));
+                            if (cplex.getValue(varChangeOver[d][i][j]) > 0.9999) {
+                                System.out.println("ChangeOver happen between trip_" + i + " and trip_" + j + " for driver" + "_" + d);
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        // here is to print out which vehicle is leading during the combine part
+        for (int i = 0; i < nbTrip; i++) {
+            for (int j = 0; j < nbTrip; j++) {
+                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                    if (instance.getTrip(i).getNbVehicleNeed() > 1.99) {
+                        for (int v = 0; v < nbVehicle; v++) {
+                            Vehicle vehicle = instance.getVehicle(v);
+                            if (cplex.getValue(varVehicleArc[v][i][j]) > 0.9999) {
+                                if (cplex.getValue(varLeading[v][i]) > 0.9999) {
+
+                                    System.out.println("vehicle" + "_" + v + " leading Trip" + "_" + i);
+                                } else {
+                                    System.out.println("vehicle_" + v + " is combined to the leading vehicle to perform the trip_" + i);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        //Here is to print out which driver is driving the trip
+        for (int i = 0; i < nbTrip; i++) {
+            for (int d = 0; d < nbDriverValidInSchedules; d++) {
+                DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+                if (instance.whetherDriverCanEndAtTrip(i)) {
+
+                    if (cplex.getValue(varDriving[d][i]) > 0.9999) {
+                        System.out.println("driver" + "_" + d + " drive" + " Trip" + "_" + i);
+
+                    }
+
+                }
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        if (driverSchedule.whetherArcExist(i, j)) {//2025.1.15
+                            if (cplex.getValue(varDriverArc[d][i][j]) > 0.9999) {
+                                if (instance.getTrip(i).getNbVehicleNeed() == 2) {
+
+//                                    if (cplex.getValue(varDriving[d][i]) > 0.9999) {
+//                                        System.out.println("driver" + "_" + d + " drive" + " Trip" + "_" + i);
+//                                        System.out.println("driver_" + d + " drive combined trip_" + i);
+//                                    }else {
+//                                        System.out.println("driver_"+d+" is a passenger in the combine trip"+i);
+//                                    }
+                                   // System.out.println("driver-" + d + " perform trip " + i + "_" + j);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        //2024.9.17
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            if (cplex.getValue(varStartingTimeOfDriverSchedule[d]) > 0.99) {
+             //   System.out.println("driver schedule_" + d + " start time " + varStartingTimeOfDriverSchedule[d]);
+            }
+        }
+
+
+        for (int i = 0; i < nbTrip; i++) {
+            if (cplex.getValue(varTripStartTime[i]) >= 0) {
+               // System.out.println("trip_" + i + " start time unit_" + cplex.getValue(varTripStartTime[i]));
+            }
+        }
+//
+        for (int v = 0; v < nbVehicle; v++) {
+            for (int i = 0; i < nbTrip; i++) {
+                int duration_i = instance.getDuration(instance.getTrip(i).getIdOfStartCity(), instance.getTrip(i).getIdOfEndCity());
+                int nbVehicleNeed_i = instance.getTrip(i).getNbVehicleNeed();
+                for (int j = 0; j < nbTrip; j++) {
+
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        int maxWaitingTime = Math.round(instance.getTrip(j).getLatestDepartureTime()
+                                - instance.getTrip(i).getEarliestDepartureTime() - duration_i);
+                        int nbVehicleNeed_j = instance.getTrip(j).getNbVehicleNeed();
+                        if (maxWaitingTime >= minPlanTime) {
+                            if (cplex.getValue(varVehicleArc[v][i][j]) > 0.99) {
+                                if (nbVehicleNeed_i == 1 || nbVehicleNeed_j == 1) {
+                                    if (cplex.getValue(varVehicleWaitingTimeForNotAllComb[i][j]) > 0.99) {
+                                        System.out.println("vehicle_" + v + " waiting _" + cplex.getValue(varVehicleWaitingTimeForNotAllComb[i][j]) + "time between trip_" + i + "_" + j);
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+//
+        for (int v = 0; v < nbVehicle; v++) {
+            for (int i = 0; i < nbTrip; i++) {
+                int nbVehicleNeed_i = instance.getTrip(i).getNbVehicleNeed();
+                int duration_i = instance.getDuration(instance.getTrip(i).getIdOfStartCity(), instance.getTrip(i).getIdOfEndCity());
+                for (int j = 0; j < nbTrip; j++) {
+                    int nbVehicleNeed_j = instance.getTrip(j).getNbVehicleNeed();
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j) && nbVehicleNeed_i == 2 && nbVehicleNeed_j == 2) {
+                        int maxWaitingTime = (instance.getTrip(j).getLatestDepartureTime()
+                                - instance.getTrip(i).getEarliestDepartureTime() - duration_i);
+                        if (cplex.getValue(varVehicleArc[v][i][j]) > 0.99) {
+                            if (maxWaitingTime >= minPlanTime) {
+                                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                                    if (cplex.getValue(varVehicleWaitingTimeForAllComb[v][i][j]) > 0.99) {
+                                        System.out.println("Vehicle_" + v + " waiting _" + cplex.getValue(varVehicleWaitingTimeForAllComb[v][i][j]) + "time between trip_" + i + "_" + j);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+//
+//
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < nbTrip; i++) {
+                int duration_i = instance.getDuration(instance.getTrip(i).getIdOfStartCity(), instance.getTrip(i).getIdOfEndCity());
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        if (driverSchedule.whetherArcExist(i, j)) {
+                            int maxWaitingTime = (instance.getTrip(j).getLatestDepartureTime()
+                                    - instance.getTrip(i).getEarliestDepartureTime() - duration_i);
+                            if (cplex.getValue(varDriverArc[d][i][j]) > 0.99) {
+                                if (maxWaitingTime >= minPlanTime) {
+                                    if (cplex.getValue(varDriverWaitingTime[d][i][j]) > 0.99) {
+
+//                                        System.out.println("Driver_" + d + " waiting _" +cplex.getValue(varDriverWaitingTime[d][i][j])+ "between trip_"+i+ "_" + j);
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < instance.getNbTrips(); i++) {
+            for (int j = 0; j < nbTrip; j++) {
+                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                    for (int d = 0; d < nbDriverValidInSchedules; d++) {
+                        DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+                        if (driverSchedule.whetherArcExist(i, j)) {
+//                            if(i==2&&j==3){
+//                                System.out.println("Check 2 to 3 "+cplex.getValue(varWhetherDriverShortArc[i][j]));
+//                            }
+
+                            if (cplex.getValue(varWhetherDriverShortArc[i][j]) > 0.99) {
+                                System.out.println(" detect driver short connection trip_"+i+" to trip_"+j);
+
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+        for (int i = 0; i < instance.getNbTrips(); i++) {
+            for (int j = 0; j < nbTrip; j++) {
+                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                    for (int v = 0; v < nbVehicleValidInRoutes; v++) {
+                        VehicleRoute vehicleRoute = this.inputInforms.getVehicleRoutes().get(v);
+                        if (vehicleRoute.whetherPerformArc(i, j) && instance.getTrip(i).getNbVehicleNeed() == 2 && instance.getTrip(j).getNbVehicleNeed() == 2) {
+                            if (cplex.getValue(varWhetherVehicleShortArc[i][j]) > 0.99) {
+                                System.out.println("arc_" + i + "_" + j + " is short connection for vehicle");
+
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+//
+
+    }
+
+    //************Below here is to add new constraints **********************2023.11.24
+    //for short connection go out
+    private void cnstUseVehicleOrder() throws IloException {
+        for (int v = 0; v < nbVehicle - 1; v++) {
+            IloLinearNumExpr expr = cplex.linearNumExpr();
+            expr.addTerm(varVehicleUse[v + 1], 1);
+            expr.addTerm(varVehicleUse[v], -1);
+            IloRange constraint = cplex.addLe(expr, 0);
+        }
+    }
+
+    private void cnstUseDriverOrder() throws IloException {
+        for (int d = 0; d < nbDriver - 1; d++) {
+            IloLinearNumExpr expr = cplex.linearNumExpr();
+            expr.addTerm(varDriverUse[d + 1], 1);
+            expr.addTerm(varDriverUse[d], -1);
+            IloConstraint constraint = cplex.addLe(expr, 0);
+        }
+    }
+
+
+    //***********Above here is to add new constraints************************2023.11..24
+
+
+    //this constraint is about the vehicle change from combined trip to a normal trip, which is (30)
+    //either driver drives the leading vehicle in combined trip enter a normal trip; or changeover happen
+    private void cnstVehicleChangeFromCombinedToNormalTrip() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    if (instance.getTrip(i).getNbVehicleNeed() == 2) {
+                        for (int j = 0; j < nbTrip; j++) {
+                            if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                                if (instance.getTrip(j).getNbVehicleNeed() == 1) {
+                                    if (driverSchedule.whetherArcExist(i, j)) {//2025.1.15
+                                        cplex.addEq(varDriverArc[d][i][j], 1);// force the arc==1 2025.1.15
+                                        IloLinearNumExpr expr = cplex.linearNumExpr();
+                                        expr.addTerm(varDriving[d][i], 1);
+                                        expr.addTerm(varLeading[v][i], 1);
+                                        expr.addTerm(varDriverArc[d][i][j], 1);
+                                        expr.addTerm(varVehicleArc[v][i][j], -1);
+                                        expr.addTerm(varChangeOver[d][i][j], -1);
+                                        IloRange constraint = cplex.addLe(expr, 2);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    //add NewConstraints 0619
+    private void cnstChangeVehicleFromCombinedToCombinedTripsCorrespoindingVerLeadingOrder() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    if (instance.getTrip(i).getNbVehicleNeed() >= 2) {
+                        for (int j = 0; j < nbTrip; j++) {
+                            if (instance.getTrip(j).getNbVehicleNeed() >= 2) {
+                                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                                    if (driverSchedule.whetherArcExist(i, j)) {//2025.1.15
+                                        cplex.addEq(varDriverArc[d][i][j], 1);// force the arc==1 2025.1.15
+                                        IloLinearNumExpr expr = cplex.linearNumExpr();
+                                        expr.addTerm(varDriverArc[d][i][j], 1);
+                                        expr.addTerm(varVehicleArc[v][i][j], 1);
+                                        expr.addTerm(varDriving[d][j], 1);
+                                        expr.addTerm(varLeading[v][j], 1);
+                                        expr.addTerm(varLeading[v][i], -1);
+                                        expr.addTerm(varChangeOver[d][i][j], -1);
+                                        IloRange constraint = cplex.addLe(expr, 3, "chCo&Co" + d);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //add NewConstraint 0618
+    public void cnstChangeOverDuringCombineToCombineWhenNotSuccessiveToVehicle() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    if (instance.getTrip(i).getNbVehicleNeed() >= 1.99) {
+                        for (int j = 0; j < nbTrip; j++) {
+                            if (instance.getTrip(j).getNbVehicleNeed() >= 2) {
+                                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                                    if (driverSchedule.whetherArcExist(i, j)) {//2025.1.15
+                                        cplex.addEq(varDriverArc[d][i][j], 1);// force the arc==1 2025.1.15
+                                        IloLinearNumExpr expr = cplex.linearNumExpr();
+                                        expr.addTerm(varDriverArc[d][i][j], 1);
+                                        expr.addTerm(varDriving[d][i], 1);
+                                        expr.addTerm(varLeading[v][j], 1);// it doesnt matter we change li to lj
+                                        expr.addTerm(varVehicleArc[v][i][j], -1);
+                                        expr.addTerm(varChangeOver[d][i][j], -1);
+                                        IloRange constraint = cplex.addLe(expr, 2, "chNo&CoNotSuccessiveToVehicle" + d);
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    // this constraint  is about changing vehicles between two combined trips, which is constraint (28)
+    // when previous combined lead by v, the latter combined not lead by v, changeover of driver happens
+    private void cnstChangeVehicleFromCombinedToCombinedTrips() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    if (instance.getTrip(i).getNbVehicleNeed() >= 2) {
+                        for (int j = 0; j < nbTrip; j++) {
+                            if (instance.getTrip(j).getNbVehicleNeed() >= 2) {
+                                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                                    IloLinearNumExpr expr = cplex.linearNumExpr();
+                                    expr.addTerm(varDriverArc[d][i][j], 1);
+                                    expr.addTerm(varVehicleArc[v][i][j], 1);
+                                    expr.addTerm(varDriving[d][j], 1);
+                                    expr.addTerm(varLeading[v][i], 1);
+                                    expr.addTerm(varLeading[v][j], -1);
+                                    expr.addTerm(varChangeOver[d][i][j], -1);
+                                    IloRange constraint = cplex.addLe(expr, 3, "chCo&Co" + d);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // this constraint  is about changing vehicles between normal trip (one vehicle) to combined trip (several vehicles),
+    // either driver drive the leading in v, or changeover occurs  which in paper is (27)
+    private void cnstChangeVehicleFromNormalToCombinedTrips() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    if (instance.getTrip(i).getNbVehicleNeed() == 1) {
+                        for (int j = 0; j < nbTrip; j++) {
+                            if (instance.getTrip(j).getNbVehicleNeed() >= 2) {
+                                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                                    if (driverSchedule.whetherArcExist(i, j)) {//2025.1.15
+                                        cplex.addEq(varDriverArc[d][i][j], 1);// force the arc==1 2025.1.15
+                                        IloLinearNumExpr expr = cplex.linearNumExpr();
+                                        expr.addTerm(varDriverArc[d][i][j], 1);
+                                        expr.addTerm(varVehicleArc[v][i][j], 1);
+                                        expr.addTerm(varDriving[d][j], 1);
+                                        expr.addTerm(varLeading[v][j], -1);
+                                        expr.addTerm(varChangeOver[d][i][j], -1);
+                                        IloRange constraint = cplex.addLe(expr, 2, "chNo&Co" + d);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    // this constraint is about changing vehicles between normal trip   which is (26) //change 0619
+    // it describes if drive leave or separates with his original vehicle cause to changeover
+    private void cnstChangeVehicleBetweenNormalTrips() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        if (driverSchedule.whetherArcExist(i, j)) {//2025.1.15
+                            cplex.addEq(varDriverArc[d][i][j], 1);// force the arc==1 2025.1.15
+                            IloLinearNumExpr expr = cplex.linearNumExpr();
+                            expr.addTerm(varDriverArc[d][i][j], 1);
+                            expr.addTerm(varDriving[d][i], 1);
+                            expr.addTerm(varChangeOver[d][i][j], -1);
+                            for (int v = 0; v < nbVehicle; v++) {
+                                expr.addTerm(varVehicleArc[v][i][j], -1);
+                            }
+                            IloRange constraint = cplex.addLe(expr, 1, "chNo&No" + d);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    // this changeOver constraint is about the work status second constraint, which is (25) in paper
+    private void cnstWorkStatusSecond() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        if (driverSchedule.whetherArcExist(i, j)) {
+                            cplex.addEq(varDriverArc[d][i][j], 1);// force the arc==1 2025.1.15
+                            IloLinearNumExpr expr = cplex.linearNumExpr();
+                            expr.addTerm(varDriverArc[d][i][j], 1);
+                            expr.addTerm(varDriving[d][j], 1);
+                            expr.addTerm(varChangeOver[d][i][j], -1);
+                            expr.addTerm(varDriving[d][i], -1);
+                            IloRange constraint = cplex.addLe(expr, 1, "statusChangeover_S" + d);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //start here, we consider the changeover
+    // this constraint is about the work status, which is (24) in paper
+    private void cnstWorkStatusFirst() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        if (driverSchedule.whetherArcExist(i, j)) {
+                            cplex.addEq(varDriverArc[d][i][j], 1);// force the arc==1 2025.1.15
+                            IloLinearNumExpr expr = cplex.linearNumExpr();
+                            expr.addTerm(varDriverArc[d][i][j], 1);
+                            expr.addTerm(varDriving[d][i], 1);
+                            expr.addTerm(varChangeOver[d][i][j], -1);
+                            expr.addTerm(varDriving[d][j], -1);
+                            IloRange constraint = cplex.addLe(expr, 1, "staCh_F" + d);
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    // this constraint is the mix about the driving variable and driver arc, which is (21) in paper
+    private void cnstDrivingAndArc() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < nbTrip; i++) {
+                IloLinearNumExpr expr = cplex.linearNumExpr();
+                expr.addTerm(varDriving[d][i], 1);
+                if (instance.whetherDriverCanEndAtTrip(i)) {
+                    for (int k = 0; k < nbDepot; k++) {
+                        Depot depot = instance.getDepot(k);
+                        if (instance.getTrip(i).getIdOfEndCity() == depot.getIdOfCityAsDepot()) {
+                            expr.addTerm(varDriverArc[d][i][depot.getIndexOfDepotAsEndingPoint()], -1);
+                        }
+                    }
+
+                }
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j))
+                        if (driverSchedule.whetherArcExist(i, j)) {//2025.1.15
+                            cplex.addEq(varDriverArc[d][i][j], 1);//2025.1.15
+                            expr.addTerm(varDriverArc[d][i][j], -1);
+                        }
+                }
+                IloRange constraint = cplex.addLe(expr, 0, "D" + d + "Trip" + i);
+            }
+        }
+    }
+
+
+    // this constraint is about the driving time, which is (19) in the paper
+    private void cnstDrivingTime() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            IloLinearNumExpr expr = cplex.linearNumExpr();
+            for (int i = 0; i < nbTrip; i++) {
+                Trip trip = instance.getTrip(i);
+//                int departureTime = trip.getEarliestDepartureTime();
+//                int arrivalTime = trip.getLatestDepartureTime();
+                int duration = trip.getDuration();
+                expr.addTerm(varDriving[d][i], duration);
+            }
+            IloRange constraint = cplex.addLe(expr, instance.getMaxDrivingTime(), "D" + d + "drivingTime");
+        }
+    }
+
+    // this constraint is about only one person drives the vehicle, which is (18) in the paper
+    private void cnstDriving() throws IloException {
+        for (int i = 0; i < nbTrip; i++) {
+            IloLinearNumExpr expr = cplex.linearNumExpr();
+            for (int d = 0; d < nbDriverValidInSchedules; d++) {
+                DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+                if (driverSchedule.whetherTripPresent(i)) {
+                    expr.addTerm(varDriving[d][i], 1);
+                }
+            }
+            IloRange constraint = cplex.addEq(expr, 1, "dri_" + i);
+        }
+    }
+
+    // this constraint is about at least one person in each trip, which is (17) in the paper
+    private void cnstPassenger() throws IloException {
+        for (int i = 0; i < nbTrip; i++) {
+            IloLinearNumExpr expr = cplex.linearNumExpr();
+            for (int d = 0; d < nbDriver; d++) {
+                Driver driver = instance.getDriver(d);
+                if (instance.whetherDriverCanEndAtTrip(i)) {
+                    // end at trip i
+                    for (int k = 0; k < nbDepot; k++) {
+                        Depot depot = instance.getDepot(k);
+                        if (instance.getTrip(i).getIdOfEndCity() == depot.getIdOfCityAsDepot()) {
+                            expr.addTerm(varDriverArc[d][i][depot.getIndexOfDepotAsEndingPoint()], 1);
+                        }
+                    }
+                }
+
+                for (int j = 0; j < nbTrip; j++) {
+                    //third case: traverse by trip i
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        expr.addTerm(varDriverArc[d][i][j], 1);
+                    }
+                }
+            }
+            IloRange constraint = cplex.addGe(expr, 1, "Pass" + "Trip" + i);
+        }
+    }
+
+    private void cnstDriverFlowConstraintForTrip() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            Driver driver = instance.getDriver(d);
+            for (int i = 0; i < nbTrip; i++) {
+                IloLinearNumExpr exprFlowEnter = cplex.linearNumExpr();
+                IloLinearNumExpr exprFlowOut = cplex.linearNumExpr();
+                //first case: Start with trip i
+                if (instance.whetherDriverCanStartWithTrip(i)) {
+                    for (int k = 0; k < nbDepot; k++) {
+                        Depot depot = instance.getDepot(k);
+                        if (instance.getTrip(i).getIdOfStartCity() == depot.getIdOfCityAsDepot()) {
+                            exprFlowEnter.addTerm(varDriverArc[d][depot.getIndexOfDepotAsStartingPoint()][i], 1);
+                        }
+                    }
+                }
+                //second case: End at trip i
+                if (instance.whetherDriverCanEndAtTrip(i)) {
+                    for (int k = 0; k < nbDepot; k++) {
+                        Depot depot = instance.getDepot(k);
+                        if (instance.getTrip(i).getIdOfEndCity() == depot.getIdOfCityAsDepot()) {
+                            exprFlowOut.addTerm(varDriverArc[d][i][depot.getIndexOfDepotAsEndingPoint()], 1);
+                        }
+                    }
+                }
+                //third case: traverse by trip i
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(j, i))
+
+                        exprFlowEnter.addTerm(varDriverArc[d][j][i], 1);
+
+
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j))
+
+                        exprFlowOut.addTerm(varDriverArc[d][i][j], 1);
+
+
+                }
+                IloConstraint constraint = cplex.addEq(exprFlowOut, exprFlowEnter, "dr" + d + "Trip" + i + "Flow");
+            }
+        }
+    }
+
+    // this is the constraint (9) for whether v leads in combined trip i limited by whether there is a v perform trip i
+    private void cnstRelationshipOfVehicleLeadingAndTripArc() throws IloException {
+        for (int i = 0; i < nbTrip; i++) {
+            if (instance.getTrip(i).getNbVehicleNeed() > 1) {
+                for (int v = 0; v < nbVehicle; v++) {
+                    IloLinearNumExpr expr = cplex.linearNumExpr();
+                    expr.addTerm(varLeading[v][i], 1);
+                    //special case
+                    if (instance.whetherVehicleCanEndAtTrip(v, i)) {
+                        for (int k = 0; k < nbDepot; k++) {
+                            Depot depot = instance.getDepot(k);
+                            int indexOfDepotAsEndingPoint = depot.getIndexOfDepotAsEndingPoint();
+                            if (instance.getTrip(i).getIdOfEndCity() == depot.getIdOfCityAsDepot()) {
+                                expr.addTerm(varVehicleArc[v][i][indexOfDepotAsEndingPoint], -1);
+                            }
+                        }
+
+                    }
+                    for (int j = 0; j < nbTrip; j++) {
+                        if (instance.whetherHavePossibleArcAfterCleaning(i, j))
+                            expr.addTerm(varVehicleArc[v][i][j], -1);
+                    }
+                    IloRange constraint = cplex.addLe(expr, 0, "LeadingTrip" + i + "V" + v);
+                }
+            }
+        }
+    }
+
+
+    // this is the constraint (8) for those combined trips, in each only one leading vehicle
+    private void cnstOneLeadingVehicleInCombTrip() throws IloException {
+        for (int i = 0; i < nbTrip; i++) {
+            if (instance.getTrip(i).getNbVehicleNeed() > 1) {
+                IloLinearNumExpr expr = cplex.linearNumExpr();
+                for (int v = 0; v < nbVehicle; v++) {
+                    Vehicle vehicle = instance.getVehicle(v);
+                    expr.addTerm(varLeading[v][i], 1);
+                }
+                IloRange constraint = cplex.addEq(expr, 1, "CombTrip" + i + "leadV");
+            }
+        }
+
+    }
+
+
+    // this constraint is for combine number of vehicle in each trip, which is (7) in paper
+    private void cnstnbVehicleInTrip() throws IloException {
+        // count the number of vehicles go out from trip i,
+        // in each trip the total number of vehicle arcs equals required number of vehicles
+        for (int i = 0; i < nbTrip; i++) {
+            IloLinearNumExpr expr = cplex.linearNumExpr();
+            for (int v = 0; v < nbVehicle; v++) {
+                Vehicle vehicle = instance.getVehicle(v);
+                //first case: some vehicle can leave i enter the depot
+                // then the vehicle go out to depot, then we need to know where is i end to obtain the out arc
+                if (instance.whetherVehicleCanEndAtTrip(v, i)) {
+                    for (int k = 0; k < nbDepot; k++) {
+                        Depot depot = instance.getDepot(k);
+                        int indexOfDepotAsEndingPoint = depot.getIndexOfDepotAsEndingPoint();
+                        if (instance.getTrip(i).getIdOfEndCity() == depot.getIdOfCityAsDepot()) {
+                            expr.addTerm(varVehicleArc[v][i][indexOfDepotAsEndingPoint], 1);
+                        }
+                    }
+
+                }
+                // second case some vehicle leave i to another trip j behind
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j))
+                        expr.addTerm(varVehicleArc[v][i][j], 1);//------here we need assign the number of vehicles in each trip
+                }
+            }
+            IloRange constraint = cplex.addEq(expr, instance.getTrip(i).getNbVehicleNeed(), "Trip" + i + "nbV");
+        }
+    }
+
+
+    // this FlowConstraint about the trip, which is constraint (6) in paper
+    private void cnstVehicleFlowConstraintForTrip() throws IloException {
+        for (int v = 0; v < nbVehicle; v++) {
+            Vehicle vehicle = instance.getVehicle(v);
+            for (int i = 0; i < nbTrip; i++) {
+                IloLinearNumExpr exprFlowEnter = cplex.linearNumExpr();
+                IloLinearNumExpr exprFlowOut = cplex.linearNumExpr();
+                //Starting with trip i
+                if (instance.whetherVehicleCanStartWithTrip(v, i)) {
+                    for (int k = 0; k < nbDepot; k++) {
+                        Depot depot = instance.getDepot(k);
+                        if (instance.getTrip(i).getIdOfStartCity() == depot.getIdOfCityAsDepot()) {
+                            exprFlowEnter.addTerm(varVehicleArc[v][depot.getIndexOfDepotAsStartingPoint()][i], 1);
+                        }
+                    }
+                }
+                //Ending with trip i
+                if (instance.whetherVehicleCanEndAtTrip(v, i)) {
+                    for (int k = 0; k < nbDepot; k++) {
+                        Depot depot = instance.getDepot(k);
+                        if (instance.getTrip(i).getIdOfEndCity() == depot.getIdOfCityAsDepot()) {
+                            exprFlowOut.addTerm(varVehicleArc[v][i][depot.getIndexOfDepotAsEndingPoint()], 1);
+                        }
+                    }
+                }
+                //general case
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(j, i))
+                        exprFlowEnter.addTerm(varVehicleArc[v][j][i], 1);
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j))
+                        exprFlowOut.addTerm(varVehicleArc[v][i][j], 1);
+
+                }
+                IloConstraint constraint = cplex.addEq(exprFlowOut, exprFlowEnter, "V" + v + "Trip" + i + "Flow");
+            }
+        }
+    }
+
+
+    /**
+     * new  part about the vehicle and driver use and depot flow constraint
+     */
+    //__________________________________________________________________________________________________________________
+
+    //constraint (2) for vehicle use and vehicle source and depot arc
+    private void cnstRelationshipOfVehicleUseAndSourceDepot() throws IloException {
+        for (int v = 0; v < nbVehicle; v++) {
+            IloLinearNumExpr exprVehicleUse = cplex.linearNumExpr();
+            IloLinearNumExpr exprVehicleSourceDepot = cplex.linearNumExpr();
+            exprVehicleUse.addTerm(varVehicleUse[v], 1);
+            for (int k = 0; k < nbDepot; k++) {
+                Depot depot = instance.getDepot(k);
+                exprVehicleSourceDepot.addTerm(varVehicleSourceDepotArc[v][k], 1);
+            }
+            IloConstraint constraint = cplex.addEq(exprVehicleUse, exprVehicleSourceDepot, "V" + v + "Use&SoDp");
+        }
+    }
+
+    //constraint (3) for the vehicle source depot and depot sink arc
+    private void cnstRelationshipOfVehicleSourceDepotArcAndVehicleDepotSinkArc() throws IloException {
+        for (int k = 0; k < nbDepot; k++) {
+            Depot depot = instance.getDepot(k);
+            int indexOfDepotInModel = depot.getIndexOfDepotAsStartingPoint();
+            IloLinearNumExpr exprVehicleSourceDepot = cplex.linearNumExpr();
+            IloLinearNumExpr exprVehicleDepotSink = cplex.linearNumExpr();
+            for (int v = 0; v < instance.getMaxNbVehicleAvailable(); v++) {
+                exprVehicleSourceDepot.addTerm(varVehicleSourceDepotArc[v][k], 1);
+                exprVehicleDepotSink.addTerm(varVehicleDepotSinkArc[v][k], 1);
+            }
+            IloConstraint constraint = cplex.addEq(exprVehicleSourceDepot, exprVehicleDepotSink, "Vehicle Dp" + k + "So&Si");
+
+        }
+    }
+
+    //constraint (4) flow constraint for the depot and the source
+    private void cnstRelationshipOfVehicleSourceDepotArcAndVehicleDepotTripArc() throws IloException {
+        for (int v = 0; v < instance.getMaxNbVehicleAvailable(); v++) {
+            for (int k = 0; k < instance.getNbDepots(); k++) {
+                IloLinearNumExpr exprVehicleSourceDepot = cplex.linearNumExpr();
+                IloLinearNumExpr exprVehicleDepotTrip = cplex.linearNumExpr();
+
+                exprVehicleSourceDepot.addTerm(varVehicleSourceDepotArc[v][k], 1);
+
+                Depot depot = instance.getDepot(k);
+                int indexOfDepotAsStartingPoint = depot.getIndexOfDepotAsStartingPoint();
+                for (int j = 0; j < instance.getNbTrips(); j++) {
+
+                    Trip trip = instance.getTrip(j);
+                    if (trip.getIdOfStartCity() == depot.getIdOfCityAsDepot()) {//only when the trip start from the depot
+                        exprVehicleDepotTrip.addTerm(varVehicleArc[v][indexOfDepotAsStartingPoint][j], 1);
+                    }
+                }
+
+                IloConstraint constraint = cplex.addEq(exprVehicleSourceDepot, exprVehicleDepotTrip, "V" + v + "Dp" + k + "SoFlow");
+
+            }
+
+        }
+
+    }
+
+    //constraint (5) flow constraint for the depot and sink
+    private void cnstRelationshipOfVehicleDepotSinkArcAndVehicleDepotTripArc() throws IloException {
+        for (int v = 0; v < instance.getMaxNbVehicleAvailable(); v++) {
+            for (int k = 0; k < instance.getNbDepots(); k++) {
+                IloLinearNumExpr exprVehicleDepotSink = cplex.linearNumExpr();
+                IloLinearNumExpr exprVehicleTripDepot = cplex.linearNumExpr();
+                exprVehicleDepotSink.addTerm(varVehicleDepotSinkArc[v][k], 1);
+                Depot depot = instance.getDepot(k);
+                int indexOfDepotAsEndingPoint = depot.getIndexOfDepotAsEndingPoint();
+                for (int i = 0; i < instance.getNbTrips(); i++) {
+                    Trip trip = instance.getTrip(i);
+                    if (trip.getIdOfEndCity() == depot.getIdOfCityAsDepot()) {//only when the trip start from the depot
+                        exprVehicleTripDepot.addTerm(varVehicleArc[v][i][indexOfDepotAsEndingPoint], 1);
+                    }
+                }
+
+                IloConstraint constraint = cplex.addEq(exprVehicleDepotSink, exprVehicleTripDepot, "V" + v + "Dp" + k + "SiFlow");
+
+            }
+
+        }
+
+    }
+    //_______________________________________________________________add constraint of driver part
+
+    //constraint (13) for driver use and driver source and depot arc
+    private void cnstRelationshipOfDriverUseAndSourceDepot() throws IloException {
+        for (int d = 0; d < nbDriver; d++) {
+            IloLinearNumExpr exprDriverUse = cplex.linearNumExpr();
+            IloLinearNumExpr exprDriverSourceDepot = cplex.linearNumExpr();
+            exprDriverUse.addTerm(varDriverUse[d], 1);
+            for (int k = 0; k < nbDepot; k++) {
+                exprDriverSourceDepot.addTerm(varDriverSourceDepotArc[d][k], 1);
+            }
+            IloConstraint constraint = cplex.addEq(exprDriverUse, exprDriverSourceDepot, "D" + d + "Use&SoDp");
+        }
+    }
+
+    //constraint (14) for the driver source depot and depot sink arc
+    private void cnstRelationshipOfDriverSourceDepotArcAndDriverDepotSinkArc() throws IloException {
+        for (int k = 0; k < nbDepot; k++) {
+            Depot depot = instance.getDepot(k);
+            for (int d = 0; d < instance.getMaxNbDriverAvailable(); d++) {
+                IloLinearNumExpr exprDriverSourceDepot = cplex.linearNumExpr();
+                IloLinearNumExpr exprDriverDepotSink = cplex.linearNumExpr();
+                exprDriverSourceDepot.addTerm(varDriverSourceDepotArc[d][k], 1);
+                exprDriverDepotSink.addTerm(varDriverDepotSinkArc[d][k], 1);
+                IloConstraint constraint = cplex.addEq(exprDriverSourceDepot, exprDriverDepotSink, "Dp" + k + "So&Si");
+            }
+        }
+    }
+
+    //constraint (15) flow constraint for the depot and the source(source depot  and depot trip arc)
+    private void cnstRelationshipOfDriverSourceDepotArcAndDriverDepotTripArc() throws IloException {
+        for (int d = 0; d < instance.getMaxNbDriverAvailable(); d++) {
+            for (int k = 0; k < instance.getNbDepots(); k++) {
+                IloLinearNumExpr exprDriverSourceDepot = cplex.linearNumExpr();
+                IloLinearNumExpr exprDriverDepotTrip = cplex.linearNumExpr();
+
+                exprDriverSourceDepot.addTerm(varDriverSourceDepotArc[d][k], 1);
+
+                Depot depot = instance.getDepot(k);
+                int indexOfDepotAsStartingPoint = depot.getIndexOfDepotAsStartingPoint();
+                for (int j = 0; j < instance.getNbTrips(); j++) {
+                    Trip trip = instance.getTrip(j);
+                    if (trip.getIdOfStartCity() == depot.getIdOfCityAsDepot()) {//only when the trip start from the depot
+                        exprDriverDepotTrip.addTerm(varDriverArc[d][indexOfDepotAsStartingPoint][j], 1);
+                    }
+                }
+
+                IloConstraint constraint = cplex.addEq(exprDriverSourceDepot, exprDriverDepotTrip, "D" + d + "Dp" + k + "SoFlow");
+
+            }
+
+        }
+
+    }
+
+    //constraint (16) flow constraint for the depot and sink
+    private void cnstRelationshipOfDriverDepotSinkAndDepotTrip() throws IloException {
+        for (int d = 0; d < instance.getMaxNbDriverAvailable(); d++) {
+            for (int k = 0; k < instance.getNbDepots(); k++) {
+                IloLinearNumExpr exprDriverDepotSink = cplex.linearNumExpr();
+                IloLinearNumExpr exprDriverTripDepot = cplex.linearNumExpr();
+
+                exprDriverDepotSink.addTerm(varDriverDepotSinkArc[d][k], 1);
+
+                Depot depot = instance.getDepot(k);
+                int indexOfDepotAsEndingPoint = depot.getIndexOfDepotAsEndingPoint();
+                for (int i = 0; i < instance.getNbTrips(); i++) {
+                    Trip trip = instance.getTrip(i);
+                    if (trip.getIdOfEndCity() == depot.getIdOfCityAsDepot()) {//only when the trip start from the depot
+                        exprDriverTripDepot.addTerm(varDriverArc[d][i][indexOfDepotAsEndingPoint], 1);
+                    }
+                }
+
+                IloConstraint constraint = cplex.addEq(exprDriverDepotSink, exprDriverTripDepot, "D" + d + "Dp" + k + "SiFlow");
+
+            }
+
+        }
+
+    }
+
+
+    //cnst (33)-1
+    private void cnstStartingTimeRange1() throws IloException {
+        for (int i = 0; i < nbTrip; i++) {
+            IloLinearNumExpr exprStartingTime = cplex.linearNumExpr();
+            Trip trip_i = instance.getTrip(i);
+            int a_i = trip_i.getEarliestDepartureTime();
+            exprStartingTime.addTerm(varTripStartTime[i], 1);
+            IloConstraint constraint = cplex.addGe(exprStartingTime, a_i, "StartTime_trip_" + i);
+        }
+    }
+
+    //cnst (33)-2
+    private void cnstStartingTimeRange2() throws IloException {
+        for (int i = 0; i < nbTrip; i++) {
+            IloLinearNumExpr exprStartingTime = cplex.linearNumExpr();
+            Trip trip_i = instance.getTrip(i);
+            int b_i = trip_i.getLatestDepartureTime();
+            exprStartingTime.addTerm(varTripStartTime[i], 1);
+            IloConstraint constraint = cplex.addLe(exprStartingTime, b_i, "StartTime_trip_" + i);
+        }
+    }
+
+
+    //(34)-1
+    private void cnstVehicleWaitingTimeForNotAllCombinedArc_M1() throws IloException {
+        for (int i = 0; i < nbTrip; i++) {
+            int nbVehicleNeed_i = instance.getTrip(i).getNbVehicleNeed();
+            for (int j = 0; j < nbTrip; j++) {
+                int nbVehicleNeed_j = instance.getTrip(j).getNbVehicleNeed();
+                if (instance.whetherHavePossibleArcAfterCleaning(i, j) && (nbVehicleNeed_i == 1 || nbVehicleNeed_j == 1)) {
+                    int duration_i = instance.getTrip(i).getDuration();
+                    int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                    if (maxWaitingTime >= minPlanTime) {
+                        int M_Waiting = maxWaitingTime;
+                        IloLinearNumExpr expr = cplex.linearNumExpr();
+                        expr.addTerm(varVehicleWaitingTimeForNotAllComb[i][j], 1);
+                        expr.addTerm(varTripStartTime[j], -1);
+                        expr.addTerm(varTripStartTime[i], 1);
+                        for (int v = 0; v < nbVehicle; v++) {
+                            expr.addTerm(varVehicleArc[v][i][j], -M_Waiting);
+                        }
+                        IloConstraint constraint = cplex.addGe(expr, -duration_i - M_Waiting, "cnstVehicleWaitingTimeForNotAllCombinedArc_M1_" + i + "_" + j);
+
+                    }
+                }
+            }
+        }
+    }
+
+
+    //(34)-2
+    private void cnstVehicleWaitingTimeForNotAllCombinedArc_M2() throws IloException {
+        for (int i = 0; i < nbTrip; i++) {
+            int nbVehicleNeed_i = instance.getTrip(i).getNbVehicleNeed();
+            for (int j = 0; j < nbTrip; j++) {
+                int nbVehicleNeed_j = instance.getTrip(j).getNbVehicleNeed();
+                if (instance.whetherHavePossibleArcAfterCleaning(i, j) && (nbVehicleNeed_i == 1 || nbVehicleNeed_j == 1)) {
+                    int duration_i = instance.getTrip(i).getDuration();
+                    int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                    if (maxWaitingTime >= minPlanTime) {
+                        int M_Waiting = duration_i + instance.getTrip(i).getLatestDepartureTime() - instance.getTrip(j).getEarliestDepartureTime() + 1;
+                        IloLinearNumExpr expr = cplex.linearNumExpr();
+                        expr.addTerm(varVehicleWaitingTimeForNotAllComb[i][j], 1);
+                        expr.addTerm(varTripStartTime[j], -1);
+                        expr.addTerm(varTripStartTime[i], 1);
+                        for (int v = 0; v < nbVehicle; v++) {
+                            expr.addTerm(varVehicleArc[v][i][j], M_Waiting);
+                        }
+                        IloConstraint constraint = cplex.addLe(expr, -duration_i + M_Waiting, "cnstVehicleWaitingTimeForNotAllCombinedArc_M2_" + i + "_" + j);
+
+                    }
+                }
+            }
+        }
+    }
+
+
+    //(35)-1
+    private void cnstVehicleWaitingTimeForNotAllCombinedArc_1() throws IloException {
+        for (int i = 0; i < nbTrip; i++) {
+            int nbVehicleNeed_i = instance.getTrip(i).getNbVehicleNeed();
+            for (int j = 0; j < nbTrip; j++) {
+                int nbVehicleNeed_j = instance.getTrip(j).getNbVehicleNeed();
+                if (instance.whetherHavePossibleArcAfterCleaning(i, j) && (nbVehicleNeed_i == 1 || nbVehicleNeed_j == 1)) {
+                    int duration_i = instance.getTrip(i).getDuration();
+                    int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                    if (maxWaitingTime >= minPlanTime) {
+                        IloLinearNumExpr expr = cplex.linearNumExpr();
+                        expr.addTerm(varVehicleWaitingTimeForNotAllComb[i][j], 1);
+                        for (int v = 0; v < nbVehicle; v++) {
+                            expr.addTerm(varVehicleArc[v][i][j], -minPlanTime);
+                        }
+                        IloConstraint constraint = cplex.addGe(expr, 0, "cnstVehicleWaitingTimeForNotAllCombinedArc_1_" + i + "_" + j);
+                    }
+                }
+            }
+        }
+    }
+
+    //(35)-2
+    private void cnstVehicleWaitingTimeForNotAllCombinedArc_2() throws IloException {
+        for (int i = 0; i < nbTrip; i++) {
+            int nbVehicleNeed_i = instance.getTrip(i).getNbVehicleNeed();
+            for (int j = 0; j < nbTrip; j++) {
+                int nbVehicleNeed_j = instance.getTrip(j).getNbVehicleNeed();
+                if (instance.whetherHavePossibleArcAfterCleaning(i, j) && (nbVehicleNeed_i == 1 || nbVehicleNeed_j == 1)) {
+                    int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                    if (maxWaitingTime >= minPlanTime) {
+                        IloLinearNumExpr expr = cplex.linearNumExpr();
+                        expr.addTerm(varVehicleWaitingTimeForNotAllComb[i][j], 1);
+                        for (int v = 0; v < nbVehicle; v++) {
+                            expr.addTerm(varVehicleArc[v][i][j], -maxWaitingTime);
+                        }
+                        IloConstraint constraint = cplex.addLe(expr, 0, "cnstVehicleWaitingTimeForNotAllCombinedArc_1_" + i + "_" + j);
+                    }
+                }
+            }
+        }
+    }
+
+
+    //(36)-1
+    private void cnstVehicleWaitingTimeForAllCombinedArc_M1() throws IloException {
+        for (int v = 0; v < nbVehicle; v++) {
+            for (int i = 0; i < nbTrip; i++) {
+                int nbVehicleNeed_i = instance.getTrip(i).getNbVehicleNeed();
+                for (int j = 0; j < nbTrip; j++) {
+                    int nbVehicleNeed_j = instance.getTrip(j).getNbVehicleNeed();
+                    if ((nbVehicleNeed_i == 2 && nbVehicleNeed_j == 2) && instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        int duration_i = instance.getTrip(i).getDuration();
+                        int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                        if (maxWaitingTime >= minPlanTime) {
+                            int M_Waiting = maxWaitingTime;
+                            IloLinearNumExpr expr = cplex.linearNumExpr();
+                            expr.addTerm(varVehicleWaitingTimeForAllComb[v][i][j], 1);
+                            expr.addTerm(varTripStartTime[j], -1);
+                            expr.addTerm(varTripStartTime[i], 1);
+                            expr.addTerm(varVehicleArc[v][i][j], -M_Waiting);
+                            IloConstraint constraint = cplex.addGe(expr, -duration_i - M_Waiting, "cnstVehicleWaitingTimeForAllCombinedArc_M1_" + i + "_" + j);
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    //(36)-2
+    private void cnstVehicleWaitingTimeForAllCombinedArc_M2() throws IloException {
+        for (int v = 0; v < nbVehicle; v++) {
+            for (int i = 0; i < nbTrip; i++) {
+                int nbVehicleNeed_i = instance.getTrip(i).getNbVehicleNeed();
+                for (int j = 0; j < nbTrip; j++) {
+                    int nbVehicleNeed_j = instance.getTrip(j).getNbVehicleNeed();
+                    if ((nbVehicleNeed_i == 2 && nbVehicleNeed_j == 2) && instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        int duration_i = instance.getTrip(i).getDuration();
+                        int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                        if (maxWaitingTime >= minPlanTime) {
+                            int M_Waiting = duration_i + instance.getTrip(i).getLatestDepartureTime() - instance.getTrip(j).getEarliestDepartureTime() + 1;
+                            IloLinearNumExpr expr = cplex.linearNumExpr();
+                            expr.addTerm(varVehicleWaitingTimeForAllComb[v][i][j], 1);
+                            expr.addTerm(varTripStartTime[j], -1);
+                            expr.addTerm(varTripStartTime[i], 1);
+                            expr.addTerm(varVehicleArc[v][i][j], M_Waiting);
+                            IloConstraint constraint = cplex.addLe(expr, -duration_i + M_Waiting, "cnstVehicleWaitingTimeForAllCombinedArc_M2_" + i + "_" + j);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    //(37)-1
+    private void cnstVehicleWaitingTimeForAllCombinedArc_1() throws IloException {
+        for (int v = 0; v < nbVehicle; v++) {
+            for (int i = 0; i < nbTrip; i++) {
+                int nbVehicleNeed_i = instance.getTrip(i).getNbVehicleNeed();
+                for (int j = 0; j < nbTrip; j++) {
+                    int nbVehicleNeed_j = instance.getTrip(j).getNbVehicleNeed();
+                    if ((nbVehicleNeed_i == 2 && nbVehicleNeed_j == 2) && instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        int duration_i = instance.getTrip(i).getDuration();
+                        int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                        if (maxWaitingTime >= minPlanTime) {
+                            IloLinearNumExpr expr = cplex.linearNumExpr();
+                            expr.addTerm(varVehicleWaitingTimeForAllComb[v][i][j], 1);
+                            expr.addTerm(varVehicleArc[v][i][j], -minPlanTime);
+                            IloConstraint constraint = cplex.addGe(expr, 0, "cnstVehicleWaitingTimeForAllCombinedArc_1_" + i + "_" + j);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    //(37)-2
+    private void cnstVehicleWaitingTimeForAllCombinedArc_2() throws IloException {
+        for (int v = 0; v < nbVehicle; v++) {
+            for (int i = 0; i < nbTrip; i++) {
+                int nbVehicleNeed_i = instance.getTrip(i).getNbVehicleNeed();
+                for (int j = 0; j < nbTrip; j++) {
+                    int nbVehicleNeed_j = instance.getTrip(j).getNbVehicleNeed();
+                    if ((nbVehicleNeed_i == 2 && nbVehicleNeed_j == 2) && instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        int duration_i = instance.getTrip(i).getDuration();
+                        int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                        if (maxWaitingTime >= minPlanTime) {
+                            IloLinearNumExpr expr = cplex.linearNumExpr();
+                            expr.addTerm(varVehicleWaitingTimeForAllComb[v][i][j], 1);
+                            expr.addTerm(varVehicleArc[v][i][j], -maxWaitingTime);
+                            IloConstraint constraint = cplex.addLe(expr, 0, "cnstVehicleWaitingTimeForAllCombinedArc_2_" + i + "_" + j);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // here is after copy
+    //(38)-1
+    private void cnstDriverWaitingTime_M1() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        if (driverSchedule.whetherArcExist(i, j)) {//2025.1.15
+                            cplex.addEq(varDriverArc[d][i][j], 1);// force the arc==1 2025.1.15
+                            int duration_i = instance.getTrip(i).getDuration();
+                            int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                            if (maxWaitingTime >= minPlanTime) {
+                                int M_Waiting = maxWaitingTime;
+                                IloLinearNumExpr expr = cplex.linearNumExpr();
+                                expr.addTerm(varDriverWaitingTime[d][i][j], 1);
+                                expr.addTerm(varTripStartTime[j], -1);
+                                expr.addTerm(varTripStartTime[i], 1);
+                                expr.addTerm(varDriverArc[d][i][j], -M_Waiting);
+                                IloConstraint constraint = cplex.addGe(expr, -duration_i - M_Waiting, "cnstDriverWaitingTime_M1_" + i + "_" + j);
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    //(38)-2
+    private void cnstDriverWaitingTime_M2() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        if (driverSchedule.whetherArcExist(i, j)) {//2025.1.15
+                            cplex.addEq(varDriverArc[d][i][j], 1);// force the arc==1 2025.1.15
+                            int duration_i = instance.getTrip(i).getDuration();
+                            int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                            if (maxWaitingTime >= minPlanTime) {
+                                int M_Waiting = instance.getTrip(i).getLatestDepartureTime() + duration_i - instance.getTrip(j).getEarliestDepartureTime() + 1;
+                                IloLinearNumExpr expr = cplex.linearNumExpr();
+                                expr.addTerm(varDriverWaitingTime[d][i][j], 1);
+                                expr.addTerm(varTripStartTime[j], -1);
+                                expr.addTerm(varTripStartTime[i], 1);
+                                expr.addTerm(varDriverArc[d][i][j], M_Waiting);
+                                IloConstraint constraint = cplex.addLe(expr, -duration_i + M_Waiting, "cnstDriverWaitingTime_M2_" + i + "_" + j);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    //(39)-1
+    private void cnstDriverWaitingTime_1() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        if (driverSchedule.whetherArcExist(i, j)) {//2025.1.15
+                            cplex.addEq(varDriverArc[d][i][j], 1);// force the arc==1 2025.1.15
+                            int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                            if (maxWaitingTime >= minPlanTime) {
+                                IloLinearNumExpr expr = cplex.linearNumExpr();
+                                expr.addTerm(varDriverWaitingTime[d][i][j], 1);
+                                expr.addTerm(varDriverArc[d][i][j], -minPlanTime);
+                                IloConstraint constraint = cplex.addGe(expr, 0, "cnstDriverWaitingTime_1_" + i + "_" + j);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //(39)-2
+    private void cnstDriverWaitingTime_2() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        if (driverSchedule.whetherArcExist(i, j)) {
+                            int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                            if (maxWaitingTime >= minPlanTime) {
+                                IloLinearNumExpr expr = cplex.linearNumExpr();
+                                expr.addTerm(varDriverWaitingTime[d][i][j], 1);
+                                expr.addTerm(varDriverArc[d][i][j], -maxWaitingTime);
+                                IloConstraint constraint = cplex.addLe(expr, 0, "cnstDriverWaitingTime_2_" + i + "_" + j);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //(40)
+    private void cnstDetectVehicleShortConnectionArc() throws IloException {
+        for (int v = 0; v < nbVehicle; v++) {
+            for (int i = 0; i < nbTrip; i++) {
+                int nbVehicleNeed_i = instance.getTrip(i).getNbVehicleNeed();
+                for (int j = 0; j < nbTrip; j++) {
+                    int nbVehicleNeed_j = instance.getTrip(j).getNbVehicleNeed();
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j) && nbVehicleNeed_i == 2 && nbVehicleNeed_j == 2) {
+                        int vehicleShortTime = instance.getShortConnectionTimeForVehicle();
+                        int diffValue = instance.getMinPlanTurnTime() - vehicleShortTime;
+                        IloLinearNumExpr expr = cplex.linearNumExpr();
+                        expr.addTerm(varVehicleWaitingTimeForAllComb[v][i][j], 1);
+                        expr.addTerm(varVehicleArc[v][i][j], -vehicleShortTime);
+                        expr.addTerm(varWhetherVehicleShortArc[i][j], -diffValue);
+                        IloConstraint constraint = cplex.addGe(expr, 0, "DetectVehicleShortConnection_" + v + "_" + i + "_" + j);
+                    }
+                }
+            }
+        }
+
+    }
+
+    //(41)
+    private void cnstKeepSameVehiclesDuringShortConnectionInCombinedArc() throws IloException {
+        for (int v = 0; v < nbVehicle; v++) {
+            for (int i = 0; i < nbTrip; i++) {
+                int nbVehicleNeed_i = instance.getTrip(i).getNbVehicleNeed();
+                for (int j = 0; j < nbTrip; j++) {
+                    int nbVehicleNeed_j = instance.getTrip(j).getNbVehicleNeed();
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j) && nbVehicleNeed_i == 2 && nbVehicleNeed_j == 2) {
+                        IloLinearNumExpr expr = cplex.linearNumExpr();
+                        expr.addTerm(varVehicleArc[v][i][j], 1);
+                        expr.addTerm(varWhetherVehicleShortArc[i][j], 1);
+                        for (int u = 0; u < nbVehicle; u++) {
+                            if (u != v) {
+                                expr.addTerm(varVehicleArc[u][i][j], -1);//修正错误，系数应该为负的
+                            }
+                        }
+                        IloConstraint constraint = cplex.addLe(expr, 1);
+                    }
+                }
+            }
+        }
+    }
+
+
+    //(42)
+    private void cnstDetectDriverShortConnectionArc() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        if (driverSchedule.whetherArcExist(i, j)) {//2025.1.15
+                            cplex.addEq(varDriverArc[d][i][j], 1);// force the arc==1 2025.1.15
+                            IloLinearNumExpr expr = cplex.linearNumExpr();
+                            int driverShortConnectionTime = instance.getShortConnectionTimeForDriver();
+                            int diffValue = instance.getMinPlanTurnTime() - driverShortConnectionTime;
+//                            if (varWhetherDriverShortArc[i][j] == null) {
+//                                throw new IloException("varWhetherDriverShortArc[" + i + "][" + j + "] is null.");
+//                            }
+//                            if (varDriverWaitingTime[d][i][j] == null) {
+//                                throw new IloException("varDriverWaitingTime[" + d + "][" + i + "][" + j + "] is null.");
+//                            }
+//                            if (varDriverArc[d][i][j] == null) {
+//                                throw new IloException("varDriverArc[" + d + "][" + i + "][" + j + "] is null.");
+//                            }
+
+                            expr.addTerm(varWhetherDriverShortArc[i][j], -diffValue);
+                            expr.addTerm(varDriverWaitingTime[d][i][j], 1);
+                            expr.addTerm(varDriverArc[d][i][j], -driverShortConnectionTime);
+                            IloConstraint constraint = cplex.addGe(expr, 0, "DetectDriverShortConnectionTime_" + d + "_" + i + "_" + j);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+//    private void cnstWhetherGreaterThanMinPlan1() throws IloException {// add 2025.2.5
+//        for (int i = 0; i < instance.getNbTrips(); i++) {
+//            for (int j = 0; j < instance.getNbTrips(); j++) {
+//                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+//                    int minWaitingTime = instance.getMinWaitingTime(i, j);
+//                    int M = instance.getEndingPlaningHorizon();
+//                    int minPlan = instance.getMinPlanTurnTime();
+//                    for(int d=0;d<nbDriverValidInSchedules;d++) {
+//                        if (minWaitingTime <= instance.getShortConnectionTimeForDriver()) {
+//                            IloLinearNumExpr expr = cplex.linearNumExpr();
+//                            expr.addTerm(this.varDriverWaitingTime[d][i][j], -1);
+//                            expr.addTerm(this.varWhetherGreaterThanMinP[i][j], M);
+//                            expr.addTerm(this.varDriverArc[d][i][j], minPlan - 1);
+//                            IloRange constraintsShortConnection = cplex.addGe(expr, 0, "idleTimeWhetherGreaterThanMinP1");
+//                        }
+//                    }
+//                }
+//
+//            }
+//
+//        }
+//
+//    }
+//
+//    private void cnstWhetherGreaterThanMinPlan2() throws IloException {
+//        for (int i = 0; i < instance.getNbTrips(); i++) {
+//            for (int j = 0; j < instance.getNbTrips(); j++) {
+//                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+//                    int minWaitingTime = instance.getMinWaitingTime(i, j);
+//                    int M = instance.getEndingPlaningHorizon();
+//                    int minPlan = instance.getMinPlanTurnTime();
+//                    for(int d=0;d<nbDriverValidInSchedules;d++) {
+//                        if (minWaitingTime <= instance.getShortConnectionTimeForDriver()) {
+//                            IloLinearNumExpr expr = cplex.linearNumExpr();
+//                            expr.addTerm(this.varDriverWaitingTime[d][i][j], -1);
+//                            expr.addTerm(this.varWhetherGreaterThanMinP[i][j], M);
+//                            expr.addTerm(this.varDriverArc[d][i][j], minPlan);
+//                            IloRange constraintsShortConnection = cplex.addLe(expr, M, "idleTimeWhetherGreaterThanMinP2");
+//                        }
+//                    }
+//                }
+//
+//            }
+//
+//        }
+//
+//    }
+//
+//
+//    private void cnstWhetherLessThanDriverShort1() throws IloException {
+//        for (int i = 0; i < instance.getNbTrips(); i++) {
+//            for (int j = 0; j < instance.getNbTrips(); j++) {
+//                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+//                    int minWaitingTime = instance.getMinWaitingTime(i, j);
+//                    int M = instance.getEndingPlaningHorizon();
+//                    int TDS = instance.getShortConnectionTimeForDriver();
+//                    for(int d=0;d<nbDriverValidInSchedules;d++) {
+//                        if (minWaitingTime <= instance.getShortConnectionTimeForDriver()) {
+//                            IloLinearNumExpr expr = cplex.linearNumExpr();
+//                            expr.addTerm(this.varDriverWaitingTime[d][i][j], -1);
+//                            expr.addTerm(this.varWhetherLessThanDriverShort[i][j], -M);
+//                            expr.addTerm(this.varDriverArc[d][i][j], TDS + 1);
+//                            IloRange constraintsShortConnection = cplex.addLe(expr, 0, "cnstWhetherLessThanDriverShort1");
+//                        }
+//                    }
+//                }
+//
+//            }
+//
+//        }
+//
+//    }
+//
+//    private void cnstWhetherLessThanDriverShort2() throws IloException {
+//        for (int i = 0; i < instance.getNbTrips(); i++) {
+//            for (int j = 0; j < instance.getNbTrips(); j++) {
+//                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+//                    int minWaitingTime = instance.getMinWaitingTime(i, j);
+//                    int M = instance.getEndingPlaningHorizon();
+//                    int TDS = instance.getShortConnectionTimeForDriver();
+//                    for(int d=0;d<nbDriverValidInSchedules;d++) {
+//                        if (minWaitingTime <= instance.getShortConnectionTimeForDriver()) {
+//                            IloLinearNumExpr expr = cplex.linearNumExpr();
+//                            expr.addTerm(this.varDriverWaitingTime[d][i][j], -1);
+//                            expr.addTerm(this.varWhetherLessThanDriverShort[i][j], -M);
+//                            expr.addTerm(this.varDriverArc[d][i][j], TDS);
+//                            IloRange constraintsShortConnection = cplex.addGe(expr, -M, "cnstWhetherLessThanDriverShort1");
+//                        }
+//                    }
+//                }
+//
+//            }
+//
+//        }
+//
+//    }
+//
+//    private void cnstWhetherIsShortLinkWhetherGreaterThanMinPlan() throws IloException {
+//        for (int i = 0; i < instance.getNbTrips(); i++) {
+//            for (int j = 0; j < instance.getNbTrips(); j++) {
+//                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+//                    int minWaitingTime = instance.getMinWaitingTime(i, j);
+//                    int M = instance.getEndingPlaningHorizon();
+//                    int TDS = instance.getShortConnectionTimeForDriver();
+//                    if (minWaitingTime <= instance.getShortConnectionTimeForDriver()) {
+//                        IloLinearNumExpr expr = cplex.linearNumExpr();
+//                        expr.addTerm(this.varWhetherGreaterThanMinP[i][j], -1);
+//                        expr.addTerm(this.varWhetherDriverShortArc[i][j], 1);
+//                        IloRange constraintsShortConnection = cplex.addLe(expr,0, "cnstWhetherLessThanDriverShort1");
+//                    }
+//                }
+//
+//            }
+//
+//        }
+//
+//    }
+//
+//    private void cnstWhetherIsShortLinkWhetherLessThanShortDriver() throws IloException {
+//        for (int i = 0; i < instance.getNbTrips(); i++) {
+//            for (int j = 0; j < instance.getNbTrips(); j++) {
+//                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+//                    int minWaitingTime = instance.getMinWaitingTime(i, j);
+//                    int M = instance.getEndingPlaningHorizon();
+//                    int TDS = instance.getShortConnectionTimeForDriver();
+//                    if (minWaitingTime <= instance.getShortConnectionTimeForDriver()) {
+//                        IloLinearNumExpr expr = cplex.linearNumExpr();
+//                        expr.addTerm(this.varWhetherLessThanDriverShort[i][j], -1);
+//                        expr.addTerm(this.varWhetherDriverShortArc[i][j], 1);
+//                        IloRange constraintsShortConnection = cplex.addLe(expr,0, "cnstWhetherLessThanDriverShort1");
+//                    }
+//                }
+//
+//            }
+//
+//        }
+//
+//    }
+//
+//    private void cnstWhetherIsShortLinkMinAndShortDriver() throws IloException {
+//        for (int i = 0; i < instance.getNbTrips(); i++) {
+//            for (int j = 0; j < instance.getNbTrips(); j++) {
+//                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+//                    int minWaitingTime = instance.getMinWaitingTime(i, j);
+//                    int M = instance.getEndingPlaningHorizon();
+//                    int TDS = instance.getShortConnectionTimeForDriver();
+//                    if (minWaitingTime <= instance.getShortConnectionTimeForDriver()) {
+//                        IloLinearNumExpr expr = cplex.linearNumExpr();
+//                        expr.addTerm(this.varWhetherLessThanDriverShort[i][j], -1);
+//                        expr.addTerm(this.varWhetherGreaterThanMinP[i][j],-1);
+//                        expr.addTerm(this.varWhetherDriverShortArc[i][j], 1);
+//                        IloRange constraintsShortConnection = cplex.addGe(expr,-1, "cnstWhetherLessThanDriverShort1");
+//                    }
+//                }
+//
+//            }
+//
+//        }
+//
+//    }
+
+    //(43)
+    private void cnstProhibitChangeVehicleDuringDriverShortConnection() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        if (driverSchedule.whetherArcExist(i, j)) {//2025.1.15
+                            cplex.addEq(varDriverArc[d][i][j], 1);// force the arc==1 2025.1.15
+                            IloLinearNumExpr expr = cplex.linearNumExpr();
+                            expr.addTerm(varWhetherDriverShortArc[i][j], 1);
+                            expr.addTerm(varDriverArc[d][i][j], 1);
+                            for (int v = 0; v < nbVehicleValidInRoutes; v++) {
+                                expr.addTerm(varVehicleArc[v][i][j], -1);
+                            }
+                            IloConstraint constraint = cplex.addLe(expr, 1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //(44)
+    private void cnstStartingTimeOfSchedule() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            for (int p = 0; p < nbDepot; p++) {
+                int idCityAsDepot = instance.getDepot(p).getIdOfCityAsDepot();
+                for (int i = 0; i < nbTrip; i++) {
+                    int idStartCityOfTrip = instance.getTrip(i).getIdOfStartCity();
+                    if (idCityAsDepot == idStartCityOfTrip) {
+                        IloLinearNumExpr expr = cplex.linearNumExpr();
+                        expr.addTerm(varStartingTimeOfDriverSchedule[d], 1);
+                        expr.addTerm(varTripStartTime[i], -1);
+                        expr.addTerm(varDriverArc[d][instance.getDepot(p).getIndexOfDepotAsStartingPoint()][i], M);
+                        IloConstraint constraint = cplex.addLe(expr, M);
+                    }
+                }
+            }
+        }
+    }
+
+    //(45)
+    private void cnstEndingTimeOfSchedule() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            for (int p = 0; p < nbDepot; p++) {
+                int idCityAsDepot = instance.getDepot(p).getIdOfCityAsDepot();
+                for (int i = 0; i < nbTrip; i++) {
+                    int idEndingCityOfTrip = instance.getTrip(i).getIdOfEndCity();
+                    int duration_i = instance.getTrip(i).getDuration();
+                    if (idCityAsDepot == idEndingCityOfTrip) {
+                        IloLinearNumExpr expr = cplex.linearNumExpr();
+                        expr.addTerm(varEndingTimeOfDriverSchedule[d], 1);
+                        expr.addTerm(varTripStartTime[i], -1);
+                        expr.addTerm(varDriverArc[d][i][instance.getDepot(p).getIndexOfDepotAsEndingPoint()], -M);
+                        IloConstraint constraint = cplex.addGe(expr, duration_i - M);
+                    }
+                }
+            }
+        }
+    }
+
+    //(71)
+    public void cnstWorkingTimeLimitation() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            IloLinearNumExpr expr = cplex.linearNumExpr();
+            expr.addTerm(varEndingTimeOfDriverSchedule[d], 1);
+            expr.addTerm(varStartingTimeOfDriverSchedule[d], -1);
+            IloConstraint constraint = cplex.addLe(expr, instance.getMaxWorkingTime());
+        }
+    }
+
+
+
+
+   public void cnstFromNormalEnterACombinedInDriverShortConnection() throws  IloException{// add 2025.2.7
+        for(int i=0;i<nbTrip;i++){
+            int qi=instance.getTrip(i).getNbVehicleNeed();
+            for(int j=0;j<nbTrip;j++){
+                int qj=instance.getTrip(j).getNbVehicleNeed();
+                   if(instance.whetherHavePossibleArcAfterCleaning(i,j)&&qi==1&&qj==2){
+                       for(int d=0;d<nbDriverValidInSchedules;d++){
+                           for(int v=0;v<nbVehicle;v++){
+                               IloLinearNumExpr expr = cplex.linearNumExpr();
+                               expr.addTerm(varDriverArc[d][i][j], 1);
+                              // expr.addTerm(varDriving[d][i], 1);
+                               expr.addTerm(varDriving[d][j], 1);
+                               expr.addTerm(varWhetherDriverShortArc[i][j],1);
+                               expr.addTerm(varLeading[v][j], 1);
+                               expr.addTerm(varVehicleArc[v][i][j], -1);
+                               IloConstraint constraint = cplex.addLe(expr, 3,"DriverShortConnectionFromNormal"+i+"ToCombined"+j);
+
+                           }
+                       }
+
+                   }
+            }
+        }
+   }
+
+    public void cnstFromACombinedLeaveToANormalInDriverShortConnection()throws  IloException {// add 2025.2.7
+        for(int i=0;i<nbTrip;i++){
+            int qi=instance.getTrip(i).getNbVehicleNeed();
+            for(int j=0;j<nbTrip;j++){
+                int qj=instance.getTrip(j).getNbVehicleNeed();
+                if(instance.whetherHavePossibleArcAfterCleaning(i,j)&&qi==2&&qj==1){
+                    for(int d=0;d<nbDriverValidInSchedules;d++){
+                        for(int v=0;v<nbVehicle;v++){
+                            IloLinearNumExpr expr = cplex.linearNumExpr();
+                            expr.addTerm(varDriverArc[d][i][j], 1);
+                            expr.addTerm(varDriving[d][i], 1);
+                            //expr.addTerm(varDriving[d][j], 1);
+                            expr.addTerm(varWhetherDriverShortArc[i][j],1);
+                            expr.addTerm(varLeading[v][i], 1);
+                            expr.addTerm(varVehicleArc[v][i][j], -1);
+                            IloConstraint constraint = cplex.addLe(expr, 3,"DriverShortConnectionFromCombined"+i+"ToNormal"+j);
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+
+    public void cnstFromCombinedToCombinedInDriverShortConnection() throws  IloException {// add 2025.2.7 for control the leading vehicle in two combined trip in driver short connection
+        for(int i=0;i<nbTrip;i++){
+            int qi=instance.getTrip(i).getNbVehicleNeed();
+            for(int j=0;j<nbTrip;j++){
+                int qj=instance.getTrip(j).getNbVehicleNeed();
+                if(instance.whetherHavePossibleArcAfterCleaning(i,j)&&qi==2&&qj==2){
+                    for(int d=0;d<nbDriverValidInSchedules;d++){
+                        for(int v=0;v<nbVehicle;v++){
+                            IloLinearNumExpr expr = cplex.linearNumExpr();
+                            expr.addTerm(varDriverArc[d][i][j], 1);
+                            expr.addTerm(varDriving[d][i], 1);
+                            expr.addTerm(varDriving[d][j], 1);
+                            expr.addTerm(varWhetherDriverShortArc[i][j],1);
+                            expr.addTerm(varLeading[v][i], 1);
+                            expr.addTerm(varVehicleArc[v][i][j], 1);
+                            expr.addTerm(varLeading[v][j], -1);
+                            IloConstraint constraint = cplex.addLe(expr, 5,"DriverShortConnectionFromCombined"+i+"ToCombined"+j);
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+
+    //____________________________________
+    private void defineObjectiveFunction() throws IloException {
+        //3. 定义目标函数 cost for the aircraft part in the objective function
+        IloLinearNumExpr obj = cplex.linearNumExpr();
+
+
+        //cost for using vehicle
+        for (int v = 0; v < nbVehicle; v++) {
+
+            obj.addTerm(varVehicleUse[v], instance.getFixedCostForVehicle());
+        }
+
+        //cost for using driver
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+
+            obj.addTerm(varDriverUse[d], instance.getFixedCostForDriver());
+        }
+
+        //idle cost for vehicle for two task are combined cased
+        for (int v = 0; v < nbVehicle; v++) {
+            for (int i = 0; i < nbTrip; i++) {
+                int duration_i = instance.getTrip(i).getDuration();
+                int nbVehicleNeed_i = instance.getTrip(i).getNbVehicleNeed();
+                //instance.getDistance(instance.getTrip(i).getIdOfStartCity(), instance.getTrip(i).getIdOfEndCity());
+                for (int j = 0; j < nbTrip; j++) {
+                    int nbVehicleNeed_j = instance.getTrip(j).getNbVehicleNeed();
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                        if (nbVehicleNeed_i == 2 && nbVehicleNeed_j == 2) {
+                            if (maxWaitingTime >= minPlanTime) {
+
+                                int idleTimeCost_v = instance.getIdleTimeCostForVehiclePerUnit();
+                                obj.addTerm(varVehicleWaitingTimeForAllComb[v][i][j], idleTimeCost_v);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //idle cost for vehicle for two task are not all combined cased
+        for (int i = 0; i < nbTrip; i++) {
+            int duration_i = instance.getTrip(i).getDuration();
+            int nbVehicleNeed_i = instance.getTrip(i).getNbVehicleNeed();
+            //instance.getDistance(instance.getTrip(i).getIdOfStartCity(), instance.getTrip(i).getIdOfEndCity());
+            for (int j = 0; j < nbTrip; j++) {
+                int nbVehicleNeed_j = instance.getTrip(j).getNbVehicleNeed();
+                if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                    int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                    if (nbVehicleNeed_i == 1 || nbVehicleNeed_j == 1) {
+                        if (maxWaitingTime >= minPlanTime) {
+                            int idleTimeCost_v = instance.getIdleTimeCostForVehiclePerUnit();
+                            obj.addTerm(varVehicleWaitingTimeForNotAllComb[i][j], idleTimeCost_v);
+                        }
+                    }
+                }
+            }
+        }
+        // cost of crew in the object function;
+        /**attention the cost ; we need to know the cost for the whole path
+         */
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        if (driverSchedule.whetherArcExist(i, j)) {
+                            int duration_i = instance.getTrip(i).getDuration();
+                            int maxWaitingTime = (instance.getTrip(j).getLatestDepartureTime()
+                                    - instance.getTrip(i).getEarliestDepartureTime() - duration_i);
+                            if (maxWaitingTime >= minPlanTime) {
+                                int idleTimeCost_d = instance.getIdleTimeCostForDriverPerUnit();
+                                obj.addTerm(varDriverWaitingTime[d][i][j], idleTimeCost_d);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //cost of the changeover part here is what I need to modify
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        if (driverSchedule.whetherArcExist(i, j)) {
+                            obj.addTerm(varChangeOver[d][i][j], instance.getCostForChangeOver());
+                        }
+                    }
+                }
+
+            }
+        }
+
+        IloObjective objective11 = cplex.addMinimize(obj);
+    }
+
+    // This part is the Decision Variables
+    private void defineDecisionVariables() throws IloException {
+        //初始化所有决定变量
+        //1.the dimension of the aircraft variables
+        varVehicleArc = new IloNumVar[nbVehicle][nbNodes][nbNodes];
+        /**
+         * add new variable about using vehicle and driver or not
+         * */
+        varVehicleUse = new IloNumVar[nbVehicle];
+        varDriverUse = new IloNumVar[nbDriver];
+
+        /**
+         * add new variable about describing depot flow constraint
+         */
+        varVehicleSourceDepotArc = new IloNumVar[nbVehicle][nbDepot];
+        varVehicleDepotSinkArc = new IloNumVar[nbVehicle][nbDepot];
+        //________________________________________________________________________________________this is for source and sink for the vehicle
+        varDriverSourceDepotArc = new IloNumVar[nbDriver][nbDepot];
+        varDriverDepotSinkArc = new IloNumVar[nbDriver][nbDepot];
+//        //_________________________________________________________________________________________this is for source and sink for the driver
+
+        //1.For the crew we also use arc form; and we add the variable to describe whether the driver is driving; whether the vehicle is leading;
+        //whether the driver change his original place
+        varDriverArc = new IloNumVar[nbDriver][nbNodes][nbNodes];
+        varDriving = new IloNumVar[nbDriver][nbTrip];
+        varLeading = new IloNumVar[nbVehicle][nbTrip];
+        varChangeOver = new IloNumVar[nbDriver][nbTrip][nbTrip];
+
+
+        //********************************************************* The following here are the new variables to deal with time window 2024.9.12 -20224.9.17 ****************
+        varTripStartTime = new IloNumVar[nbTrip];
+        varDriverWaitingTime = new IloNumVar[nbDriver][nbTrip][nbTrip];
+        varVehicleWaitingTimeForNotAllComb = new IloNumVar[nbTrip][nbTrip];
+        varVehicleWaitingTimeForAllComb = new IloNumVar[nbVehicle][nbTrip][nbTrip];
+
+
+        varWhetherDriverShortArc = new IloNumVar[nbTrip][nbTrip];
+//        varWhetherGreaterThanMinP = new IloNumVar[instance.getNbTrips()][instance.getNbTrips()];// bij_{DS1} 2025.2.5
+//        varWhetherLessThanDriverShort = new IloNumVar[instance.getNbTrips()][instance.getNbTrips()];// bij_{DS1} 2025.2.5
+
+        varWhetherVehicleShortArc = new IloNumVar[nbTrip][nbTrip];
+        varStartingTimeOfDriverSchedule = new IloNumVar[nbDriver];
+        varEndingTimeOfDriverSchedule = new IloNumVar[nbDriver];
+        //********************* the above are the new variables dealing with time window 2024.9.12 -20224.9.17********************
+
+
+        //2.变量的类型及取值范围声明
+        //variable of vehicle use -type and range
+        // variable of vehicle pass which arc ---type and range
+        /**
+         * add two new variable range about use of vehicle and driver
+         * */
+        if (this.whetherSolveRelaxationProblem == true) {
+            for (int v = 0; v < nbVehicle; v++) {
+                varVehicleUse[v] = cplex.numVar(0, 1, "x_v_" + v);
+            }
+            //variable of driver use --type and range
+            for (int d = 0; d < nbDriver; d++) {
+                varDriverUse[d] = cplex.numVar(0, 1, "x_d_" + d);
+            }
+            /**
+             * add the new variable for the depot flow
+             */
+
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int p = 0; p < instance.getNbDepots(); p++) {
+                    varVehicleSourceDepotArc[v][p] = cplex.numVar(0, 1, "x_v" + v + "_source_" + p);
+                }
+            }
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int k = 0; k < instance.getNbDepots(); k++) {
+                    varVehicleDepotSinkArc[v][k] = cplex.numVar(0, 1, "x_v" + v + "_" + k + "_sink");
+                }
+            }
+
+            for (int d = 0; d < nbDriver; d++) {
+                for (int p = 0; p < instance.getNbDepots(); p++) {
+                    varDriverSourceDepotArc[d][p] = cplex.numVar(0, 1, "x_d" + d + "_source_" + p);
+                }
+            }
+
+            for (int d = 0; d < nbDriver; d++) {
+                for (int k = 0; k < instance.getNbDepots(); k++) {
+                    varDriverDepotSinkArc[d][k] = cplex.numVar(0, 1, "x_d" + d + "_" + k + "_sink");
+                }
+            }
+
+            //___________________________________________________________________________________here is all the new variable
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int i = 0; i < nbNodes; i++) {
+                    for (int j = 0; j < nbNodes; j++) {
+                        if (i < this.nbTrip && j < this.nbTrip) {
+                            if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                                varVehicleArc[v][i][j] = cplex.numVar(0, 1, "x_v" + v + "_" + i + "_" + j);
+                            }
+                        } else {
+                            varVehicleArc[v][i][j] = cplex.numVar(0, 1, "x_v" + v + "_" + i + "_" + j);
+                        }
+                    }
+                }
+            }
+            // variables for driver pass which arcs---- type and range
+            for (int d = 0; d < nbDriver; d++) {
+                for (int i = 0; i < nbNodes; i++) {
+                    for (int j = 0; j < nbNodes; j++) {
+                        if (i < this.nbTrip && j < this.nbTrip) {
+                            if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                                varDriverArc[d][i][j] = cplex.numVar(0, 1, "x_d" + d + "_" + i + "_" + j);
+                            }
+                        } else {
+                            varDriverArc[d][i][j] = cplex.numVar(0, 1, "x_d" + d + "_" + i + "_" + j);
+                        }
+                    }
+                }
+            }
+            // variable for whether diver is driving the arc---- type and range
+            for (int d = 0; d < nbDriver; d++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    varDriving[d][i] = cplex.numVar(0, 1, "o_d" + d + "_" + i);
+                }
+            }
+            // variable the type of variable whether leading the vehicle
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    varLeading[v][i] = cplex.numVar(0, 1, "l_v" + v + "_" + i);
+                }
+            }
+            // the type of variable whether changeover happen to the driver
+            for (int d = 0; d < nbDriver; d++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    for (int j = 0; j < nbTrip; j++) {
+                        if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                            varChangeOver[d][i][j] = cplex.numVar(0, 1, "y_d" + d + "_" + i + "_" + j);
+                        }
+                    }
+                }
+            }
+            // ****************************************************Here are the new variables to deal with the time window 2024.9.16- 2024.9.17
+            for (int i = 0; i < nbTrip; i++) {
+                varTripStartTime[i] = cplex.numVar(startHorizon, endHorizon, "t_trip_" + i);
+            }
+            for (int d = 0; d < nbDriver; d++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    for (int j = 0; j < nbTrip; j++) {
+                        if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                            int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                            if (maxWaitingTime >= minPlanTime) {
+                                varDriverWaitingTime[d][i][j] = cplex.numVar(0, maxWaitingTime, "t_d_" + d + "_" + i + "_" + j);
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                        if (maxWaitingTime >= minPlanTime) {
+                            varVehicleWaitingTimeForNotAllComb[i][j] = cplex.numVar(0, maxWaitingTime, "t_V_" + i + "_" + j);
+                        }
+                    }
+                }
+            }
+
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    for (int j = 0; j < nbTrip; j++) {
+                        if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                            int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                            if (maxWaitingTime >= minPlanTime) {
+                                varVehicleWaitingTimeForAllComb[v][i][j] = cplex.numVar(0, maxWaitingTime, "t_v_" + v + "_" + i + "_" + j);
+                            }
+                        }
+                    }
+                }
+            }
+
+            //************************* modify 9.19 ********************************************************************
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    varWhetherDriverShortArc[i][j] = cplex.numVar(0, 1, "b^DS_" + i + "_" + j);
+                }
+            }
+
+//            for (int i = 0; i < instance.getNbTrips(); i++) {
+//                for (int j = 0; j < instance.getNbTrips(); j++) {
+//                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+//                        int minWaiting = instance.getMinWaitingTime(i, j);
+//                        if (minWaiting <= instance.getShortConnectionTimeForDriver()) {
+//                            this.varWhetherGreaterThanMinP[i][j] = cplex.numVar(0,1,"b1" + "_" + i + "_" + j);//2025.1.10
+//                        }
+//                    }
+//                }
+//            }
+//
+//            for (int i = 0; i < instance.getNbTrips(); i++) {
+//                for (int j = 0; j < instance.getNbTrips(); j++) {
+//                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+//                        int minWaiting = instance.getMinWaitingTime(i, j);
+//                        if (minWaiting <= instance.getShortConnectionTimeForDriver()) {
+//                            this.varWhetherLessThanDriverShort[i][j] = cplex.numVar(0,1,"b2" + "_" + i + "_" + j);//2025.1.10
+//                        }
+//                    }
+//                }
+//            }
+
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    varWhetherVehicleShortArc[i][j] = cplex.numVar(0, 1, "b^VS_" + i + "_" + j);
+                }
+            }
+
+            for (int d = 0; d < nbDriver; d++) {
+                varStartingTimeOfDriverSchedule[d] = cplex.numVar(instance.getStartingPlanningHorizon(), instance.getEndingPlaningHorizon(), "s^d" + d);
+            }
+
+            for (int d = 0; d < nbDriver; d++) {
+                varEndingTimeOfDriverSchedule[d] = cplex.numVar(instance.getStartingPlanningHorizon(), instance.getEndingPlaningHorizon(), "e^d" + d);
+            }
+
+
+        } else { //solving integer problem
+            for (int v = 0; v < nbVehicle; v++) {
+                varVehicleUse[v] = cplex.boolVar("x_v_" + v);
+            }
+            //variable of driver use --type and range
+            for (int d = 0; d < nbDriverValidInSchedules; d++) {
+                varDriverUse[d] = cplex.boolVar("x_d_" + d);
+            }
+            /**
+             * add the new variable for the depot flow
+             */
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int p = 0; p < instance.getNbDepots(); p++) {
+                    varVehicleSourceDepotArc[v][p] = cplex.boolVar("x_v" + v + "_source_" + p);
+                }
+            }
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int k = 0; k < instance.getNbDepots(); k++) {
+                    varVehicleDepotSinkArc[v][k] = cplex.boolVar("x_v" + v + "_" + k + "_sink");
+                }
+            }
+            for (int d = 0; d < nbDriverValidInSchedules; d++) {
+                for (int p = 0; p < instance.getNbDepots(); p++) {
+                    varDriverSourceDepotArc[d][p] = cplex.boolVar("x_d" + d + "_source_" + p);
+                }
+            }
+            for (int d = 0; d < nbDriverValidInSchedules; d++) {
+                for (int k = 0; k < instance.getNbDepots(); k++) {
+                    varDriverDepotSinkArc[d][k] = cplex.boolVar("x_d" + d + "_" + k + "_sink");
+                }
+            }
+            //___________________________________________________________________________________here is all the new variable
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int i = 0; i < nbNodes; i++) {
+                    for (int j = 0; j < nbNodes; j++) {
+                        if (i < this.nbTrip && j < this.nbTrip) {
+                            if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                                varVehicleArc[v][i][j] = cplex.boolVar("x_v" + v + "_" + i + "_" + j);
+                                // System.out.println("vehicle arc is not null v_"+v+"_"+i+"_"+j);
+                            }
+                        } else {
+                            varVehicleArc[v][i][j] = cplex.boolVar("x_v" + v + "_" + i + "_" + j);
+                        }
+
+                    }
+                }
+            }
+            // variables for driver pass which arcs---- type and range
+            for (int d = 0; d < nbDriverValidInSchedules; d++) {
+                for (int i = 0; i < nbNodes; i++) {
+                    for (int j = 0; j < nbNodes; j++) {
+                        if (i < this.nbTrip && j < this.nbTrip) {
+                            if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                                varDriverArc[d][i][j] = cplex.boolVar("x_d" + d + "_" + i + "_" + j);
+                            }
+                        } else {
+                            varDriverArc[d][i][j] = cplex.boolVar("x_d" + d + "_" + i + "_" + j);
+                        }
+
+                    }
+                }
+            }
+            // variable for whether diver is driving the arc---- type and range
+            for (int d = 0; d < nbDriver; d++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    varDriving[d][i] = cplex.boolVar("o_d" + d + "_" + i);
+                }
+            }
+            // variable the type of variable whether leading the vehicle
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    varLeading[v][i] = cplex.boolVar("l_v" + v + "_" + i);
+                }
+            }
+            // the type of variable whether changeover happen to the driver
+            for (int d = 0; d < nbDriverValidInSchedules; d++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    for (int j = 0; j < nbTrip; j++) {
+                        if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                            varChangeOver[d][i][j] = cplex.boolVar("y_d" + d + "_" + i + "_" + j);
+                        }
+                    }
+                }
+            }
+            //*********************************Here are the new variables to deal with the time window 2024.9.12-2024.9.19********************
+            for (int i = 0; i < nbTrip; i++) {
+                varTripStartTime[i] = cplex.intVar(startHorizon, endHorizon, "StartTime_t_i" + i);
+            }
+
+            for (int d = 0; d < nbDriverValidInSchedules; d++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    for (int j = 0; j < nbTrip; j++) {
+                        if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                            int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                            if (maxWaitingTime >= minPlanTime) {
+                                varDriverWaitingTime[d][i][j] = cplex.intVar(0, maxWaitingTime, "t_" + d + "_" + i + "_" + j);
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                        int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                        if (maxWaitingTime >= minPlanTime) {
+                            varVehicleWaitingTimeForNotAllComb[i][j] = cplex.intVar(0, maxWaitingTime, "t_V_" + i + "_" + j);
+                        }
+                    }
+                }
+            }
+
+            for (int v = 0; v < nbVehicle; v++) {
+                for (int i = 0; i < nbTrip; i++) {
+                    for (int j = 0; j < nbTrip; j++) {
+                        if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+                            int maxWaitingTime = instance.getMaxWaitingTime(i, j);
+                            if (maxWaitingTime >= minPlanTime) {
+                                varVehicleWaitingTimeForAllComb[v][i][j] = cplex.intVar(0, maxWaitingTime, "t_v_" + v + i + "_" + j);
+                            }
+                        }
+                    }
+                }
+            }
+            // 2024.9.17
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    varWhetherDriverShortArc[i][j] = cplex.boolVar("b^DS_" + i + "_" + j);
+                }
+            }
+
+
+//            for (int i = 0; i < instance.getNbTrips(); i++) {
+//                for (int j = 0; j < instance.getNbTrips(); j++) {
+//                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+//                        int minWaiting = instance.getMinWaitingTime(i, j);
+//                        if (minWaiting <= instance.getShortConnectionTimeForDriver()) {
+//                            this.varWhetherGreaterThanMinP[i][j] = this.cplex.boolVar("b1" + "_" + i + "_" + j);//2025.1.10
+//                        }
+//                    }
+//                }
+//            }
+//
+//            for (int i = 0; i < instance.getNbTrips(); i++) {
+//                for (int j = 0; j < instance.getNbTrips(); j++) {
+//                    if (instance.whetherHavePossibleArcAfterCleaning(i, j)) {
+//                        int minWaiting = instance.getMinWaitingTime(i, j);
+//                        if (minWaiting <= instance.getShortConnectionTimeForDriver()) {
+//                            this.varWhetherLessThanDriverShort[i][j] = this.cplex.boolVar("b2" + "_" + i + "_" + j);//2025.1.10
+//                        }
+//                    }
+//                }
+//            }
+
+
+            for (int i = 0; i < nbTrip; i++) {
+                for (int j = 0; j < nbTrip; j++) {
+                    varWhetherVehicleShortArc[i][j] = cplex.boolVar("b^VS_" + i + "_" + j);
+                }
+            }
+
+            for (int d = 0; d < nbDriver; d++) {
+                varStartingTimeOfDriverSchedule[d] = cplex.intVar(instance.getStartingPlanningHorizon(), instance.getEndingPlaningHorizon(), "s^d_" + d);
+            }
+
+            for (int d = 0; d < nbDriverValidInSchedules; d++) {
+                varEndingTimeOfDriverSchedule[d] = cplex.intVar(instance.getStartingPlanningHorizon(), instance.getEndingPlaningHorizon(), "e^d_" + d);
+            }
+
+            setVarDriverArcAndDepartureTime();
+            setVarVehicleArc();
+        }
+    }
+
+    private void setVarDriverArcAndDepartureTime() throws IloException {
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            for (int i = 0; i < driverSchedule.getTripWithWorkingStatusAndDepartureTimeArrayList().size() - 1; i++) {
+                int idTrip1 = driverSchedule.getTripWithWorkingStatusAndDepartureTimeArrayList().get(i).getIdOfTrip();
+                int idTrip2 = driverSchedule.getTripWithWorkingStatusAndDepartureTimeArrayList().get(i + 1).getIdOfTrip();
+                System.out.println("idDriver"+d);
+                System.out.println("idTrip1"+idTrip1);
+                System.out.println("idTrip2"+idTrip2);
+                varDriverArc[d][idTrip1][idTrip2].setLB(1);
+                varDriverArc[d][idTrip1][idTrip2].setUB(1);
+            }
+            for(int i=0;i<nbTrip;i++){
+                int depTime=Integer.MAX_VALUE;
+                if(driverSchedule.whetherTripPresent(i)){
+                    for(int t=0;t<driverSchedule.getTripWithWorkingStatusAndDepartureTimeArrayList().size();t++){
+                        TripWithWorkingStatusAndDepartureTime tripWithWorkingStatusAndDepartureTime=driverSchedule.getTripWithWorkingStatusAndDepartureTimeArrayList().get(t);
+                        if(tripWithWorkingStatusAndDepartureTime.getIdOfTrip()==i){
+                            depTime=tripWithWorkingStatusAndDepartureTime.getDepartureTime();
+                            varTripStartTime[i].setUB(depTime);
+                            varTripStartTime[i].setLB(depTime);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void setVarVehicleArc() throws IloException {
+        for (int v = 0; v < nbVehicleValidInRoutes; v++) {
+            VehicleRoute vehicleRoute = this.inputInforms.getVehicleRoutes().get(v);
+            for (int i = 0; i < vehicleRoute.getTripWithStartingInfosArrayList().size() - 1; i++) {
+                Trip trip1 = vehicleRoute.getTripWithStartingInfosArrayList().get(i);
+                Trip trip2 = vehicleRoute.getTripWithStartingInfosArrayList().get(i + 1);
+                varVehicleArc[v][trip1.getIdOfTrip()][trip2.getIdOfTrip()].setLB(1);
+                varVehicleArc[v][trip1.getIdOfTrip()][trip2.getIdOfTrip()].setUB(1);
+                System.out.println("vehicle arc set v_" + v + "_" + trip1.getIdOfTrip() + "_" + trip2.getIdOfTrip());
+            }
+        }
+    }
+
+    // here I need to rethink about it, I need to rewrite how to obtain the solution from cplex
+    private Solution getSolutionFromCplex() throws IloException {
+        Solution solution = new Solution(instance);
+        //give vehicle path from the cplex solution
+        for (int v = 0; v < nbVehicleValidInRoutes; v++) {
+            if (cplex.getValue(varVehicleUse[v]) > 0.999) {
+                PathForVehicle pathForVehicle = new PathForVehicle(instance, v);
+                Vehicle vehicle = this.instance.getVehicle(v);
+                int firstTrip = -1;
+                for (int k = 0; k < nbDepot; k++) {
+                    Depot depot = instance.getDepot(k);
+                    if (cplex.getValue(varVehicleSourceDepotArc[v][k]) > 0.99) {
+                        for (int i = 0; i < nbTrip; i++) {
+
+                            if (instance.whetherVehicleCanStartWithTrip(v, i)) {
+
+                                if (instance.getTrip(i).getIdOfStartCity() == depot.getIdOfCityAsDepot()) {
+
+                                    if (cplex.getValue(varVehicleArc[v][depot.getIndexOfDepotAsStartingPoint()][i]) > 0.99) {
+                                        firstTrip = i;
+                                        if (cplex.getValue(varTripStartTime[firstTrip]) >= 0) {
+                                            int t = (int) Math.round(cplex.getValue(varTripStartTime[firstTrip]));
+                                            TripWithStartingInfos tripWithStartingInfos = new TripWithStartingInfos(instance.getTrip(firstTrip), t);
+                                            pathForVehicle.addTripInVehiclePath(tripWithStartingInfos);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                // find the other trips for that vehicle
+                int currentTrip = firstTrip;
+                //System.out.println("currentTrip" + currentTrip);
+
+                boolean findNextTrip = true;
+                while (findNextTrip) {
+                    findNextTrip = false;
+                    for (int l = 0; l < this.nbTrip; l++) {
+                        if (instance.whetherHavePossibleArcAfterCleaning(currentTrip, l)) {
+                            //System.out.println("check varVehicleArc" + cplex.getValue(varVehicleArc[v][currentTrip][l]));
+                            if (cplex.getValue(varVehicleArc[v][currentTrip][l]) > 0.99) {
+                                if (cplex.getValue(varTripStartTime[l]) >= 0) {
+                                    int t = (int) Math.round(cplex.getValue(varTripStartTime[l]));
+                                    TripWithStartingInfos tripWithStartingInfos_l = new TripWithStartingInfos(instance.getTrip(l), t);
+                                    pathForVehicle.addTripInVehiclePath(tripWithStartingInfos_l);
+                                    currentTrip = l;
+                                    findNextTrip = true;
+                                }
+                            }
+                        }
+                    }
+
+                }
+                //System.out.println("path for vehicle is :" + pathForVehicle);
+                solution.addPathInSetForVehicle(pathForVehicle);
+
+            }
+        }
+        //give crew path from cplex solution
+        for (int d = 0; d < nbDriverValidInSchedules; d++) {
+            DriverSchedule driverSchedule = this.inputInforms.getDriverSchedules().get(d);
+            //int idDriver=this.schedules.getDriverSchedules()
+            PathForDriver pathForDriver = new PathForDriver(instance, d);
+            for (int l = 0; l < driverSchedule.getTripWithWorkingStatusAndDepartureTimeArrayList().size(); l++) {
+                TripWithWorkingStatusAndDepartureTime tripWithWorkingStatusAndDepartureTime=driverSchedule.getTripWithWorkingStatusAndDepartureTimeArrayList().get(l);
+                int idTrip = driverSchedule.getTripWithWorkingStatusAndDepartureTimeArrayList().get(l).getIdOfTrip();
+                int idOfVehicleInTrip = Integer.MAX_VALUE;
+                boolean whetherDrive = false;
+                int startTime = Integer.MAX_VALUE;
+                int nbVehicleNeed = instance.getTrip(idTrip).getNbVehicleNeed();
+
+                if (nbVehicleNeed == 1) {
+
+                    for (int v = 0; v < solution.getPathForVehicles().size(); v++) {
+
+                        if (solution.getPathForVehicles().get(v).isPresentInPath(instance.getTrip(idTrip))) {
+                            idOfVehicleInTrip = v;
+                        }
+                    }
+                    // System.out.println("cplex.getValue(varDriving[d][idTrip]" + d + " " + idTrip + " value is: " + cplex.getValue(varDriving[d][idTrip]));
+                    if (cplex.getValue(varDriving[d][idTrip]) > 0.99) {
+                        whetherDrive = true;
+                    }
+
+                    if (cplex.getValue(varTripStartTime[idTrip]) >=0) {
+                        startTime = (int) Math.round(cplex.getValue(varTripStartTime[idTrip]));
+                    }
+                    TripWithDriveInfos tripWithDriveInfos = new TripWithDriveInfos(instance.getTrip(idTrip), idOfVehicleInTrip, whetherDrive, startTime);
+                   // System.out.println("tripWithDriveInfos:" + idTrip + " " + whetherDrive + " " + startTime);
+                    pathForDriver.addTripInDriverPath(tripWithDriveInfos);
+                }
+                if(nbVehicleNeed==2) {
+                    // combine  trip 分两类，driving driver 和 passenger case, 把passenger 放在non-leading vehicle上
+                    if (cplex.getValue(varDriving[d][idTrip]) > 0.99) {
+                        whetherDrive = true;
+                        for (int v = 0; v < solution.getPathForVehicles().size(); v++) {
+
+                            if (solution.getPathForVehicles().get(v).isPresentInPath(instance.getTrip(idTrip))) {
+
+                                if (cplex.getValue(varLeading[v][idTrip]) > 0.999) {
+                                    //  System.out.println("when driver" + d + "is passenger in combine trip " + idTrip + " Leading by " + v);
+                                    idOfVehicleInTrip = v;
+                                }
+                            }
+                        }
+                        if (cplex.getValue(varTripStartTime[idTrip]) >= 0) {
+                            startTime = (int) Math.round(cplex.getValue(varTripStartTime[idTrip]));
+                        }
+
+                        TripWithDriveInfos tripWithDriveInfos = new TripWithDriveInfos(instance.getTrip(idTrip), idOfVehicleInTrip, whetherDrive, startTime);
+                        pathForDriver.addTripInDriverPath(tripWithDriveInfos);
+                    } else {
+                        // passenger in combined trip, put in non-leading vehicle
+                        whetherDrive = false;
+                        boolean whetherOriginOfShortConnection=driverSchedule.whetherIsOriginOfAShortConnection(tripWithWorkingStatusAndDepartureTime);
+                        boolean whetherADestinationOfAShortConnection=driverSchedule.whetherADestinationOfAShortConnection(tripWithWorkingStatusAndDepartureTime);
+                        if(whetherOriginOfShortConnection){
+                            int idOfNextTripInDriverSchedule=driverSchedule.getTripWithWorkingStatusAndDepartureTimeArrayList().get(l+1).getIdOfTrip();
+                            for (int v = 0; v < solution.getPathForVehicles().size(); v++) {
+                                if (solution.getPathForVehicles().get(v).isPresentInPath(instance.getTrip(idOfNextTripInDriverSchedule))) {
+
+                                        //  System.out.println("when driver" + d + "is passenger in combine trip " + idTrip + " Leading by " + v);
+                                        idOfVehicleInTrip = v;
+
+                                }
+                            }
+
+                        }else if(whetherADestinationOfAShortConnection){
+                            int idOfLastTripInDriverSchedule=driverSchedule.getTripWithWorkingStatusAndDepartureTimeArrayList().get(l-1).getIdOfTrip();
+                            for (int v = 0; v < solution.getPathForVehicles().size(); v++) {
+                                if (solution.getPathForVehicles().get(v).isPresentInPath(instance.getTrip(idOfLastTripInDriverSchedule))) {
+                                    //  System.out.println("when driver" + d + "is passenger in combine trip " + idTrip + " Leading by " + v);
+                                    idOfVehicleInTrip = v;
+
+                                }
+                            }
+
+                        }else {
+                            for (int v = 0; v < solution.getPathForVehicles().size(); v++) {
+                                if (solution.getPathForVehicles().get(v).isPresentInPath(instance.getTrip(idTrip))) {
+                                    if (cplex.getValue(varLeading[v][idTrip]) < 0.001) {
+                                        //  System.out.println("when driver" + d + "is passenger in combine trip " + idTrip + " Leading by " + v);
+                                        idOfVehicleInTrip = v;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (cplex.getValue(varTripStartTime[idTrip]) >=0) {
+                            startTime = (int) Math.round(cplex.getValue(varTripStartTime[idTrip]));
+                        }
+
+                        TripWithDriveInfos tripWithDriveInfos = new TripWithDriveInfos(instance.getTrip(idTrip), idOfVehicleInTrip, whetherDrive, startTime);
+                        System.out.println("tripWithDriveInfos:" + idTrip + " " + whetherDrive + " " + startTime);
+                        pathForDriver.addTripInDriverPath(tripWithDriveInfos);
+                    }
+
+                }
+            }
+            System.out.println("path for driver is :" + pathForDriver);
+            solution.addPathInSetForDriver(pathForDriver);
+        }
+        return solution;
+    }
+
+    public double getTimeInSec() {
+        return timeInMilliSec / 1000;
+    }
+
+
+    public double getLowerBound() {
+        return lowerBound;
+    }
+
+    public double getUpperBound() {
+        return upperBound;
+    }
+
+    public double getGap() {
+        double decimalNumber = 100 * (upperBound - lowerBound) / upperBound;
+        return decimalNumber;
+    }
+
+
+    @Override
+    public String toString() {
+        return "SolverWithFormulation_2{" +
+                //"instance=" + instance +
+                '}';
+    }
+
+
+    public static void main(String[] args) throws IloException, IOException {
+
+//        InstanceReader reader = new InstanceReader("largerExample.txt");
+        InstanceReader reader1 = new InstanceReader("inst_nbCity03_Size90_Day1_nbTrips045_combPer0.25_TW5.txt");
+
+        Instance instance = reader1.readFile(); //这个语句将文本的内容就读出来了
+        System.out.println(instance);
+
+
+
+        InputInformsReader inputInformsReader = new InputInformsReader("FirstSolutionGivenByTwoIndex_inst_nbCity03_Size90_Day1_nbTrips045_combPer0.25_TW5.txt", instance);
+        InputInforms inputInforms = inputInformsReader.readFile();
+        System.out.println("input driver schedules: "+inputInforms.getDriverSchedules());
+        System.out.println("input vehicle routes: "+inputInforms.getVehicleRoutes());
+
+
+        SolverWithFormulationBasedOnDriverSchedule solverWithFormulation1 = new SolverWithFormulationBasedOnDriverSchedule(instance, inputInforms, false);
+
+        // print solution
+        Solution sol = solverWithFormulation1.solveWithCplexBasedOnGivenSchedules();
+        if (sol != null) {
+            sol.printInfile("sol_inst_nbCity03_Size90_Day1_nbTrips045_combPer0.25_TW5.txt");
+            System.out.println("total cost for the solution: " + sol.getTotalCost());
+        }
+        //System.out.println(sol);
+        System.out.println("time : " + solverWithFormulation1.getTimeInSec() + " s");
+        System.out.println("lb : " + solverWithFormulation1.getLowerBound());
+        System.out.println("ub : " + solverWithFormulation1.getUpperBound());
+    }
+}
