@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="RoutingAndScheduling:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8f321cbc-180e-44f5-805b-5f0153a1b712" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../10 StatisticForOnlyInstances_VehicleAndDriverSolution/checkerForVehicleAndDriver.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../10 StatisticForOnlyInstances_VehicleAndDriverSolution/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../2 ShortestPath/ShortestPath/src/.idea/libraries/cplex.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../2 ShortestPath/ShortestPath/src/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../2 ShortestPath/ShortestPath/src/out/production/ShortestPath/ShortestPath.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../4(1)AircraftRoutingAndCrewScheduling/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../4(3)Decomposed-DriverSchedule-CGforDriverSchedulingProblem_CplexAndLabelingCompare/4(4)CGforDriverSchedulingProblem.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../6BronKerboschCliqueFinderAndGreedyCliqueFinder/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../7GeneateIntialColumns(ForInitialSchedules)/GeneateIntialColumns/GeneateIntialColumns.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../7ShortestTimeCalculatorToAGivenDepot(DifferentInstanceSizeModifyBenchmarkFileDepot)/ShortestTimeCalculator.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../8checkerForVehicleAndDriver/checkerForVehicleAndDriver.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../8checkerForVehicleAndDriver/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../9StatisticForVehicleAndDriverSolutionsAndInstances/9StatisticForVehicleAndDriverSolutionsAndInstances.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../9StatisticForVehicleAndDriverSolutionsAndInstances/checkerForVehicleAndDriver.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GeneateIntialColumns(For get the best column in column generation)8.17.2023/GeneateIntialColumns.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2 ShortestPath/ShortestPath/src/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/../2 ShortestPath/ShortestPath/src/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2 ShortestPath/ShortestPath/src/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../2 ShortestPath/ShortestPath/src/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2 ShortestPath/ShortestPath/src/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2 ShortestPath/ShortestPath/src/ShortestPath.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../2 ShortestPath/ShortestPath/src/ShortestPath.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2 ShortestPath/ShortestPath/src/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../2 ShortestPath/ShortestPath/src/Solver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../3 CuttingProblem/src/ColumnGe/MasterProblem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../3 CuttingProblem/src/ColumnGe/MasterProblem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(1)AircraftRoutingAndCrewScheduling/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/../4(1)AircraftRoutingAndCrewScheduling/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(1)AircraftRoutingAndCrewScheduling/out/production/RoutingAndScheduling/PathsForCrews/PathGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/../4(1)AircraftRoutingAndCrewScheduling/out/production/RoutingAndScheduling/PathsForCrews/PathGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(1)AircraftRoutingAndCrewScheduling/src/PathsForCrews/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/../4(1)AircraftRoutingAndCrewScheduling/src/PathsForCrews/Label.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(1)AircraftRoutingAndCrewScheduling/src/PathsForCrews/PathGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../4(1)AircraftRoutingAndCrewScheduling/src/PathsForCrews/PathGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(2)Vehicle routing and scheduling" beforeDir="false" afterPath="$PROJECT_DIR$/../4(2)Vehicle routing and scheduling" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/.idea/artifacts/RoutingAndScheduling_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/.idea/libraries/cplex.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/Instance Generate.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/Instance0DriverSchedules.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/Instance3DriverSchedules.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/RoutingAndScheduling.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/RoutingAndScheduling.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/cplex.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/feaSol_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/feaSol_nbCity05_Size180_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/inst_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/inst_nbCity05_Size180_Day1_nbTrips020_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/inst_nbCity05_Size180_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/inst_nbCity05_Size180_Day1_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/inst_nbCity05_Size180_Day3_nbTrips150_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/inst_nbCity05_Size180_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/inst_nbCity10_Size240_Day1_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/instanceOfRoutingAndScheduling.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/instances/inst_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/instances/inst_nbCity05_Size180_Day1_nbTrips020_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/modelOfRoutingAndScheduling.lp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/otherWarmStartCode.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/artifacts/RoutingAndScheduling_jar/RoutingAndScheduling.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Instance/Arc.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Instance/City.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Instance/CoordinateOfCity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Instance/Depot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Instance/Driver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Instance/Instance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Instance/InstanceReader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Instance/Trip.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Instance/Vehicle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/PathsForDrivers/Label.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/PathsForDrivers/Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/PathsForDrivers/PathGenerator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Solution/DriverSchedule.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Solution/PathForDriver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Solution/PathForVehicle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Solution/Schedules.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Solution/SchedulesReader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Solution/Solution.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Solution/TripWithDriveInfos.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Solution/TripWithWorkingStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/Solver/SolverBasedOnDriverSchedule.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/out/production/RoutingAndScheduling/benchmark/Benchmark.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/results.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/results/log1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/results/log2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/results/results1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/results/results2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/schedules/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/schedules/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/sol.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Instance/Arc.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Instance/City.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Instance/CoordinateOfCity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Instance/Depot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Instance/Driver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Instance/Instance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Instance/InstanceReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Instance/Trip.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Instance/Vehicle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/PathsForDrivers/Label.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/PathsForDrivers/Node.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/PathsForDrivers/PathGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Solution/DriverSchedule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Solution/PathForDriver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Solution/PathForResource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Solution/PathForVehicle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Solution/Schedules.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Solution/SchedulesReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Solution/Solution.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Solution/TripWithDriveInfos.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Solution/TripWithWorkingStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/Solver/SolverBasedOnDriverSchedule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/src/benchmark/Benchmark.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/vehicleLargerExample.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/vehicleRoutingSmallExample.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-VehiclePart/warmStartFile.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/.idea/artifacts/RoutingAndScheduling_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/.idea/libraries/cplex.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/.idea/libraries/cplex1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/DriverScheduleSolution.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/Instance Generate.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/Instance0DriverSchedules.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/Instance12DriverSchedules.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/Instance17DriverSchedules.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/RoutingAndScheduling.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/RoutingAndScheduling.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliqueResult_inst_nbCity10_Size240_Day1_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliqueResult_inst_nbCity10_Size240_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliqueResult_inst_nbCity20_Size300_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day1_nbTrips050_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day1_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day1_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day2_nbTrips040_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day2_nbTrips040_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day2_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day2_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day2_nbTrips200_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day3_nbTrips060_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day3_nbTrips060_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day3_nbTrips150_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day3_nbTrips150_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day3_nbTrips300_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity05_Size180_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity10_Size240_Day1_nbTrips050_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity10_Size240_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity10_Size240_Day1_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity10_Size240_Day1_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity10_Size240_Day2_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity10_Size240_Day2_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity10_Size240_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity10_Size240_Day2_nbTrips200_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity10_Size240_Day3_nbTrips150_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity10_Size240_Day3_nbTrips150_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity10_Size240_Day3_nbTrips300_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity10_Size240_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity20_Size300_Day1_nbTrips050_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity20_Size300_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity20_Size300_Day1_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity20_Size300_Day1_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity20_Size300_Day2_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity20_Size300_Day2_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity20_Size300_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity20_Size300_Day2_nbTrips200_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity20_Size300_Day3_nbTrips150_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity20_Size300_Day3_nbTrips150_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity20_Size300_Day3_nbTrips300_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cliques/cliqueResult_inst_nbCity20_Size300_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/cplex.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/feaSol_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/feaSol_nbCity05_Size180_Day1_nbTrips020_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/feaSol_nbCity05_Size180_Day3_nbTrips060_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/feaSol_nbCity05_Size180_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/feaSol_nbCity20_Size300_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/inst_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/inst_nbCity05_Size180_Day1_nbTrips020_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/inst_nbCity05_Size180_Day3_nbTrips060_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/inst_nbCity05_Size180_Day3_nbTrips060_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/inst_nbCity05_Size180_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/inst_nbCity10_Size240_Day1_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/inst_nbCity10_Size240_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/inst_nbCity20_Size300_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/instanceOfRoutingAndScheduling.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/modelOfDriverSchedule.lp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/modelOfRoutingAndScheduling.lp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/otherWarmStartCode.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/artifacts/RoutingAndScheduling_jar/RoutingAndScheduling.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Instance/Arc.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Instance/City.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Instance/CoordinateOfCity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Instance/Depot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Instance/Driver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Instance/InputDriverSchedule.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Instance/InputSchedules.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Instance/Instance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Instance/InstanceReader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Instance/SchedulesReader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Instance/Trip.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Instance/Vehicle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/PathsForDrivers/Label.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/PathsForDrivers/Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/PathsForDrivers/PathGenerator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Solution/DriverSchedule.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Solution/PathForDriver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Solution/PathForVehicle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Solution/Solution.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Solution/SolutionForDriverSchedule.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Solution/TripWithWorkingStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/Solver/SolverForDriverSchedule.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/out/production/RoutingAndScheduling/benchmark/BenchmarkForSolvingDriverScheduleProblem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultOfSchedule.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/results.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/log1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips050_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips040_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips040_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips200_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day3_nbTrips150_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day3_nbTrips150_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day3_nbTrips300_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity05_Size180_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity10_Size240_Day1_nbTrips050_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity10_Size240_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity10_Size240_Day1_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/SolutionModifiedBy2shortConnection/scheduleSolution_inst_nbCity10_Size240_Day1_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/log2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/scheduleSolution_inst_nbCity10_Size240_Day2_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/scheduleSolution_inst_nbCity10_Size240_Day2_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/scheduleSolution_inst_nbCity10_Size240_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/scheduleSolution_inst_nbCity10_Size240_Day2_nbTrips200_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/scheduleSolution_inst_nbCity10_Size240_Day3_nbTrips150_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/scheduleSolution_inst_nbCity10_Size240_Day3_nbTrips150_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/scheduleSolution_inst_nbCity10_Size240_Day3_nbTrips300_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/scheduleSolution_inst_nbCity10_Size240_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/resultsOfSchedules/scheduleSolution_inst_nbCity20_Size300_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/sol_DriverSchedule.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Instance/Arc.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Instance/City.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Instance/CoordinateOfCity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Instance/Depot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Instance/Driver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Instance/InputDriverSchedule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Instance/InputSchedules.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Instance/Instance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Instance/InstanceReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Instance/SchedulesReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Instance/Trip.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Instance/Vehicle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/PathsForDrivers/Label.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/PathsForDrivers/Node.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/PathsForDrivers/PathGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Solution/DriverSchedule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Solution/PathForDriver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Solution/PathForResource.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Solution/PathForVehicle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Solution/Solution.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Solution/SolutionForDriverSchedule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Solution/TripWithWorkingStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/Solver/SolverForDriverSchedule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/src/benchmark/BenchmarkForSolvingDriverScheduleProblem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/vehicleLargerExample.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/vehicleRoutingSmallExample.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFile.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day1_nbTrips020_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day1_nbTrips050_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day1_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day1_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day2_nbTrips040_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day2_nbTrips040_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day2_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day2_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day2_nbTrips200_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day3_nbTrips060_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day3_nbTrips060_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day3_nbTrips150_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day3_nbTrips150_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day3_nbTrips300_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity05_Size180_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity10_Size240_Day1_nbTrips050_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity10_Size240_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity10_Size240_Day1_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity10_Size240_Day1_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity10_Size240_Day2_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity10_Size240_Day2_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity10_Size240_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity10_Size240_Day2_nbTrips200_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity10_Size240_Day3_nbTrips150_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity10_Size240_Day3_nbTrips150_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity10_Size240_Day3_nbTrips300_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity10_Size240_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity20_Size300_Day1_nbTrips050_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity20_Size300_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity20_Size300_Day1_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity20_Size300_Day1_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity20_Size300_Day2_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity20_Size300_Day2_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity20_Size300_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity20_Size300_Day2_nbTrips200_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity20_Size300_Day3_nbTrips150_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity20_Size300_Day3_nbTrips150_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity20_Size300_Day3_nbTrips300_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(3)Decomposed-driverScheduling/warmStartFiles/feaSol_nbCity20_Size300_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/.idea/libraries/cplex.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/CGforDriverSchedulingProblem.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../4(3)Decomposed-DriverSchedule-CGforDriverSchedulingProblem - OnlyLabelingForSubP - doubleChangeToInt/4(4)CGforDriverSchedulingProblem.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/inst_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/instances/inst_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/instances/inst_nbCity05_Size180_Day1_nbTrips020_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/out/production/CGforDriverSchedulingProblem/ColumnGe/MasterProblem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/out/production/CGforDriverSchedulingProblem/Instance/City.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/out/production/CGforDriverSchedulingProblem/Instance/CoordinateOfCity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/out/production/CGforDriverSchedulingProblem/Instance/Depot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/out/production/CGforDriverSchedulingProblem/Instance/Driver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/out/production/CGforDriverSchedulingProblem/Instance/Instance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/out/production/CGforDriverSchedulingProblem/Instance/InstanceReader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/out/production/CGforDriverSchedulingProblem/Instance/ScheduleType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/out/production/CGforDriverSchedulingProblem/Instance/Trip.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/out/production/CGforDriverSchedulingProblem/Instance/TripWithWorkingStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/out/production/CGforDriverSchedulingProblem/Instance/Vehicle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/out/production/CGforDriverSchedulingProblem/Solution/DriverSchedule.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/out/production/CGforDriverSchedulingProblem/Solution/SchedulesReader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/out/production/CGforDriverSchedulingProblem/Solution/Solution.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips050_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips040_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips040_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips200_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day3_nbTrips060_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day3_nbTrips060_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day3_nbTrips150_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day3_nbTrips150_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day3_nbTrips300_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity05_Size180_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity10_Size240_Day1_nbTrips050_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity10_Size240_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity10_Size240_Day1_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity10_Size240_Day1_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity10_Size240_Day2_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity10_Size240_Day2_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity10_Size240_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity10_Size240_Day2_nbTrips200_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity10_Size240_Day3_nbTrips150_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity10_Size240_Day3_nbTrips150_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity10_Size240_Day3_nbTrips300_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity10_Size240_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity20_Size300_Day1_nbTrips050_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity20_Size300_Day1_nbTrips050_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity20_Size300_Day1_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity20_Size300_Day1_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity20_Size300_Day2_nbTrips100_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity20_Size300_Day2_nbTrips100_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity20_Size300_Day2_nbTrips200_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity20_Size300_Day2_nbTrips200_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity20_Size300_Day3_nbTrips150_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity20_Size300_Day3_nbTrips150_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity20_Size300_Day3_nbTrips300_combPer0.0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/schedules/scheduleSolution_inst_nbCity20_Size300_Day3_nbTrips300_combPer0.1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/ColumnGe/MasterProblem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/ColumnGe/SubProblem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/Instance/City.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/Instance/CoordinateOfCity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/Instance/Depot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/Instance/Driver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/Instance/Instance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/Instance/InstanceReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/Instance/ScheduleType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/Instance/Trip.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/Instance/TripWithWorkingStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/Instance/Vehicle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/Solution/DriverSchedule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/Solution/SchedulesReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4(4)CGforDriverSchedulingProblem/src/Solution/Solution.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../5FindKClique/src/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/../5FindKClique/src/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../6BronKerboschCliqueFinderAndGreedyCliqueFinder/out/production/BronKerboschCliqueFinder/GreedyCliqueFinder.class" beforeDir="false" afterPath="$PROJECT_DIR$/../6BronKerboschCliqueFinderAndGreedyCliqueFinder/out/production/BronKerboschCliqueFinder/GreedyCliqueFinder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../6BronKerboschCliqueFinderAndGreedyCliqueFinder/src/GreedyCliqueFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../6BronKerboschCliqueFinderAndGreedyCliqueFinder/src/GreedyCliqueFinder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ExampleRandom Version 2- dirver routes-degsinedCityAndDepot- feasible solution including combined part" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2DzzZSb4YlmXycRVMZNes79k7Uh" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "last_opened_file_path": "C:/Users/wsun/IdeaProjects/11-S-VehicleRoutingAndDriverScheduling_departureTimeWindow(integrated)_20240911-Formulation_1/src/Instance/Instance.java",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="Instance" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.SolverWithFormulation_2">
+    <configuration name="Benchmark" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="benchmark.Benchmark" />
+      <module name="RoutingAndScheduling" />
+      <option name="PROGRAM_PARAMETERS" value="-d C:\Users\wsun\Desktop\instances -warm C:\Users\wsun\Desktop\warmStartFiles" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Instance.InstanceReader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Instance.InstanceReader" />
+      <module name="RoutingAndScheduling" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Solution.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PathForVehicle" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Solution.PathForVehicle" />
+      <module name="RoutingAndScheduling" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Solution.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Solver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Solver.Solver" />
+      <module name="RoutingAndScheduling" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Solver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SolverWithFormulation_1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Solver.SolverWithFormulation_1" />
+      <module name="RoutingAndScheduling" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Solver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SolverWithFormulation_2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="-Xmx" value="8000m" />
+        <env name="-Xms" value="1024m" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="Solver.SolverWithFormulation_2" />
+      <module name="RoutingAndScheduling" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Solver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Benchmark" />
+      <item itemvalue="Application.Solver" />
+      <item itemvalue="Application.SolverWithFormulation_1" />
+      <item itemvalue="Application.SolverWithFormulation_2" />
+      <item itemvalue="Application.PathForVehicle" />
+      <item itemvalue="Application.Instance.InstanceReader" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SolverWithFormulation_2" />
+        <item itemvalue="Application.SolverWithFormulation_1" />
+        <item itemvalue="Application.Instance.InstanceReader" />
+        <item itemvalue="Application.PathForVehicle" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8f321cbc-180e-44f5-805b-5f0153a1b712" name="Changes" comment="" />
+      <created>1661716757377</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1661716757377</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

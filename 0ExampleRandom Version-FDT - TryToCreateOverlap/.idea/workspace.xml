@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a9e4b923-55fd-4a49-a7da-db931ba58ca2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/InstanceGet/ArcForTwoConflictTripsBySameDriver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/InstanceGet/MaximumCliqueConflictGraph.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/InstanceGet/Pair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChangingParameter.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ChangingParameter.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FixedParameter.txt" beforeDir="false" afterPath="$PROJECT_DIR$/FixedParameter.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceCreate/Copy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceCreate/RandomInstanceCreate.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceCreate/RandomInstanceCreate.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceGet/ArcForTrip.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceGet/City.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceGet/City.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceGet/FeasibleSolution.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceGet/FeasibleSolution.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceGet/Instance.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceGet/Instance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceGet/Shift.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceGet/Shift.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceGet/Trip.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceGet/Trip.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceGet/VehicleStartTrips.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceGet/VehicleStartTrips.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceInput/Input.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceInput/Input.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceInput/InputReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceInput/InputReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceInput/InputReaderFromTxtAndCsvFiles.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ExampleRandom/InstanceInput/InputReaderFromTxtAndCsvFiles.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InstanceCreate/Copy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InstanceCreate/RandomInstanceCreate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InstanceCreate/RandomInstanceCreate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InstanceGet/ArcForTrip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InstanceGet/ArcForTwoFeasibleSuccessiveTrip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InstanceGet/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InstanceGet/City.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InstanceGet/FeasibleSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InstanceGet/FeasibleSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InstanceGet/Instance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InstanceGet/Instance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InstanceGet/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InstanceGet/Shift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InstanceGet/Trip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InstanceGet/Trip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InstanceGet/VehicleStartTrips.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InstanceGet/VehicleStartTrips.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InstanceInput/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InstanceInput/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InstanceInput/InputReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InstanceInput/InputReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InstanceInput/InputReaderFromTxtAndCsvFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InstanceInput/InputReaderFromTxtAndCsvFiles.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2HJdKb6sWkErX4KkGQH5trcZQ26" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/wsun/IdeaProjects/ExampleRandom Version 2- dirver routes-degsinedCityAndDepot- feasible solution including combined part&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="InstanceInput" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.InputReaderFromTxtAndCsvFiles">
+    <configuration name="ArcForTwoConflictTripsBySameDriver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="InstanceGet.ArcForTwoConflictTripsBySameDriver" />
+      <module name="ExampleRandom" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="InstanceGet.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InputReader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="InstanceInput.InputReader" />
+      <module name="ExampleRandom" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="InstanceInput.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InputReaderFromTxtAndCsvFiles" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="InstanceInput.InputReaderFromTxtAndCsvFiles" />
+      <module name="ExampleRandom" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="InstanceInput.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MaximumCliqueConflictGraph" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="InstanceGet.MaximumCliqueConflictGraph" />
+      <module name="ExampleRandom" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="InstanceGet.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RandomInstanceCreate" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="InstanceCreate.RandomInstanceCreate" />
+      <module name="ExampleRandom" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="InstanceCreate.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.InputReaderFromTxtAndCsvFiles" />
+        <item itemvalue="Application.RandomInstanceCreate" />
+        <item itemvalue="Application.MaximumCliqueConflictGraph" />
+        <item itemvalue="Application.ArcForTwoConflictTripsBySameDriver" />
+        <item itemvalue="Application.InputReader" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a9e4b923-55fd-4a49-a7da-db931ba58ca2" name="Changes" comment="" />
+      <created>1668007059833</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1668007059833</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
