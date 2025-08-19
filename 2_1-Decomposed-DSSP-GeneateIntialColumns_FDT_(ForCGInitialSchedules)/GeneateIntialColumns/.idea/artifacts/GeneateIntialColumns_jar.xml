@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GeneateIntialColumns:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GeneateIntialColumns_jar</output-path>
+    <root id="archive" name="GeneateIntialColumns.jar">
+      <element id="module-output" name="GeneateIntialColumns" />
+    </root>
+  </artifact>
+</component>

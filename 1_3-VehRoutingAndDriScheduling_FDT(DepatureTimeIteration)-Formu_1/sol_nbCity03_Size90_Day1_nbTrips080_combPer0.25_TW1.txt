@@ -1,0 +1,57 @@
+The mini cost is including :1836070.0
+The fixed cost for vehicle and driver :1768000.0
+The idle cost for vehicle and driver :67620.0
+The idle cost for all drivers :3220.0
+THe idle cost for all vehicles 64400.0
+The changover cost for all drivers:450.0
+0 7 0 415 1 485 2 595 3 670 4 770 5 835 6 895
+1 7 7 35 8 110 9 185 10 285 11 385 12 460 13 520
+2 6 14 150 15 230 16 315 17 405 18 490 2 595
+3 5 19 370 20 435 21 515 3 670 22 760
+4 7 23 515 24 615 25 685 26 760 27 865 28 925 29 985
+5 5 30 390 23 515 31 595 32 700 33 805
+6 6 34 500 35 560 32 700 36 810 37 895 38 955
+7 6 39 60 9 185 40 270 17 405 41 475 42 540
+8 6 43 635 44 710 45 795 46 885 47 975 48 1060
+9 6 49 460 24 615 50 690 51 775 52 845 53 935
+10 5 54 465 55 580 44 710 56 790 57 865
+11 7 58 480 59 555 43 635 60 700 36 810 61 875 62 935
+12 5 63 235 64 315 21 515 65 590 66 670
+13 5 67 490 55 580 68 670 33 805 69 870
+14 5 70 260 71 365 18 490 72 580 50 690
+15 6 73 570 66 670 74 770 57 865 75 935 76 995
+16 3 77 95 78 155 79 215
+0 7 0 0 true 1 0 true 2 0 true 3 0 true 4 0 true 5 0 true 6 0 true 
+ timeInMinute working: 2445.0 driving: 330.0
+1 7 7 1 true 8 1 true 9 7 false 10 1 true 11 1 true 12 1 true 13 1 true 
+ timeInMinute working: 2470.0 driving: 285.0
+2 6 14 2 true 15 2 true 16 2 true 17 7 false 18 14 false 2 0 false 
+ timeInMinute working: 2270.0 driving: 150.0
+3 5 19 3 true 20 3 true 21 12 false 3 0 false 22 3 true 
+ timeInMinute working: 1995.0 driving: 150.0
+4 7 23 5 false 24 9 false 25 4 true 26 4 true 27 4 true 28 4 true 29 4 true 
+ timeInMinute working: 2410.0 driving: 225.0
+5 5 30 5 true 23 5 true 31 5 true 32 5 true 33 13 false 
+ timeInMinute working: 2120.0 driving: 195.0
+6 6 34 6 true 35 6 true 32 5 false 36 11 false 37 6 true 38 6 true 
+ timeInMinute working: 2335.0 driving: 195.0
+7 6 39 7 true 9 7 true 40 7 true 17 7 true 41 7 true 42 7 true 
+ timeInMinute working: 2445.0 driving: 285.0
+8 6 43 11 false 44 10 false 45 8 true 46 8 true 47 8 true 48 8 true 
+ timeInMinute working: 2185.0 driving: 180.0
+9 6 49 9 true 24 9 true 50 9 true 51 9 true 52 9 true 53 9 true 
+ timeInMinute working: 2420.0 driving: 285.0
+10 5 54 10 true 55 10 true 44 10 true 56 10 true 57 15 false 
+ timeInMinute working: 2045.0 driving: 195.0
+11 7 58 11 true 59 11 true 43 11 true 60 11 true 36 11 true 61 11 true 62 11 true 
+ timeInMinute working: 2335.0 driving: 330.0
+12 5 63 12 true 64 12 true 21 12 true 65 12 true 66 15 false 
+ timeInMinute working: 2235.0 driving: 195.0
+13 5 67 13 true 55 10 false 68 13 true 33 13 true 69 13 true 
+ timeInMinute working: 1945.0 driving: 180.0
+14 5 70 14 true 71 14 true 18 14 true 72 14 true 50 9 false 
+ timeInMinute working: 2195.0 driving: 195.0
+15 6 73 15 true 66 15 true 74 15 true 57 15 true 75 15 true 76 15 true 
+ timeInMinute working: 2170.0 driving: 285.0
+16 3 77 16 true 78 16 true 79 16 true 
+ timeInMinute working: 660.0 driving: 150.0

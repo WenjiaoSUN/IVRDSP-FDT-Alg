@@ -1,0 +1,10 @@
+The mini cost is including :211315.0
+The fixed cost for vehicle and driver :208000.0
+The idle cost for vehicle and driver :3255.0
+The changover cost for all drivers:60.0
+PathForVehicle{ idOfVehicle=0, vehiclePath=[TripWithStartInfos{trip_1, departureTimeUnit=94}, TripWithStartInfos{trip_2, departureTimeUnit=111}, TripWithStartInfos{trip_3, departureTimeUnit=130}] };
+PathForVehicle{ idOfVehicle=1, vehiclePath=[TripWithStartInfos{trip_0, departureTimeUnit=91}, TripWithStartInfos{trip_2, departureTimeUnit=111}, TripWithStartInfos{trip_4, departureTimeUnit=134}] };
+PathForDriver{ idOfDriver=0, driverPath=[TripWithDriveInfos{trip_0, v_1, driving=true, departureTimeUnit=91}, TripWithDriveInfos{trip_2, v_0, driving=false, departureTimeUnit=111}, TripWithDriveInfos{trip_4, v_1, driving=true, departureTimeUnit=134}] };
+	 workingTimeInThisShift: 275.0 minutes, drivingTimeInThisShift: 120.0 minutes
+PathForDriver{ idOfDriver=1, driverPath=[TripWithDriveInfos{trip_1, v_0, driving=true, departureTimeUnit=94}, TripWithDriveInfos{trip_2, v_0, driving=true, departureTimeUnit=111}, TripWithDriveInfos{trip_3, v_0, driving=true, departureTimeUnit=130}] };
+	 workingTimeInThisShift: 240.0 minutes, drivingTimeInThisShift: 180.0 minutes

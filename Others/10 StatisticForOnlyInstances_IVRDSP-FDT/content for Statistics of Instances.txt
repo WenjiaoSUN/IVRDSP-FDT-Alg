@@ -1,0 +1,264 @@
+
+                   0 writerForStatisticsInstance.print(instance.getNameOfInstance() + ",");
+                   1 writerForStatisticsInstance.print(instance.getNbTrips()+",");
+                   2 writerForStatisticsInstance.print(instance.getNbCombinedTrips() +",");
+                   3 writerForStatisticsInstance.print(instance.getActualPercentageOfCombine()+",");
+                   4  writerForStatisticsInstance.print(instance.getNbCombineTripStartFromDepotAndEndAtDepot() +",");
+                   5 writerForStatisticsInstance.print(instance.getNbCombineTripStartFromDepotAndEndAtNonDepot()+",");
+                   6 writerForStatisticsInstance.print(instance.getNbCombineTripStartFromNonDepotEndAtDepot() +",");
+                   7 writerForStatisticsInstance.print(instance.getNbCombineTripStartFromNonDepotEndAtNonDepot()+",");
+                   8  writerForStatisticsInstance.print(instance.getNbNormalTrip()+",");
+                   9 writerForStatisticsInstance.print(instance.getNbNormalTripStartFromDepotEndAtDepot()+",");
+                   10 writerForStatisticsInstance.print(instance.getNbNormalTripStartFromDepotEndAtNonDepot()+",");
+                  11   writerForStatisticsInstance.print(instance.getNbNormalTripStartFromNonDepotEndAtDepot()+",");
+                  12  writerForStatisticsInstance.print(instance.getNbNormalTripStartFromNonDepotEndAtNonDepot()+",");
+                  13 length of DepartureTimeWindow
+
+
+  2 public int getNbCombinedTrips(){
+        int nbCombinedTrips=0;
+        for(int i=0;i<this.trips.length;i++){
+            int nbVehicleInTrip=this.trips[i].nbVehicleNeed;
+            if(nbVehicleInTrip>1.99){
+                nbCombinedTrips++;
+            }
+        }
+        return nbCombinedTrips;
+    }
+
+3 public double getActualPercentageOfCombine(){
+        double nbCombinedTrips=this.getNbCombinedTrips();
+        double nbTrips=this.getNbTrips();
+        double percentage=100*nbCombinedTrips/nbTrips;
+
+        return percentage;
+    }
+
+
+
+ 4   public int getNbCombineTripStartFromDepotAndEndAtDepot(){
+        int nbCombineTrip_StartDepot_EndDepot=0;
+        for(int t=0;t<this.getTrips().length;t++){
+            Trip trip=this.trips[t];
+            int nbVehicleNeed=trip.nbVehicleNeed;
+            if(nbVehicleNeed>1.999){
+                boolean whetherTripStartFromDepot=false;
+                boolean whetherTripEndAtDepot=false;
+                for(int d=0;d<this.getDepots().length;d++){
+                    Depot depot=this.getDepots()[d];
+                    if(trip.getIdOfStartCity()==depot.getIdOfCityAsDepot()){
+                        whetherTripStartFromDepot=true;
+                    }
+                    if(trip.getIdOfEndCity()==depot.getIdOfCityAsDepot()){
+                        whetherTripEndAtDepot=true;
+                    }
+                }
+                if(whetherTripStartFromDepot&&whetherTripEndAtDepot){
+                    nbCombineTrip_StartDepot_EndDepot++;
+                }
+            }
+        }
+        return nbCombineTrip_StartDepot_EndDepot;
+    }
+
+ 5   public int getNbCombineTripStartFromDepotAndEndAtNonDepot(){
+        int nbCombineTrip_StartDepot_EndNonDepot=0;
+        for(int t=0;t<this.getTrips().length;t++){
+            Trip trip=this.trips[t];
+            int nbVehicleNeed=trip.nbVehicleNeed;
+            if(nbVehicleNeed>1.999){
+                boolean whetherTripStartFromDepot=false;
+                boolean whetherTripEndAtDepot=false;
+                for(int d=0;d<this.getDepots().length;d++){
+                    Depot depot=this.getDepots()[d];
+                    if(trip.getIdOfStartCity()==depot.getIdOfCityAsDepot()){
+                        whetherTripStartFromDepot=true;
+                    }
+                    if(trip.getIdOfEndCity()==depot.getIdOfCityAsDepot()){
+                        whetherTripEndAtDepot=true;
+                    }
+                }
+                if(whetherTripStartFromDepot&&!whetherTripEndAtDepot){
+                    nbCombineTrip_StartDepot_EndNonDepot++;
+                }
+            }
+        }
+        return nbCombineTrip_StartDepot_EndNonDepot;
+    }
+
+
+
+
+   6  public int getNbCombineTripStartFromNonDepotEndAtDepot(){
+        int nbCombineTrip_StartNonDepot_EndAtDepot=0;
+        for(int t=0;t<this.getTrips().length;t++){
+            Trip trip=this.trips[t];
+            int nbVehicleNeed=trip.nbVehicleNeed;
+            if(nbVehicleNeed>1.999){
+                boolean whetherStartDepot=false;
+                boolean whetherEndAtDepot=false;
+                for(int d=0;d<this.getDepots().length;d++){
+                    Depot depot=this.getDepots()[d];
+                    if(trip.getIdOfStartCity()==depot.getIdOfCityAsDepot()){
+                        whetherStartDepot=true;
+                    }
+                    if(trip.getIdOfEndCity()==depot.getIdOfCityAsDepot()){
+                        whetherEndAtDepot=true;
+                    }
+                }
+                if(!whetherStartDepot&&whetherEndAtDepot){
+                    nbCombineTrip_StartNonDepot_EndAtDepot++;
+                }
+
+            }
+        }
+        return nbCombineTrip_StartNonDepot_EndAtDepot;
+
+    }
+
+
+  7  public int getNbCombineTripStartFromNonDepotEndAtNonDepot(){
+        int nbCombineTrip_StartNonDepot_EndAtNonDepot=0;
+        for(int t=0;t<this.getTrips().length;t++){
+            Trip trip=this.trips[t];
+            int nbVehicleNeed=trip.nbVehicleNeed;
+            if(nbVehicleNeed>1.999){
+                boolean whetherStartDepot=false;
+                boolean whetherEndAtDepot=false;
+                for(int d=0;d<this.getDepots().length;d++){
+                    Depot depot=this.getDepots()[d];
+                    if(trip.getIdOfStartCity()==depot.getIdOfCityAsDepot()){
+                        whetherStartDepot=true;
+                    }
+                    if(trip.getIdOfEndCity()==depot.getIdOfCityAsDepot()){
+                        whetherEndAtDepot=true;
+                    }
+                }
+                if(!whetherStartDepot&&!whetherEndAtDepot){
+                    nbCombineTrip_StartNonDepot_EndAtNonDepot++;
+                }
+
+            }
+        }
+        return nbCombineTrip_StartNonDepot_EndAtNonDepot;
+
+    }
+
+
+8 public int getNbNormalTrip(){
+        int nbNormalTrip=0;
+        for(int t=0;t<this.getTrips().length;t++){
+            Trip trip=this.trips[t];
+            int nbVehicleNeed=trip.nbVehicleNeed;
+            if(nbVehicleNeed==1){
+                nbNormalTrip++;
+            }
+        }
+        return nbNormalTrip;
+    }
+
+
+  9  public int getNbNormalTripStartFromDepotEndAtDepot(){
+        int nbNormalTrip_StartDepot_EndDepot=0;
+        for(int t=0;t<this.getTrips().length;t++){
+            Trip trip=this.trips[t];
+            int nbVehicleNeed=trip.nbVehicleNeed;
+            if(nbVehicleNeed==1){
+                boolean whetherStartFromDepot=false;
+                boolean whetherEndAtDepot=false;
+                for(int d=0;d<this.getDepots().length;d++){
+                    Depot depot=this.getDepots()[d];
+                    if(trip.getIdOfStartCity()==depot.getIdOfCityAsDepot()){
+                        whetherStartFromDepot=true;
+                    }
+                    if(trip.getIdOfEndCity()==depot.getIdOfCityAsDepot()){
+                        whetherEndAtDepot=true;
+                    }
+                }
+                if(whetherStartFromDepot&&whetherEndAtDepot){
+                    nbNormalTrip_StartDepot_EndDepot++;
+                }
+            }
+        }
+        return nbNormalTrip_StartDepot_EndDepot;
+    }
+
+
+  10  public int getNbNormalTripStartFromDepotEndAtNonDepot(){
+        int nbNormalTrip_StartDepot_EndNonDepot=0;
+        for(int t=0;t<this.getTrips().length;t++){
+            Trip trip=this.trips[t];
+            int nbVehicleNeed=trip.nbVehicleNeed;
+            if(nbVehicleNeed==1){
+                boolean whetherStartFromDepot=false;
+                boolean whetherEndAtDepot=false;
+                for(int d=0;d<this.getDepots().length;d++){
+                    Depot depot=this.getDepots()[d];
+                    if(trip.getIdOfStartCity()==depot.getIdOfCityAsDepot()){
+                        whetherStartFromDepot=true;
+                    }
+                    if(trip.getIdOfEndCity()==depot.getIdOfCityAsDepot()){
+                        whetherEndAtDepot=true;
+                    }
+                }
+                if(whetherStartFromDepot&&!whetherEndAtDepot){
+                    nbNormalTrip_StartDepot_EndNonDepot++;
+                }
+            }
+        }
+        return nbNormalTrip_StartDepot_EndNonDepot;
+    }
+
+ 11   public int getNbNormalTripStartFromNonDepotEndAtDepot(){
+        int nbNormalTrip_StartNonDepot_EndDepot=0;
+        for(int t=0;t<this.getTrips().length;t++){
+            Trip trip=this.trips[t];
+            int nbVehicleNeed=trip.nbVehicleNeed;
+            if(nbVehicleNeed==1){
+                boolean whetherStartFromDepot=false;
+                boolean whetherEndAtDepot=false;
+                for(int d=0;d<this.getDepots().length;d++){
+                    Depot depot=this.getDepots()[d];
+                    if(trip.getIdOfStartCity()==depot.getIdOfCityAsDepot()){
+                        whetherStartFromDepot=true;
+                    }
+                    if(trip.getIdOfEndCity()==depot.getIdOfCityAsDepot()){
+                        whetherEndAtDepot=true;
+                    }
+                }
+                if(!whetherStartFromDepot&&whetherEndAtDepot) {
+                    nbNormalTrip_StartNonDepot_EndDepot++;
+                }
+            }
+        }
+        return nbNormalTrip_StartNonDepot_EndDepot;
+    }
+
+  12  public int getNbNormalTripStartFromNonDepotEndAtNonDepot(){
+        int nbNormalTrip_StartNonDepot_EndNonDepot=0;
+        for(int t=0;t<this.getTrips().length;t++){
+            Trip trip=this.trips[t];
+            int nbVehicleNeed=trip.nbVehicleNeed;
+            if(nbVehicleNeed==1){
+                boolean whetherStartFromDepot=false;
+                boolean whetherEndAtDepot=false;
+                for(int d=0;d<this.getDepots().length;d++){
+                    Depot depot=this.getDepots()[d];
+                    if(trip.getIdOfStartCity()==depot.getIdOfCityAsDepot()){
+                        whetherStartFromDepot=true;
+                    }
+                    if(trip.getIdOfEndCity()==depot.getIdOfCityAsDepot()){
+                        whetherEndAtDepot=true;
+                    }
+                }
+                if(!whetherStartFromDepot&&!whetherEndAtDepot) {
+                    nbNormalTrip_StartNonDepot_EndNonDepot++;
+                }
+            }
+        }
+        return nbNormalTrip_StartNonDepot_EndNonDepot;
+    }
+
+
+
+   

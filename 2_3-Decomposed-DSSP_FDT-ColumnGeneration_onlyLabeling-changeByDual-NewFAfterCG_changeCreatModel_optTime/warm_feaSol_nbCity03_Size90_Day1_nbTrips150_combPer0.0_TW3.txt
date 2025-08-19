@@ -1,0 +1,25 @@
+//Here for varDriving  idOfDriver idOfDepot indexDepotAsStartPoint [idOfTrip whetherDrive startingTime]  indexDepotAsEndPoint
+driver 0 1 151 0 true 410 1 true 490 2 true 600 3 true 675 4 true 775 5 true 840 6 true 900 153
+driver 1 0 150 7 true 30 8 true 105 9 true 190 10 true 290 11 true 390 12 true 465 13 true 525 152
+driver 2 1 151 14 true 145 15 true 235 16 true 320 17 true 410 18 true 495 19 true 590 153
+driver 3 0 150 20 true 155 21 true 260 22 true 375 23 true 470 24 true 560 25 true 645 152
+driver 4 1 151 26 true 585 27 true 650 28 true 760 29 true 830 30 true 910 31 true 1010 153
+driver 5 1 151 32 true 30 33 true 130 34 true 235 35 true 305 36 true 395 37 true 485 153
+driver 6 1 151 38 true 30 39 true 100 40 true 210 41 true 290 42 true 375 43 true 440 44 true 515 153
+driver 7 0 150 45 true 200 46 true 290 47 true 370 48 true 470 49 true 555 50 true 630 51 true 690 152
+driver 8 1 151 52 true 450 53 true 545 54 true 625 55 true 710 56 true 785 57 true 870 153
+driver 9 0 150 58 true 290 59 true 370 60 true 440 61 true 520 62 true 590 63 true 675 64 true 735 152
+driver 10 0 150 65 true 185 66 true 255 67 true 320 68 true 400 69 true 475 70 true 575 152
+driver 11 1 151 71 true 140 72 true 215 73 true 275 74 true 345 75 true 445 76 true 545 77 true 620 153
+driver 12 1 151 78 true 255 79 true 340 80 true 420 81 true 480 82 true 555 83 true 665 153
+driver 13 1 151 84 true 310 85 true 395 86 true 475 87 true 540 88 true 615 89 true 695 90 true 780 153
+driver 14 0 150 91 true 60 92 true 150 93 true 215 94 true 300 95 true 385 96 true 445 97 true 540 152
+driver 15 1 151 98 true 70 99 true 165 100 true 245 101 true 345 102 true 420 103 true 490 153
+driver 16 1 151 104 true 145 105 true 220 106 true 305 107 true 415 108 true 510 109 true 575 153
+driver 17 1 151 110 true 275 111 true 360 112 true 460 113 true 560 114 true 635 115 true 695 116 true 770 153
+driver 18 1 151 117 true 380 118 true 455 119 true 550 120 true 620 121 true 685 122 true 780 123 true 840 153
+driver 19 1 151 124 true 530 125 true 600 126 true 705 127 true 815 128 true 875 129 true 935 153
+driver 20 0 150 130 true 485 131 true 565 132 true 655 133 true 720 134 true 810 135 true 885 136 true 955 152
+driver 21 1 151 137 true 190 138 true 275 139 true 350 140 true 440 141 true 540 142 true 660 153
+driver 22 0 150 143 true 560 144 true 660 145 true 755 146 true 845 147 true 920 152
+driver 23 0 150 148 true 355 149 true 430 152

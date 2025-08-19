@@ -1,0 +1,188 @@
+// The instance basic information 
+nbCities:5; nbDepots:2; size:180 180;nbTrips:100;nbCombinedTrips0;maxFolderTimeSlotAsTimeWindow2;planningHorizon:0-1440;maxDriving:540;maxWorking:720
+// The number of cities is 
+5
+// The number of depots is 
+2
+// The max number of vehicles is 
+14
+// The max number of drivers is 
+14
+// The number of trips is 
+100
+// The minPlanTime is 
+15
+// The short Time for driver is 
+20
+// The short Time for vehicle is 
+20
+// The maximum driving time is 
+540
+// The maximum working time is 
+720
+// The cost of using driver is 
+4000
+// The cost of using vehicle is 
+100000
+// The idle time cost for driver per unit is 
+1
+// The idle time cost for vehicle per unit is 
+20
+// The cost of driver changeover penalty per change is 
+30
+// The max percentage of combined trips is  
+0.0
+//The maxFolderOfTimeSlotAsTimeWindow is 
+2
+// The maxPlanTime is 
+720
+//The time slot Unit is 
+5
+//The scale of distance and duration is 
+0.99
+//The start time of planning horizon
+0
+//The ending time of planning horizon
+1440
+
+//Here are the cities: idOfCity 	 nameOfCity 	 coordinateX 	 coordinateY 
+0 C0 132 25
+1 C1 88 121
+2 C2 95 55
+3 C3 78 86
+4 C4 113 57
+//Depots:  
+// idOfDepot  	 indexOfDepotAsStartingPoint 	 indexOfDepotAsEndingPoint 	 idCityAsDepot
+0 100 102 3
+1 101 103 4
+//Trips: idOfTrip 	 idOfStartCity 	 idEndCity	 earliestDepartureTime 	 latestDepartureTime 	 nbCombinedVehicleInThisTrip 	 duration
+0 4 2 445 465 1 20
+1 2 3 485 505 1 35
+2 3 4 545 565 1 45
+3 4 1 630 650 1 65
+4 1 4 745 765 1 65
+5 4 3 830 850 1 45
+6 3 2 890 910 1 35
+7 2 4 955 975 1 20
+8 4 3 680 700 1 45
+9 3 0 750 770 1 80
+10 0 2 860 880 1 45
+11 2 4 960 980 1 20
+12 4 2 1015 1035 1 20
+13 2 3 1090 1110 1 35
+14 3 4 1165 1185 1 45
+15 3 1 510 530 1 35
+16 1 4 565 585 1 65
+17 4 0 650 670 1 35
+18 0 2 730 750 1 45
+19 2 3 790 810 1 35
+20 3 1 860 880 1 35
+21 1 4 920 940 1 65
+22 4 3 1000 1020 1 45
+23 4 0 660 680 1 35
+24 0 3 745 765 1 80
+25 3 2 840 860 1 35
+26 2 1 895 915 1 65
+27 1 4 975 995 1 65
+28 4 0 1085 1105 1 35
+29 0 4 1160 1180 1 35
+30 3 0 550 570 1 80
+31 0 4 675 695 1 35
+32 4 2 740 760 1 20
+33 2 4 775 795 1 20
+34 4 3 850 870 1 45
+35 3 4 930 950 1 45
+36 4 2 1015 1035 1 20
+37 2 3 1050 1070 1 35
+38 4 2 305 325 1 20
+39 2 1 340 360 1 65
+40 1 2 440 460 1 65
+41 2 4 545 565 1 20
+42 4 2 595 615 1 20
+43 2 0 665 685 1 45
+44 0 2 725 745 1 45
+45 2 4 785 805 1 20
+46 4 2 540 560 1 20
+47 2 3 600 620 1 35
+48 3 1 660 680 1 35
+49 1 4 740 760 1 65
+50 4 0 820 840 1 35
+51 0 2 905 925 1 45
+52 2 3 980 1000 1 35
+53 3 4 1030 1050 1 45
+54 4 1 650 670 1 65
+55 1 2 770 790 1 65
+56 2 4 875 895 1 20
+57 4 3 915 935 1 45
+58 3 4 1000 1020 1 45
+59 4 2 1065 1085 1 20
+60 2 4 1120 1140 1 20
+61 3 4 385 405 1 45
+62 4 0 455 475 1 35
+63 0 1 545 565 1 105
+64 1 4 695 715 1 65
+65 4 2 795 815 1 20
+66 2 4 835 855 1 20
+67 4 3 870 890 1 45
+68 3 2 180 200 1 35
+69 2 4 260 280 1 20
+70 4 0 310 330 1 35
+71 0 3 375 395 1 80
+72 3 2 485 505 1 35
+73 2 3 550 570 1 35
+74 3 4 610 630 1 45
+75 4 3 670 690 1 45
+76 3 1 375 395 1 35
+77 1 4 425 445 1 65
+78 4 1 505 525 1 65
+79 1 3 615 635 1 35
+80 3 1 700 720 1 35
+81 1 3 760 780 1 35
+82 3 1 815 835 1 35
+83 1 3 865 885 1 35
+84 3 2 500 520 1 35
+85 2 4 575 595 1 20
+86 4 2 630 650 1 20
+87 2 0 685 705 1 45
+88 0 2 775 795 1 45
+89 2 1 870 890 1 65
+90 1 3 990 1010 1 35
+91 3 0 435 455 1 80
+92 0 3 540 560 1 80
+93 3 2 645 665 1 35
+94 2 0 705 725 1 45
+95 0 1 785 805 1 105
+96 1 3 930 950 1 35
+97 3 4 165 185 1 45
+98 4 0 225 245 1 35
+99 0 3 275 295 1 80
+//Vehicles: idOfVehicle idOfStartingDepot nbTrips
+0 -1 100
+1 -1 100
+2 -1 100
+3 -1 100
+4 -1 100
+5 -1 100
+6 -1 100
+7 -1 100
+8 -1 100
+9 -1 100
+10 -1 100
+11 -1 100
+12 -1 100
+13 -1 100
+//Drivers :idOfDriver idOfStartingDepot idOfEndingDepot nbTrips
+0 -1 100
+1 -1 100
+2 -1 100
+3 -1 100
+4 -1 100
+5 -1 100
+6 -1 100
+7 -1 100
+8 -1 100
+9 -1 100
+10 -1 100
+11 -1 100
+12 -1 100
+13 -1 100

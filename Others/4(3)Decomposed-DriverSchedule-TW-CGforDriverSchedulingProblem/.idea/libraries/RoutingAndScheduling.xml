@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="RoutingAndScheduling">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/RoutingAndScheduling_jar/RoutingAndScheduling.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

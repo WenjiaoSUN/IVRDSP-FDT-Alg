@@ -1,0 +1,37 @@
+//instance
+//nbCities:3; nbDepots:2; size:90 90;nbTrips:45;nbCombinedTrips6;maxFolderTimeSlotAsTimeWindow6;planningHorizon:0-1440;maxDriving:540;maxWorking:720
+//nbVehicles in the solution
+//8
+//nbDrivers in the solution
+//9
+//total cost of the solution
+//861075.0
+//vehicle routes in the solution: idVehicle, nbTripsInPath [idTrip departureTime] 
+vehicle 0 6 39 85 9 220 40 280 11 385 43 460 13 520
+vehicle 1 6 23 540 31 615 32 690 33 805 28 900 29 960
+vehicle 2 8 23 540 24 615 3 675 4 745 5 810 27 870 37 930 38 990
+vehicle 3 7 30 405 34 465 18 525 2 595 25 665 26 725 6 870
+vehicle 4 3 19 360 20 420 12 495
+vehicle 5 10 7 60 8 135 9 220 10 280 17 380 41 450 42 510 44 570 32 690 36 785
+vehicle 6 2 21 505 35 565
+vehicle 7 9 14 170 15 230 16 305 17 380 0 440 1 520 2 595 3 675 22 735
+//driver schedules in the solution: idDriver, nbTripsInPath [idTrip idVehicleStay, status, departureTime]
+driver 0 8 39 0 true 9 5 false 40 0 true 17 5 true 41 5 true 42 5 true 3 7 false 4 2 false 
+ timeInMinute working: 3345.0 driving: 225.0
+driver 1 6 23 1 true 4 2 true 5 2 true 27 2 true 37 2 true 38 2 true 
+ timeInMinute working: 2310.0 driving: 285.0
+driver 2 6 19 4 true 20 4 true 21 6 true 44 5 true 32 5 false 33 1 false 
+ timeInMinute working: 2270.0 driving: 195.0
+driver 3 9 14 7 true 15 7 true 16 7 true 11 0 false 34 3 false 18 3 false 31 1 true 32 5 true 36 5 true 
+ timeInMinute working: 3120.0 driving: 315.0
+driver 4 7 1 7 true 2 7 true 25 3 true 26 3 true 33 1 true 28 1 true 29 1 true 
+ timeInMinute working: 2260.0 driving: 330.0
+driver 5 5 30 3 true 12 4 true 35 6 true 32 5 false 6 3 true 
+ timeInMinute working: 2370.0 driving: 195.0
+driver 6 7 34 3 true 18 3 true 24 2 true 3 7 true 22 7 true 37 2 false 38 2 false 
+ timeInMinute working: 2685.0 driving: 240.0
+driver 7 8 7 5 true 8 5 true 9 5 true 10 5 true 17 5 false 0 7 true 21 6 false 35 6 false 
+ timeInMinute working: 2570.0 driving: 240.0
+driver 8 5 9 5 false 10 5 false 11 0 true 43 0 true 13 0 true 
+ timeInMinute working: 1545.0 driving: 135.0
+

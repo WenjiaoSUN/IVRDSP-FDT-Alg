@@ -1,0 +1,26 @@
+//minplanTurnTime
+15
+
+//maxplanTurnTime
+720
+
+//maxWaitngTime
+60
+
+//short connection time for driver
+20
+
+//short connection time for vehicle
+20
+
+//double keyWorkAndDriveTimePercentageGoBackToDepot
+0.75
+
+//maxChargingTimeForVehicleInDepot
+120
+
+//timeSlotUnit
+5
+
+//scale distance and duration
+0.99

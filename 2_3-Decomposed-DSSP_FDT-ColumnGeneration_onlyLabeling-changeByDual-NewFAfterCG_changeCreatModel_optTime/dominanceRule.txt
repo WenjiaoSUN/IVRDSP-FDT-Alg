@@ -1,0 +1,113 @@
+public boolean whetherThisDominatesUnderSameDriveStatusForwardLabelingAlgorithm(Label other) {
+        boolean whetherDominates = false;
+        int departureTimeOfThisLabel = this.getCurrentNodeDepTime();
+        int departureTimeOfOtherLabel = other.getCurrentNodeDepTime();
+
+        double reducedCost_this = this.getTotalReducedCost();
+        double reducedCost_label = other.getTotalReducedCost();
+
+        double totalWorkingTime_this = this.getTotalWorkingTime();
+        double totalWorkingTime_label = other.getTotalWorkingTime();
+
+        double totalDrivingTime_this = this.getTotalDrivingTime();
+        double totalDrivingTime_label = other.getTotalDrivingTime();
+        double idleCost = this.graphRelatedToGivenDepot.getInstance().getIdleTimeCostForDriverPerUnit();
+
+
+            //针对第一个node希望越晚越好
+            boolean whetherCurrentNodeIsTrip = (this.currentNode.getNodeType() == "trip");
+            int idTrip = this.currentNode.getId();
+            Trip trip = this.graphRelatedToGivenDepot.getInstance().getTrip(idTrip);
+            int nbValid = 0;
+            int nbStrict = 0;
+
+            int keyDepartureFromCurrentTrip = this.graphRelatedToGivenDepot.getInstance().getKeyDeparturePointForExtendFrom(trip);
+            boolean whetherCouldHavePreNode = this.graphRelatedToGivenDepot.getInstance().whetherCouldHavePreTripInGraph(trip);
+            boolean whetherCouldHaveSucNode = this.graphRelatedToGivenDepot.getInstance().whetherCouldHaveSuccessorTripInGraph(trip);
+            boolean whetherEffectByTimeWindow = this.graphRelatedToGivenDepot.getInstance().whetherConArcEffectByTW(trip);
+
+            //接下来开始进行比较，只要有一个严格不等式或者真子集成立，那么这个标签就是更好的
+            //case 15: reducedCost_this= ;total working =; total driving=; proper subset
+            BitSet visited_This = this.visitedTripId;
+            BitSet visited_Other = other.visitedTripId;
+            //if(departureTimeOfThisLabel==departureTimeOfLabel) {
+            int idCity = trip.getIdOfStartCity();
+            int moreWaitThis = 0;
+            if (this.currentNodeDepTime <= other.getCurrentNodeDepTime()) {
+                moreWaitThis = other.getCurrentNodeDepTime() - this.currentNodeDepTime;// pay more but it would earned in the future
+            }
+            moreWaitThis = Math.max(0, other.getCurrentNodeDepTime() - this.getCurrentNodeDepTime());
+            double moreWaitCost = moreWaitThis * idleCost;
+            if (reducedCost_this + moreWaitCost <= reducedCost_label + EPS) {//分两种情况讨论
+                nbValid++;
+                if (reducedCost_this + moreWaitCost < reducedCost_label + EPS) {
+                    nbStrict++;
+                }
+                // case 1.1: reducedCost_this< reducedCost_label
+                if (totalWorkingTime_this + moreWaitThis <= totalWorkingTime_label + EPS) {//+ moreWaitThis
+                    nbValid++;
+                    if (totalWorkingTime_this + moreWaitThis < totalWorkingTime_label + EPS) {//+ moreWaitThis
+                        nbStrict++;
+                    }
+                    //case1.1.1  reducedCost_this< ;total working <
+                    if (totalDrivingTime_this <= totalDrivingTime_label) {
+                        nbValid++;
+                        if (totalDrivingTime_this < totalDrivingTime_label) {
+                            //case1.1.1.1 reducedCost_this< ;total working <; total driving<
+                            nbStrict++;
+                        }
+                        BitSet unreachableSet_this = this.getUnreachableTripId();
+                        BitSet unreachableSet_label = other.getUnreachableTripId();
+                        //求这俩的交集，看看是不是交集是this,说明 this 不能扩展的点更少，可扩展的可能性是更多的，因此，this的label更好
+                        //首先克隆下来或者说给他一个第三个水杯放交集
+//                        BitSet interSection = (BitSet) label.unreachableTripId.clone();//第三个水杯
+//                        interSection.and(this.unreachableTripId); //求交集的操作
+//                        boolean isSubSet = interSection.equals(unreachableSet_this);//对这两个集合做对比，是不是两个集合相等
+
+
+// 正确版子集判断
+                        BitSet temp = (BitSet) unreachableSet_this.clone();
+                        temp.andNot(unreachableSet_label);
+                        boolean isSubSet = temp.isEmpty();
+                        if (isSubSet) {
+                            nbValid++;
+                            if (unreachableSet_this.cardinality() < unreachableSet_label.cardinality()) {
+                                nbStrict++;
+                            }
+                            if (visited_This.cardinality() > 1 && visited_Other.cardinality() > 1) {
+                                //假如不是第一个trip越早越好，不仅仅是最后 trip
+                                if (departureTimeOfThisLabel <= departureTimeOfOtherLabel) {
+                                    nbValid++;
+                                    if (departureTimeOfThisLabel < departureTimeOfOtherLabel) {
+                                        nbStrict++;
+                                    }
+                                }
+                            }
+//                            else if (
+//                                    visited_This.cardinality() <= 1
+////                                        &&   <= 2
+//
+//                                            && visited_Other.cardinality() <= 1
+////                                        && visited_Other.cardinality() <= 2
+//                            ) {
+//                                //假如不是第一个trip越早越好，不仅仅是最后 trip
+//                                if (departureTimeOfThisLabel >= departureTimeOfOtherLabel) {
+//                                    nbValid++;
+//                                    if (departureTimeOfThisLabel > departureTimeOfOtherLabel) {
+//                                        nbStrict++;
+//                                    }
+//                                }
+//                            }
+                        }
+                    }
+                }
+            }
+
+            if (nbStrict >= 1 && nbValid == 5) {
+                whetherDominates = true;
+                // System.out.println("this label "+this+ "dominates \n"+label+" in the same status");
+            }
+
+        //}
+        return whetherDominates;
+    }

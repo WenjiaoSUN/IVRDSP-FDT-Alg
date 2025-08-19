@@ -1,0 +1,2 @@
+name,minPlanTime,maxPlanTime,shortConTimeDriver,shortConTimeVehicle,maxDrivingTime,maxWorkingTime,nbCities,nbTrips,nbNodes,maxNbPossibleArc,maxPercentCombine,maxFolderTimeSlotAsTimeWindow,maxNbDriverAvailable,maxNbVehicleAvailable,lb,ub,gap(%),fixedCost,idleTimeCost,changeOverCost,nbDrivers,nbVehicles,elapsedTime(s),
+nbCities:5; nbDepots:2; size:180 180;nbTrips:25;nbCombinedTrips0;maxFolderTimeSlotAsTimeWindow0;planningHorizon:0-1440;maxDriving:540;maxWorking:720,15,720,20,20,540,720,5,25,31,83,0.0,0,5,5,433870.0,433870.0,0.0,420000.0,13870.0,0.0,5,4,0.902,

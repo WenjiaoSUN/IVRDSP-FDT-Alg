@@ -1,0 +1,482 @@
+                        //1
+                        writerForStatisticsSolution.print(solution.getNbDrivers()+",");
+                        //2
+                       writerForStatisticsSolution.print(solution.getNbVehicles()+",");
+
+                        //3
+                        writerForStatisticsSolution.print(solution.getNbTripsWithPassenger()+",");
+                       //4
+                       writerForStatisticsSolution.print(solution.getNbTripsWithPassenger_Normal()+",");
+                        //5
+                       writerForStatisticsSolution.print(solution.getNbTripsWithPassenger_Combine()+",");
+                        //6
+                       writerForStatisticsSolution.print(solution.getNbTripsPerDriver()+",");
+
+                        //7
+                       writerForStatisticsSolution.print(solution.getWorkingTimePerDriver()+",");
+                        //8
+                      writerForStatisticsSolution.print(solution.getDrivingTimePerDriver()+",");
+                       //9
+                      writerForStatisticsSolution.print(solution.getPassengerTimePerDriver()+",");
+                      //10
+                     writerForStatisticsSolution.print(solution.getIdleTimePerDriver()+",");
+                       //11
+                     writerForStatisticsSolution.print(solution.getShortestIdleTime()+",");
+                       //12
+                     writerForStatisticsSolution.print(solution.getLongestIdleTime()+",");
+                      //13
+                     writerForStatisticsSolution.print(solution.getShortestWorkingTime()+",");
+                       //14
+                     writerForStatisticsSolution.print(solution.getLongestWorkingTime()+",");
+                       //15
+                     writerForStatisticsSolution.print(solution.getNbChangeOversPerDriver()+",");
+                       //16
+                     writerForStatisticsSolution.print(solution.getNbChangeOversPerDriver_ChangeStatus()+",");
+                       //17
+                    writerForStatisticsSolution.print(solution.getNbChangeOversPerDriver_ChangeVehicle()+",");
+
+
+
+//statistics 1
+    public int getNbTripsWithPassenger() {
+        int nbPassengers = 0;
+        for (int s = 0; s < driverSchedules.size(); s++) {
+            DriverSchedule driverSchedule = this.driverSchedules.get(s);
+            for (int t = 0; t < driverSchedule.getTripWithWorkingStatuses().size(); t++) {
+                boolean whetherDrive = driverSchedule.getTripWithWorkingStatuses().get(t).isWhetherDriving();
+                if (!whetherDrive) {
+                    nbPassengers++;
+
+                }
+            }
+
+        }
+        return nbPassengers;
+    }
+
+    //statistics 2
+    public int getNbTripsWithPassenger_Normal() {
+        int nbPassengersInNormalTrip = 0;
+        for (int s = 0; s < driverSchedules.size(); s++) {
+            DriverSchedule driverSchedule = this.driverSchedules.get(s);
+            for (int t = 0; t < driverSchedule.getTripWithWorkingStatuses().size(); t++) {
+                TripWithWorkingStatus tripWithWorkingStatus = driverSchedule.getTripWithWorkingStatuses().get(t);
+                boolean whetherDrive = tripWithWorkingStatus.isWhetherDriving();
+                int nbVehicleNeed = tripWithWorkingStatus.getNbVehicleNeed();
+                if (!whetherDrive && nbVehicleNeed == 1) {
+                    nbPassengersInNormalTrip++;
+
+                }
+            }
+        }
+        return nbPassengersInNormalTrip;
+    }
+
+    //statistics 3
+    public int getNbTripsWithPassenger_Combine() {
+        int nbPassengersInCombineTrip = 0;
+        for (int s = 0; s < driverSchedules.size(); s++) {
+            DriverSchedule driverSchedule = this.driverSchedules.get(s);
+            for (int t = 0; t < driverSchedule.getTripWithWorkingStatuses().size(); t++) {
+                TripWithWorkingStatus tripWithWorkingStatus = driverSchedule.getTripWithWorkingStatuses().get(t);
+                boolean whetherDrive = tripWithWorkingStatus.isWhetherDriving();
+                int nbVehicleNeed = tripWithWorkingStatus.getNbVehicleNeed();
+                if (!whetherDrive && nbVehicleNeed > 1) {
+                    nbPassengersInCombineTrip++;
+
+                }
+            }
+        }
+        return nbPassengersInCombineTrip;
+    }
+
+    //statistics 4 on average  nbTrips performed per driver
+    public double getNbTripsPerDriver() {
+        int nbDriverInSchedules = driverSchedules.size();
+        double nbTotalTrips = instance.getNbTrips();
+        double nbTripsPerDriver = (double) (nbTotalTrips / nbDrivers);
+        return nbTripsPerDriver;
+    }
+
+    //statistics 5 total working time per driver
+    public double getWorkingTimePerDriver() {
+        double totalWorkingTime = 0;
+        double workingTimePerDriver = 0;
+        int nbDrivers = driverSchedules.size();
+        for (int s = 0; s < this.driverSchedules.size(); s++) {
+            DriverSchedule driverSchedule = this.driverSchedules.get(s);
+            int nbTripsForDriverS = driverSchedule.getTripWithWorkingStatuses().size();
+            double startWorkTimeS = driverSchedule.getTripWithWorkingStatuses().get(0).getDepartureTime();
+            double endWorkTimeS = driverSchedule.getTripWithWorkingStatuses().get(nbTripsForDriverS - 1).getArrivalTime();
+            double workingTimeS = endWorkTimeS - startWorkTimeS;
+            totalWorkingTime = totalWorkingTime + workingTimeS;
+        }
+        workingTimePerDriver = (double) (totalWorkingTime / nbDrivers);
+        return workingTimePerDriver;
+    }
+
+    //statistics 6 driving time perDriver
+    public double getDrivingTimePerDriver() {
+        double totalDriverTime = 0;
+        double drivingTimePerDriver = 0;
+        int nbDrivers = driverSchedules.size();
+        for (int s = 0; s < this.driverSchedules.size(); s++) {
+            DriverSchedule driverSchedule = this.driverSchedules.get(s);
+            for (int t = 0; t < driverSchedule.getTripWithWorkingStatuses().size(); t++) {
+                TripWithWorkingStatus tripWithDriveInfos = driverSchedule.getTripWithWorkingStatuses().get(t);
+                Boolean whetherDrive = tripWithDriveInfos.isWhetherDriving();
+
+                if (whetherDrive == true) {
+                    double driveTimeTForS = tripWithDriveInfos.getArrivalTime() - tripWithDriveInfos.getDepartureTime();
+                    totalDriverTime = totalDriverTime + driveTimeTForS;
+                }
+
+            }
+        }
+        drivingTimePerDriver = (double) (totalDriverTime / nbDrivers);
+        return drivingTimePerDriver;
+    }
+
+    //statistics 7 passengerTimePerDriver
+    public double getPassengerTimePerDriver() {
+        double totalPassengerTime = 0;
+        double passengerTimePerDriver = 0;
+        int nbDrivers = driverSchedules.size();
+        for (int s = 0; s < this.driverSchedules.size(); s++) {
+            DriverSchedule driverSchedule = this.driverSchedules.get(s);
+            for (int t = 0; t < driverSchedule.getTripWithWorkingStatuses().size(); t++) {
+                TripWithWorkingStatus tripWithDriveInfos = driverSchedule.getTripWithWorkingStatuses().get(t);
+                Boolean whetherDrive = tripWithDriveInfos.isWhetherDriving();
+                if (whetherDrive == false) {
+                    double passengerTimeTForS = tripWithDriveInfos.getArrivalTime() - tripWithDriveInfos.getDepartureTime();
+                    totalPassengerTime = totalPassengerTime + passengerTimeTForS;
+                }
+
+            }
+        }
+        passengerTimePerDriver = (double) (totalPassengerTime / nbDrivers);
+        return passengerTimePerDriver;
+    }
+
+    //statistics 8 idleTimePerDriver
+    public double getIdleTimePerDriver() {
+        double totalIdleTime = 0;
+        double idleTimePerDriver = 0;
+        int nbDrivers = driverSchedules.size();
+        for (int s = 0; s < this.driverSchedules.size(); s++) {
+            DriverSchedule driverSchedule = this.driverSchedules.get(s);
+            for (int t = 0; t < driverSchedule.getTripWithWorkingStatuses().size() - 1; t++) {
+                TripWithWorkingStatus tripWithDriveInfos_F = driverSchedule.getTripWithWorkingStatuses().get(t);
+                int j = t + 1;
+                TripWithWorkingStatus tripWithDriveInfos_S = driverSchedule.getTripWithWorkingStatuses().get(j);
+                double previousTripEndTime = tripWithDriveInfos_F.getArrivalTime();
+                double latterTripStartTime = tripWithDriveInfos_S.getDepartureTime();
+                double idleTime = latterTripStartTime - previousTripEndTime;
+                totalIdleTime = totalIdleTime + idleTime;
+
+            }
+        }
+        idleTimePerDriver = (double) (totalIdleTime / nbDrivers);
+        return idleTimePerDriver;
+    }
+
+    //statistics 9 nbChangeOver
+    public double getNbChangeOversPerDriver() {
+        double nbChangeOverPerDriver = 0;
+        double nbTotalChangeOver = 0;
+        double nbDrivers = this.driverSchedules.size();
+        for (int s = 0; s < this.driverSchedules.size(); s++) {
+            DriverSchedule driverSchedule = this.driverSchedules.get(s);
+            for (int t = 0; t < driverSchedule.getNbTrips() - 1; t++) {
+                //formerTripInformation
+                TripWithWorkingStatus tripWithWorkingStatus_former = driverSchedule.getTripWithWorkingStatuses().get(t);
+                int idTripInDriverSchedule_former = tripWithWorkingStatus_former.getIdOfTrip();
+                Trip tripInDriverSchedule_former = instance.getCorrespondingIdTrip(idTripInDriverSchedule_former);
+                boolean whetherDrive_former = tripWithWorkingStatus_former.isWhetherDriving();
+                int idVehiclePerformDriverSchedule_former = Integer.MAX_VALUE;
+
+                //latterTripInformation
+                TripWithWorkingStatus tripWithWorkingStatus_latter = driverSchedule.getTripWithWorkingStatuses().get(t + 1);
+                int idTripInDriverSchedule_latter = tripWithWorkingStatus_latter.getIdOfTrip();
+                Trip tripInDriverSchedule_latter = instance.getCorrespondingIdTrip(idTripInDriverSchedule_latter);
+                boolean whetherDriver_latter = tripWithWorkingStatus_latter.isWhetherDriving();
+                int idVehiclePerformDriverSchedule_latter = Integer.MAX_VALUE;
+
+                for (int r = 0; r < vehicleRoutes.size(); r++) {
+                    VehicleRoute vehicleRoute = this.vehicleRoutes.get(r);
+                    boolean isTripInVehicleRoute_former = vehicleRoute.isTripPresent(tripInDriverSchedule_former);
+                    boolean isTripInVehicleRoute_latter = vehicleRoute.isTripPresent(tripInDriverSchedule_latter);
+
+                    //Case1: normal trip to normal trip
+
+                    if (tripInDriverSchedule_former.getNbVehicleNeed() == 1 && tripInDriverSchedule_latter.getNbVehicleNeed() == 1) {
+                        if (isTripInVehicleRoute_former) {
+                            idVehiclePerformDriverSchedule_former = r;
+                        }
+                        if (isTripInVehicleRoute_latter) {
+                            idVehiclePerformDriverSchedule_latter = r;
+                        }
+                    }
+                    //Case2: combine trip to normal trip
+                    else if (tripInDriverSchedule_former.getNbVehicleNeed() > 1 && tripInDriverSchedule_latter.getNbVehicleNeed() == 1) {
+                        //check the combine list the idvehicle in combined trip should be the leading vehicle (combine trip should be the current trip we care)
+                        for (int c = 0; c < this.combinedInformationArrayList.size(); c++) {
+                            CombinedInformation combinedInformation = this.combinedInformationArrayList.get(c);
+                            Trip combineTrip = combinedInformation.getCombinedTrip();
+                            int idCombineTrip = combineTrip.getIdOfTrip();
+                            int idLeadingVehicle = combinedInformation.getIdLeadingVehicle();
+                            if (idCombineTrip == idTripInDriverSchedule_former) {
+                                idVehiclePerformDriverSchedule_former = idLeadingVehicle;
+                            }
+                        }
+                        if (isTripInVehicleRoute_latter) {
+                            idVehiclePerformDriverSchedule_latter = r;
+                        }
+
+                    }
+                    // Case3: normal trip to combine trip
+                    else if (tripInDriverSchedule_former.getNbVehicleNeed() == 1 && tripInDriverSchedule_latter.getNbVehicleNeed() > 1) {
+                        //check the combine list the idvehicle in combined trip should be the leading vehicle (combine trip should be the current trip we care)
+                        for (int c = 0; c < this.combinedInformationArrayList.size(); c++) {
+                            CombinedInformation combinedInformation = this.combinedInformationArrayList.get(c);
+                            Trip combineTrip = combinedInformation.getCombinedTrip();
+                            int idCombineTrip = combineTrip.getIdOfTrip();
+                            int idLeadingVehicle = combinedInformation.getIdLeadingVehicle();
+                            if (idCombineTrip == idTripInDriverSchedule_latter) {
+                                idVehiclePerformDriverSchedule_former = idLeadingVehicle;
+                            }
+                        }
+                        if (isTripInVehicleRoute_former) {
+                            idVehiclePerformDriverSchedule_latter = r;
+                        }
+
+                    }
+                    // Case4: combine trip to combine trip
+                    else if (tripInDriverSchedule_former.getNbVehicleNeed() > 1 && tripInDriverSchedule_latter.getNbVehicleNeed() > 1) {
+                        for (int c = 0; c < this.combinedInformationArrayList.size(); c++) {
+                            CombinedInformation combinedInformation = this.combinedInformationArrayList.get(c);
+                            Trip combineTrip = combinedInformation.getCombinedTrip();
+                            int idCombineTrip = combineTrip.getIdOfTrip();
+                            int idLeadingVehicle = combinedInformation.getIdLeadingVehicle();
+                            if (idCombineTrip == idTripInDriverSchedule_former) {
+                                idVehiclePerformDriverSchedule_former = idLeadingVehicle;
+                            }
+                            if (idCombineTrip == idTripInDriverSchedule_latter) {
+                                idVehiclePerformDriverSchedule_latter = idLeadingVehicle;
+                            }
+                        }
+                    }
+                }
+
+
+                if (whetherDriver_latter != whetherDrive_former || idVehiclePerformDriverSchedule_latter != idVehiclePerformDriverSchedule_former) {
+                    nbTotalChangeOver = nbTotalChangeOver + 1;
+                }
+                if (whetherDriver_latter == false && whetherDrive_former == false && idVehiclePerformDriverSchedule_latter != idVehiclePerformDriverSchedule_former) {
+                    nbTotalChangeOver = nbTotalChangeOver - 1;
+                }
+
+            }
+        }
+        nbChangeOverPerDriver = (nbTotalChangeOver / nbDrivers);
+
+        return nbChangeOverPerDriver;
+    }
+
+    //statistics 10 nbChangeOver
+    public double getNbChangeOversPerDriver_ChangeStatus() {
+        double nbChangeOverPerDriver_ChangeStatus = 0;
+        double nbTotalChangeOver_ChangeStatus = 0;
+        double nbDrivers = this.driverSchedules.size();
+        for (int s = 0; s < this.driverSchedules.size(); s++) {
+            DriverSchedule driverSchedule = this.driverSchedules.get(s);
+            for (int t = 0; t < driverSchedule.getNbTrips() - 1; t++) {
+                //formerTripInformation
+                TripWithWorkingStatus tripWithWorkingStatus_former = driverSchedule.getTripWithWorkingStatuses().get(t);
+                int idTripInDriverSchedule_former = tripWithWorkingStatus_former.getIdOfTrip();
+                Trip tripInDriverSchedule_former = instance.getCorrespondingIdTrip(idTripInDriverSchedule_former);
+                boolean whetherDrive_former = tripWithWorkingStatus_former.isWhetherDriving();
+                int idVehiclePerformDriverSchedule_former = Integer.MAX_VALUE;
+
+                //latterTripInformation
+                TripWithWorkingStatus tripWithWorkingStatus_latter = driverSchedule.getTripWithWorkingStatuses().get(t + 1);
+                int idTripInDriverSchedule_latter = tripWithWorkingStatus_latter.getIdOfTrip();
+                Trip tripInDriverSchedule_latter = instance.getCorrespondingIdTrip(idTripInDriverSchedule_latter);
+                boolean whetherDriver_latter = tripWithWorkingStatus_latter.isWhetherDriving();
+                int idVehiclePerformDriverSchedule_latter = Integer.MAX_VALUE;
+
+
+                if (whetherDriver_latter != whetherDrive_former) {
+                    nbTotalChangeOver_ChangeStatus = nbTotalChangeOver_ChangeStatus + 1;
+                }
+
+            }
+        }
+        nbChangeOverPerDriver_ChangeStatus = (nbTotalChangeOver_ChangeStatus / nbDrivers);
+        return nbChangeOverPerDriver_ChangeStatus;
+    }
+
+    //statistics 11 nbChangeOver
+    public double getNbChangeOversPerDriver_ChangeVehicle() {
+        double nbChangeOverPerDriver_ChangeVehicle = 0;
+        double nbTotalChangeOver_ChangeVehicle = 0;
+        double nbDrivers = this.driverSchedules.size();
+        for (int s = 0; s < this.driverSchedules.size(); s++) {
+            DriverSchedule driverSchedule = this.driverSchedules.get(s);
+            for (int t = 0; t < driverSchedule.getNbTrips() - 1; t++) {
+                //formerTripInformation
+                TripWithWorkingStatus tripWithWorkingStatus_former = driverSchedule.getTripWithWorkingStatuses().get(t);
+                int idTripInDriverSchedule_former = tripWithWorkingStatus_former.getIdOfTrip();
+                Trip tripInDriverSchedule_former = instance.getCorrespondingIdTrip(idTripInDriverSchedule_former);
+                boolean whetherDrive_former = tripWithWorkingStatus_former.isWhetherDriving();
+                int idVehiclePerformDriverSchedule_former = Integer.MAX_VALUE;
+
+                //latterTripInformation
+                TripWithWorkingStatus tripWithWorkingStatus_latter = driverSchedule.getTripWithWorkingStatuses().get(t + 1);
+                int idTripInDriverSchedule_latter = tripWithWorkingStatus_latter.getIdOfTrip();
+                Trip tripInDriverSchedule_latter = instance.getCorrespondingIdTrip(idTripInDriverSchedule_latter);
+                boolean whetherDriver_latter = tripWithWorkingStatus_latter.isWhetherDriving();
+                int idVehiclePerformDriverSchedule_latter = Integer.MAX_VALUE;
+
+                for (int r = 0; r < vehicleRoutes.size(); r++) {
+                    VehicleRoute vehicleRoute = this.vehicleRoutes.get(r);
+                    boolean isTripInVehicleRoute_former = vehicleRoute.isTripPresent(tripInDriverSchedule_former);
+                    boolean isTripInVehicleRoute_latter = vehicleRoute.isTripPresent(tripInDriverSchedule_latter);
+
+                    //Case1: normal trip to normal trip
+
+                    if (tripInDriverSchedule_former.getNbVehicleNeed() == 1 && tripInDriverSchedule_latter.getNbVehicleNeed() == 1) {
+                        if (isTripInVehicleRoute_former) {
+                            idVehiclePerformDriverSchedule_former = r;
+                        }
+                        if (isTripInVehicleRoute_latter) {
+                            idVehiclePerformDriverSchedule_latter = r;
+                        }
+                    }
+                    //Case2: combine trip to normal trip
+                    else if (tripInDriverSchedule_former.getNbVehicleNeed() > 1 && tripInDriverSchedule_latter.getNbVehicleNeed() == 1) {
+                        //check the combine list the idvehicle in combined trip should be the leading vehicle (combine trip should be the current trip we care)
+                        for (int c = 0; c < this.combinedInformationArrayList.size(); c++) {
+                            CombinedInformation combinedInformation = this.combinedInformationArrayList.get(c);
+                            Trip combineTrip = combinedInformation.getCombinedTrip();
+                            int idCombineTrip = combineTrip.getIdOfTrip();
+                            int idLeadingVehicle = combinedInformation.getIdLeadingVehicle();
+                            if (idCombineTrip == idTripInDriverSchedule_former) {
+                                idVehiclePerformDriverSchedule_former = idLeadingVehicle;
+                            }
+                        }
+                        if (isTripInVehicleRoute_latter) {
+                            idVehiclePerformDriverSchedule_latter = r;
+                        }
+
+                    }
+                    // Case3: normal trip to combine trip
+                    else if (tripInDriverSchedule_former.getNbVehicleNeed() == 1 && tripInDriverSchedule_latter.getNbVehicleNeed() > 1) {
+                        //check the combine list the idvehicle in combined trip should be the leading vehicle (combine trip should be the current trip we care)
+                        for (int c = 0; c < this.combinedInformationArrayList.size(); c++) {
+                            CombinedInformation combinedInformation = this.combinedInformationArrayList.get(c);
+                            Trip combineTrip = combinedInformation.getCombinedTrip();
+                            int idCombineTrip = combineTrip.getIdOfTrip();
+                            int idLeadingVehicle = combinedInformation.getIdLeadingVehicle();
+                            if (idCombineTrip == idTripInDriverSchedule_latter) {
+                                idVehiclePerformDriverSchedule_former = idLeadingVehicle;
+                            }
+                        }
+                        if (isTripInVehicleRoute_former) {
+                            idVehiclePerformDriverSchedule_latter = r;
+                        }
+
+                    }
+                    // Case4: combine trip to combine trip
+                    else if (tripInDriverSchedule_former.getNbVehicleNeed() > 1 && tripInDriverSchedule_latter.getNbVehicleNeed() > 1) {
+                        for (int c = 0; c < this.combinedInformationArrayList.size(); c++) {
+                            CombinedInformation combinedInformation = this.combinedInformationArrayList.get(c);
+                            Trip combineTrip = combinedInformation.getCombinedTrip();
+                            int idCombineTrip = combineTrip.getIdOfTrip();
+                            int idLeadingVehicle = combinedInformation.getIdLeadingVehicle();
+                            if (idCombineTrip == idTripInDriverSchedule_former) {
+                                idVehiclePerformDriverSchedule_former = idLeadingVehicle;
+                            }
+                            if (idCombineTrip == idTripInDriverSchedule_latter) {
+                                idVehiclePerformDriverSchedule_latter = idLeadingVehicle;
+                            }
+                        }
+                    }
+                }
+
+
+                if (idVehiclePerformDriverSchedule_latter != idVehiclePerformDriverSchedule_former) {
+                    nbTotalChangeOver_ChangeVehicle = nbTotalChangeOver_ChangeVehicle + 1;
+                }
+                if (whetherDriver_latter == false && whetherDrive_former == false && idVehiclePerformDriverSchedule_latter != idVehiclePerformDriverSchedule_former) {
+                    nbTotalChangeOver_ChangeVehicle = nbTotalChangeOver_ChangeVehicle - 1;
+                }
+
+            }
+        }
+        nbChangeOverPerDriver_ChangeVehicle = (nbTotalChangeOver_ChangeVehicle / nbDrivers);
+
+        return nbChangeOverPerDriver_ChangeVehicle;
+    }
+
+ public double getShortestIdleTime() {
+        double shortestIdleTime = Double.MAX_VALUE;
+        for (int s = 0; s < this.driverSchedules.size(); s++) {
+            DriverSchedule driverSchedule = this.driverSchedules.get(s);
+            for (int t = 0; t < driverSchedule.getNbTrips() - 1; t++) {
+                TripWithWorkingStatus fistTrip = driverSchedule.getTripWithWorkingStatuses().get(t);
+                TripWithWorkingStatus secondTrip = driverSchedule.getTripWithWorkingStatuses().get(t + 1);
+                double idleTime = secondTrip.getDepartureTime() - fistTrip.getArrivalTime();
+                if (idleTime <= shortestIdleTime) {
+                    shortestIdleTime = idleTime;
+                }
+            }
+
+        }
+        return shortestIdleTime;
+    }
+
+
+    public double getLongestIdleTime() {
+        double longestIdleTime = 0;
+        for (int s = 0; s < this.driverSchedules.size(); s++) {
+            DriverSchedule driverSchedule = this.driverSchedules.get(s);
+            for (int t = 0; t < driverSchedule.getNbTrips() - 1; t++) {
+                TripWithWorkingStatus fistTrip = driverSchedule.getTripWithWorkingStatuses().get(t);
+                TripWithWorkingStatus secondTrip = driverSchedule.getTripWithWorkingStatuses().get(t + 1);
+                double idleTime = secondTrip.getDepartureTime() - fistTrip.getArrivalTime();
+                if (idleTime >= longestIdleTime) {
+                    longestIdleTime = idleTime;
+                }
+            }
+
+        }
+        return longestIdleTime;
+    }
+
+
+    public double getShortestWorkingTime() {
+        double shortestWorkingTime = Double.MAX_VALUE;
+        for (int s = 0; s < this.driverSchedules.size(); s++) {
+            DriverSchedule driverSchedule = this.driverSchedules.get(s);
+            double workingTime = driverSchedule.getTotalWorkingTime();
+            if (workingTime <= shortestWorkingTime) {
+                shortestWorkingTime = workingTime;
+            }
+        }
+        return shortestWorkingTime;
+    }
+
+    public double getLongestWorkingTime() {
+        double longestWorkingTime = 0;
+        for (int s = 0; s < this.driverSchedules.size(); s++) {
+            DriverSchedule driverSchedule = this.driverSchedules.get(s);
+            double workingTime = driverSchedule.getTotalWorkingTime();
+            System.out.println("Schedule_" + s + " workingTime" + workingTime);
+            if (workingTime >= longestWorkingTime) {
+                longestWorkingTime = workingTime;
+            }
+        }
+        return longestWorkingTime;
+    }
+

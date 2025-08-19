@@ -1,0 +1,30 @@
+//instance
+//nbCities:3; nbDepots:2; size:90 90;nbTrips:80;nbCombinedTrips0;maxFolderTimeSlotAsTimeWindow5;planningHorizon:0-1440;maxDriving:540;maxWorking:720
+//nbVehicles in the solution
+//8
+//nbDrivers in the solution
+//11
+//total cost of the solution
+cost 869355.0
+//vehicle routes in the solution: idVehicle, nbTrips, [idTrips departureTime]
+vehicle 0 11 7 20 39 95 65 170 78 230 79 290 42 350 36 410 37 485 76 545 2 605 51 665
+vehicle 1 11 9 185 66 245 16 305 11 380 69 455 13 515 49 575 63 650 64 710 56 770 57 845
+vehicle 2 8 40 190 41 265 35 325 22 385 23 445 1 505 77 580 25 640
+vehicle 3 12 72 235 46 295 74 355 75 430 48 490 24 550 26 610 27 670 28 745 29 850 30 910 31 985
+vehicle 4 9 14 170 34 240 10 300 68 375 12 450 18 510 19 570 54 630 55 690
+vehicle 5 13 32 55 33 135 15 210 58 285 59 360 52 460 53 520 62 580 50 640 3 700 4 760 5 820 6 880
+vehicle 6 8 38 45 8 105 20 180 21 255 67 330 17 405 60 465 61 525
+vehicle 7 8 71 165 45 225 73 285 47 345 0 405 43 465 44 540 70 600
+//driver schedules in the solution: idDriver, nbTrips, [idTrip idVehicle drivingStatus departureTime]
+driver 0 6 9 1 true 185 66 1 true 245 16 1 true 305 11 1 true 380 69 1 true 455 13 1 true 515
+driver 1 8 40 2 true 190 41 2 true 265 35 2 true 325 22 2 true 385 23 2 true 445 1 2 true 505 77 2 true 580 25 2 true 640
+driver 2 10 71 7 true 165 45 7 true 225 73 7 true 285 47 7 true 345 0 7 true 405 43 7 true 465 44 7 true 540 70 7 true 600 27 3 true 670 28 3 true 745
+driver 3 8 38 6 true 45 8 6 true 105 20 6 true 180 21 6 true 255 67 6 true 330 17 6 true 405 60 6 true 465 61 6 true 525
+driver 4 7 72 3 true 235 46 3 true 295 74 3 true 355 75 3 true 430 48 3 true 490 24 3 true 550 26 3 true 610
+driver 5 5 32 5 true 55 33 5 true 135 15 5 true 210 58 5 true 285 59 5 true 360
+driver 6 3 29 3 true 850 30 3 true 910 31 3 true 985
+driver 7 11 7 0 true 20 39 0 true 95 65 0 true 170 78 0 true 230 79 0 true 290 42 0 true 350 36 0 true 410 37 0 true 485 76 0 true 545 2 0 true 605 51 0 true 665
+driver 8 8 52 5 true 460 53 5 true 520 62 5 true 580 50 5 true 640 3 5 true 700 4 5 true 760 5 5 true 820 6 5 true 880
+driver 9 11 14 4 true 170 34 4 true 240 10 4 true 300 68 4 true 375 12 4 true 450 18 4 true 510 19 4 true 570 54 4 true 630 55 4 true 690 56 1 true 770 57 1 true 845
+driver 10 3 49 1 true 575 63 1 true 650 64 1 true 710
+

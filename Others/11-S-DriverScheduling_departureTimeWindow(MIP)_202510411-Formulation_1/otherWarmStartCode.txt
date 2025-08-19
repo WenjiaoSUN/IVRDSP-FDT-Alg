@@ -1,0 +1,42 @@
+*********This is for the driving part, but may be it not necessary, as we already give the trip arc to the driver*****************
+//                    //Here is the part for varDriving[idOfDriver][idOfTrip]
+//                    idOfDriver=0;
+//                    while(line!=null&&line.startsWith("driving")){
+//                        String[] values;
+//                        values = line.split(" ");
+//                        //varDriving[idOfDriver][idOfTrip]
+//
+//                        int l=2;
+//                        while (l<values.length){
+//                            startVar.add(index, varDriving[idOfDriver][Integer.valueOf(values[l])]);
+//                            starValue.add(index, 1.0);
+//                            System.out.println("varDriving: " + varDriving[idOfDriver][Integer.valueOf(values[l])]);
+//                            index++;
+//                            l++;
+//                        }
+//                        line = bufferedReader.readLine();
+//                        idOfDriver=idOfDriver+1;
+//                    }
+//
+
+********This part is super specail for the combine part leading and combine part driving*****************
+//                startVar.add(index,varDriving[4][29]);
+//                starValue.add(index,1.0);
+//                //System.out.println("varDriving(combine Trip): "+varDriving[4][29]);
+//                index++;
+//                startVar.add(index,varDriving[2][16]);
+//                starValue.add(index,1.0);
+//                index++;
+//                //System.out.println("varDriving(combine Trip): "+varDriving[2][16]);
+//
+//                //Here is for the varLeading[idOfVehicle][idOfTrip]
+//                startVar.add(index,varLeading[4][29]);
+//                starValue.add(index,1.0);
+//                index++;
+//
+//                //System.out.println("varLeading(combine Trip): "+varLeading[4][29]);
+//
+//                startVar.add(index,varLeading[2][16]);
+//                starValue.add(index,1.0);
+//                index++;
+                //System.out.println("varLeading(combine Trip): "+varLeading[2][16]);

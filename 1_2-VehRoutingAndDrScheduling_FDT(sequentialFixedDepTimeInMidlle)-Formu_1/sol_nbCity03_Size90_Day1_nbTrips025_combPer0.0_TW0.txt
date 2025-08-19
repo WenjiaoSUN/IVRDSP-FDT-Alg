@@ -1,0 +1,21 @@
+The mini cost is including :533650.0
+The fixed cost for vehicle and driver :520000.0
+The idle cost for vehicle and driver :13650.0
+The idle cost for all drivers :650.0
+THe idle cost for all vehicles 13000.0
+The changover cost for all drivers:0.0
+0 7 0 410 1 490 2 600 3 675 4 775 5 840 6 900
+1 7 7 30 8 105 9 190 10 290 11 390 12 465 13 525
+2 6 14 145 15 235 16 320 17 410 18 495 19 590
+3 2 20 155 21 260
+4 3 22 60 23 120 24 180
+0 7 0 0 true 1 0 true 2 0 true 3 0 true 4 0 true 5 0 true 6 0 true 
+ timeInMinute working: 2495.0 driving: 330.0
+1 7 7 1 true 8 1 true 9 1 true 10 1 true 11 1 true 12 1 true 13 1 true 
+ timeInMinute working: 2520.0 driving: 330.0
+2 6 14 2 true 15 2 true 16 2 true 17 2 true 18 2 true 19 2 true 
+ timeInMinute working: 2270.0 driving: 285.0
+3 2 20 3 true 21 3 true 
+ timeInMinute working: 585.0 driving: 105.0
+4 3 22 4 true 23 4 true 24 4 true 
+ timeInMinute working: 660.0 driving: 150.0

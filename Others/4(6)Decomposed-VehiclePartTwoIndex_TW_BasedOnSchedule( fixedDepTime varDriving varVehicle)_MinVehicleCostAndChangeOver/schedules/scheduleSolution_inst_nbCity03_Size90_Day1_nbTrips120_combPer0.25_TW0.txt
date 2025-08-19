@@ -1,0 +1,26 @@
+//instance 120 nbCities:3; nbDepots:2; size:90 90;nbTrips:120;nbCombinedTrips30;maxFolderTimeSlotAsTimeWindow0;planningHorizon:0-1440;maxDriving:540;maxWorking:720,
+//nbNodes 126, nbArcs: 2338, maxPerCombined: 0.25, timeWindow0, nbDriverAvailable: 27, solution gap: 0.144139422132201, 
+//The final integer value is: 76315.0
+//The elapsed time is: 91.0 sec
+//Total time in milli second of cplex solving pricing problem: 0.0 milli sec
+//Schedules: driver idDriver idDepot indexStarting tripWithWorkingStatus indexEnding 
+driver 0 0 120 7 true 30 8 true 105 9 true 190 102 true 275 122
+driver 1 0 120 98 true 260 81 true 325 82 true 410 67 true 485 55 true 575 68 true 675 92 true 780 87 true 855 93 true 920 122
+driver 2 0 120 91 true 525 65 true 585 110 true 650 74 true 775 5 true 840 62 true 940 122
+driver 3 1 121 39 true 55 118 true 180 119 true 245 16 true 320 114 true 430 18 true 495 24 true 620 123
+driver 4 0 120 63 true 230 64 true 310 94 true 400 95 true 485 116 true 560 66 true 675 56 true 795 97 true 865 122
+driver 5 0 120 105 true 210 40 true 275 17 true 410 115 true 495 109 true 570 83 true 650 122
+driver 6 1 121 77 true 95 112 false 270 19 true 365 20 true 430 23 true 510 2 true 600 3 true 675 104 true 745 123
+driver 7 0 120 79 true 495 72 true 585 25 true 690 51 false 780 5 false 840 6 true 900 76 true 1000 122
+driver 8 0 120 21 true 520 86 true 580 101 true 670 26 true 755 27 true 870 28 true 930 29 true 990 122
+driver 9 0 120 111 true 190 112 true 270 113 true 340 107 true 405 108 true 490 73 true 565 117 true 665 122
+driver 10 1 121 84 true 215 71 true 370 49 true 455 99 true 530 123
+driver 11 0 120 1 true 490 31 true 590 32 true 705 33 true 810 37 true 900 38 true 960 122
+driver 12 1 121 14 true 145 15 true 235 78 true 325 30 true 385 54 true 460 103 true 540 123
+driver 13 1 121 106 true 310 11 true 390 12 true 465 13 true 525 96 true 595 4 true 775 57 true 870 75 true 940 123
+driver 14 0 120 70 true 255 71 false 370 85 true 450 42 true 545 100 true 610 22 true 765 52 true 840 122
+driver 15 1 121 0 true 410 58 true 475 59 true 560 43 true 630 50 true 695 51 true 780 69 true 875 53 true 940 89 true 1010 90 true 1070 123
+driver 16 0 120 34 true 495 35 true 555 43 false 630 44 true 715 45 true 800 46 true 880 47 true 980 48 true 1065 122
+driver 17 1 121 10 true 290 17 false 410 41 true 480 80 true 570 60 true 705 36 true 815 61 true 880 88 true 945 123
+
+

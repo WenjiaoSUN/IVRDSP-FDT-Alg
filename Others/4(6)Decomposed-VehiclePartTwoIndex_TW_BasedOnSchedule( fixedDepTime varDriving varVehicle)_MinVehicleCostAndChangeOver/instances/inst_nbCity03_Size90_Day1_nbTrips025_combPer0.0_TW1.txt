@@ -1,0 +1,93 @@
+// The instance basic information 
+nbCities:3; nbDepots:2; size:90 90;nbTrips:25;nbCombinedTrips0;maxFolderTimeSlotAsTimeWindow1;planningHorizon:0-1440;maxDriving:540;maxWorking:720
+// The number of cities is 
+3
+// The number of depots is 
+2
+// The max number of vehicles is 
+5
+// The max number of drivers is 
+5
+// The number of trips is 
+25
+// The minPlanTime is 
+15
+// The short Time for driver is 
+20
+// The short Time for vehicle is 
+20
+// The maximum driving time is 
+540
+// The maximum working time is 
+720
+// The cost of using driver is 
+4000
+// The cost of using vehicle is 
+100000
+// The idle time cost for driver per unit is 
+1
+// The idle time cost for vehicle per unit is 
+20
+// The cost of driver changeover penalty per change is 
+30
+// The max percentage of combined trips is  
+0.0
+//The maxFolderOfTimeSlotAsTimeWindow is 
+1
+// The maxPlanTime is 
+720
+//The time slot Unit is 
+5
+//The scale of distance and duration is 
+0.99
+//The start time of planning horizon
+0
+//The ending time of planning horizon
+1440
+
+//Here are the cities: idOfCity 	 nameOfCity 	 coordinateX 	 coordinateY 
+0 C0 80 25
+1 C1 78 86
+2 C2 45 57
+//Depots:  
+// idOfDepot  	 indexOfDepotAsStartingPoint 	 indexOfDepotAsEndingPoint 	 idCityAsDepot
+0 25 27 1
+1 26 28 2
+//Trips: idOfTrip 	 idOfStartCity 	 idEndCity	 earliestDepartureTime 	 latestDepartureTime 	 nbCombinedVehicleInThisTrip 	 duration
+0 2 1 405 415 1 45
+1 1 0 485 495 1 60
+2 0 2 595 605 1 45
+3 2 0 670 680 1 45
+4 0 2 770 780 1 45
+5 2 0 835 845 1 45
+6 0 2 895 905 1 45
+7 1 0 25 35 1 60
+8 0 1 100 110 1 60
+9 1 2 185 195 1 45
+10 2 0 285 295 1 45
+11 0 1 385 395 1 60
+12 1 2 460 470 1 45
+13 2 1 520 530 1 45
+14 2 0 140 150 1 45
+15 0 1 230 240 1 60
+16 1 0 315 325 1 60
+17 0 2 405 415 1 45
+18 2 0 490 500 1 45
+19 0 2 585 595 1 45
+20 1 0 150 160 1 60
+21 0 1 255 265 1 60
+22 1 2 55 65 1 45
+23 2 0 115 125 1 45
+24 0 1 175 185 1 60
+//Vehicles: idOfVehicle idOfStartingDepot nbTrips
+0 -1 25
+1 -1 25
+2 -1 25
+3 -1 25
+4 -1 25
+//Drivers :idOfDriver idOfStartingDepot idOfEndingDepot nbTrips
+0 -1 25
+1 -1 25
+2 -1 25
+3 -1 25
+4 -1 25

@@ -1,0 +1,23 @@
+//Here is the changeover for driver idOfDriver idOfShift idOfFirst(or idOfSecond)Trip
+//Here are the total idle time per driver: 163.125
+//Here are the cost 
+The total cost is 859405
+The cost for idle time is 27405
+The cost for driver ChangOver is 0
+//One feasible solution vehicle (Driver): idVehicle(idDriver)  idOfDepot  indexOfDepotAsStartingPoint  idOfTrip startTime indexOfDepotAsEndingPoint
+vehicle 0 1 46 0 410 1 490 2 600 3 675 4 775 5 840 6 900 48
+vehicle 1 0 45 7 30 8 105 9 190 10 290 11 390 12 465 13 525 47
+vehicle 2 1 46 14 145 15 235 16 320 17 410 18 495 19 590 48
+vehicle 3 0 45 20 155 21 260 22 375 23 470 24 560 25 645 47
+vehicle 4 1 46 26 585 27 650 28 760 29 830 30 910 31 1010 48
+vehicle 5 1 46 32 30 33 130 34 235 35 305 36 395 37 485 48
+vehicle 6 1 46 38 30 39 100 40 210 41 290 48
+vehicle 7 0 45 42 645 43 705 44 765 47
+driver 0 1 46 0 410 1 490 2 600 3 675 4 775 5 840 6 900 48
+driver 1 0 45 7 30 8 105 9 190 10 290 11 390 12 465 13 525 47
+driver 2 1 46 14 145 15 235 16 320 17 410 18 495 19 590 48
+driver 3 0 45 20 155 21 260 22 375 23 470 24 560 25 645 47
+driver 4 1 46 26 585 27 650 28 760 29 830 30 910 31 1010 48
+driver 5 1 46 32 30 33 130 34 235 35 305 36 395 37 485 48
+driver 6 1 46 38 30 39 100 40 210 41 290 48
+driver 7 0 45 42 645 43 705 44 765 47

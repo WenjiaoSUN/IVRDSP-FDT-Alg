@@ -1,0 +1,83 @@
+//instance
+//nbCities:3; nbDepots:2; size:90 90;nbTrips:150;nbCombinedTrips0;maxFolderTimeSlotAsTimeWindow3;planningHorizon:0-1440;maxDriving:540;maxWorking:720
+//nbVehicles in the solution
+//24
+//nbDrivers in the solution
+//24
+//total cost of the solution
+//2567820.0
+//vehicle routes in the solution: idVehicle, nbTripsInPath [idTrip departureTime] 
+vehicle 0 7 0 425 1 505 2 585 3 690 4 760 5 825 6 885
+vehicle 1 7 7 45 8 120 9 205 10 275 11 375 12 450 13 510
+vehicle 2 6 14 160 15 220 16 335 17 425 18 510 19 575
+vehicle 3 6 20 170 21 245 22 360 23 455 24 545 25 630
+vehicle 4 6 26 600 27 665 28 745 29 845 30 920 31 995
+vehicle 5 6 32 45 33 115 34 220 35 320 36 380 37 470
+vehicle 6 7 38 45 39 115 40 195 41 300 42 360 43 425 44 500
+vehicle 7 7 45 215 46 275 47 385 48 455 49 540 50 615 51 675
+vehicle 8 6 52 465 53 530 54 635 55 695 56 780 57 855
+vehicle 9 7 58 305 59 385 60 455 61 535 62 600 63 660 64 720
+vehicle 10 6 65 200 66 270 67 335 68 415 69 490 70 560
+vehicle 11 7 71 155 72 230 73 290 74 360 75 460 76 530 77 605
+vehicle 12 6 78 270 79 355 80 435 81 495 82 570 83 650
+vehicle 13 7 84 325 85 405 86 480 87 540 88 600 89 690 90 765
+vehicle 14 7 91 75 92 165 93 230 94 315 95 400 96 460 97 525
+vehicle 15 6 98 85 99 150 100 255 101 330 102 405 103 475
+vehicle 16 6 104 160 105 235 106 320 107 400 108 495 109 560
+vehicle 17 7 110 290 111 370 112 445 113 545 114 620 115 680 116 755
+vehicle 18 7 117 395 118 470 119 565 120 635 121 700 122 765 123 825
+vehicle 19 6 124 545 125 615 126 690 127 800 128 860 129 920
+vehicle 20 7 130 500 131 580 132 670 133 735 134 795 135 870 136 940
+vehicle 21 6 137 205 138 290 139 365 140 425 141 555 142 645
+vehicle 22 5 143 575 144 645 145 740 146 830 147 905
+vehicle 23 2 148 355 149 415
+//driver schedules in the solution: idDriver, nbTripsInPath [idTrip idVehicleStay, status, departureTime]
+driver 0 7 0 0 true 1 0 true 2 0 true 3 0 true 4 0 true 5 0 true 6 0 true 
+ timeInMinute working: 2345.0 driving: 330.0
+driver 1 7 7 1 true 8 1 true 9 1 true 10 1 true 11 1 true 12 1 true 13 1 true 
+ timeInMinute working: 2370.0 driving: 330.0
+driver 2 6 14 2 true 15 2 true 16 2 true 17 2 true 18 2 true 19 2 true 
+ timeInMinute working: 2120.0 driving: 285.0
+driver 3 6 20 3 true 21 3 true 22 3 true 23 3 true 24 3 true 25 3 true 
+ timeInMinute working: 2345.0 driving: 285.0
+driver 4 6 26 4 true 27 4 true 28 4 true 29 4 true 30 4 true 31 4 true 
+ timeInMinute working: 2020.0 driving: 285.0
+driver 5 6 32 5 true 33 5 true 34 5 true 35 5 true 36 5 true 37 5 true 
+ timeInMinute working: 2170.0 driving: 285.0
+driver 6 7 38 6 true 39 6 true 40 6 true 41 6 true 42 6 true 43 6 true 44 6 true 
+ timeInMinute working: 2320.0 driving: 330.0
+driver 7 7 45 7 true 46 7 true 47 7 true 48 7 true 49 7 true 50 7 true 51 7 true 
+ timeInMinute working: 2345.0 driving: 330.0
+driver 8 6 52 8 true 53 8 true 54 8 true 55 8 true 56 8 true 57 8 true 
+ timeInMinute working: 1995.0 driving: 285.0
+driver 9 7 58 9 true 59 9 true 60 9 true 61 9 true 62 9 true 63 9 true 64 9 true 
+ timeInMinute working: 2120.0 driving: 330.0
+driver 10 6 65 10 true 66 10 true 67 10 true 68 10 true 69 10 true 70 10 true 
+ timeInMinute working: 1845.0 driving: 285.0
+driver 11 7 71 11 true 72 11 true 73 11 true 74 11 true 75 11 true 76 11 true 77 11 true 
+ timeInMinute working: 2295.0 driving: 330.0
+driver 12 6 78 12 true 79 12 true 80 12 true 81 12 true 82 12 true 83 12 true 
+ timeInMinute working: 1945.0 driving: 285.0
+driver 13 7 84 13 true 85 13 true 86 13 true 87 13 true 88 13 true 89 13 true 90 13 true 
+ timeInMinute working: 2245.0 driving: 330.0
+driver 14 7 91 14 true 92 14 true 93 14 true 94 14 true 95 14 true 96 14 true 97 14 true 
+ timeInMinute working: 2295.0 driving: 330.0
+driver 15 6 98 15 true 99 15 true 100 15 true 101 15 true 102 15 true 103 15 true 
+ timeInMinute working: 1995.0 driving: 285.0
+driver 16 6 104 16 true 105 16 true 106 16 true 107 16 true 108 16 true 109 16 true 
+ timeInMinute working: 2045.0 driving: 285.0
+driver 17 7 110 17 true 111 17 true 112 17 true 113 17 true 114 17 true 115 17 true 116 17 true 
+ timeInMinute working: 2370.0 driving: 330.0
+driver 18 7 117 18 true 118 18 true 119 18 true 120 18 true 121 18 true 122 18 true 123 18 true 
+ timeInMinute working: 2195.0 driving: 330.0
+driver 19 6 124 19 true 125 19 true 126 19 true 127 19 true 128 19 true 129 19 true 
+ timeInMinute working: 1920.0 driving: 285.0
+driver 20 7 130 20 true 131 20 true 132 20 true 133 20 true 134 20 true 135 20 true 136 20 true 
+ timeInMinute working: 2260.0 driving: 330.0
+driver 21 6 137 21 true 138 21 true 139 21 true 140 21 true 141 21 true 142 21 true 
+ timeInMinute working: 2245.0 driving: 285.0
+driver 22 5 143 22 true 144 22 true 145 22 true 146 22 true 147 22 true 
+ timeInMinute working: 1710.0 driving: 240.0
+driver 23 2 148 23 true 149 23 true 
+ timeInMinute working: 345.0 driving: 105.0
+

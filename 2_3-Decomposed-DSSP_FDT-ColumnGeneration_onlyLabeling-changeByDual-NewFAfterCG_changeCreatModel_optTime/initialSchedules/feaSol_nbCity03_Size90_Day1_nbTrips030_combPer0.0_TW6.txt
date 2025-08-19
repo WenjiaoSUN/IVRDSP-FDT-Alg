@@ -1,0 +1,132 @@
+//Schedules: driver idDriver idDepot indexStarting tripWithWorkingStatus indexEnding 
+driver 0 1 31 0 true 410 1 true 490 2 true 600 3 true 675 4 true 775 5 true 840 6 true 900 33
+driver 1 0 30 7 true 30 8 true 105 9 true 190 10 true 290 11 true 390 12 true 465 13 true 525 32
+driver 2 1 31 14 true 145 15 true 235 16 true 320 17 true 410 18 true 495 19 true 590 33
+driver 3 0 30 20 true 155 21 true 260 22 true 375 23 true 470 24 true 560 25 true 645 32
+driver 4 1 31 26 true 585 27 true 650 33
+driver 5 0 30 28 true 595 29 true 665 32
+//Schedules: driver idDriver idDepot indexStarting tripWithWorkingStatus indexEnding 
+driver 0 1 31 0 true 410 24 true 560 33
+driver 1 1 31 0 true 410 1 true 490 19 true 590 33
+driver 2 1 31 0 true 410 28 true 595 33
+driver 3 1 31 0 true 410 1 true 490 2 true 600 33
+driver 4 1 31 0 true 410 27 true 650 33
+driver 5 1 31 0 true 410 1 true 490 4 true 775 33
+driver 6 1 31 0 true 410 24 true 560 3 true 675 4 true 775 33
+driver 7 1 31 0 true 410 1 true 490 19 true 590 3 true 675 4 true 775 33
+driver 8 1 31 0 true 410 28 true 595 3 true 675 4 true 775 33
+driver 9 1 31 0 true 410 1 true 490 2 true 600 3 true 675 4 true 775 33
+driver 10 0 30 1 true 490 19 true 590 29 true 665 32
+driver 11 0 30 1 true 490 2 true 600 29 true 665 32
+driver 12 1 31 3 true 675 4 true 775 33
+driver 13 1 31 3 true 675 6 true 900 33
+driver 14 1 31 3 true 675 4 true 775 5 true 840 6 true 900 33
+driver 15 1 31 5 true 840 6 true 900 33
+driver 16 0 30 7 true 30 8 true 105 32
+driver 17 0 30 7 true 30 15 true 235 32
+driver 18 0 30 7 true 30 21 true 260 32
+driver 19 0 30 7 true 30 11 true 390 32
+driver 20 0 30 7 true 30 8 true 105 9 true 190 10 true 290 11 true 390 32
+driver 21 0 30 7 true 30 8 true 105 9 true 190 0 true 410 32
+driver 22 0 30 7 true 30 8 true 105 9 true 190 23 true 470 32
+driver 23 0 30 7 true 30 8 true 105 22 true 375 23 true 470 32
+driver 24 0 30 7 true 30 15 true 235 22 true 375 23 true 470 32
+driver 25 0 30 7 true 30 21 true 260 22 true 375 23 true 470 32
+driver 26 0 30 9 true 190 10 true 290 11 true 390 32
+driver 27 0 30 9 true 190 0 true 410 32
+driver 28 0 30 9 true 190 23 true 470 32
+driver 29 0 30 9 true 190 10 true 290 17 true 410 23 true 470 32
+driver 30 0 30 9 true 190 13 true 525 32
+driver 31 0 30 9 true 190 10 true 290 17 true 410 13 true 525 32
+driver 32 0 30 9 true 190 10 true 290 11 true 390 12 true 465 13 true 525 32
+driver 33 0 30 9 true 190 26 true 585 32
+driver 34 0 30 9 true 190 10 true 290 17 true 410 26 true 585 32
+driver 35 0 30 9 true 190 10 true 290 11 true 390 12 true 465 26 true 585 32
+driver 36 1 31 10 true 290 17 true 410 33
+driver 37 1 31 10 true 290 11 true 390 12 true 465 33
+driver 38 1 31 10 true 290 11 true 390 24 true 560 33
+driver 39 1 31 10 true 290 17 true 410 23 true 470 24 true 560 33
+driver 40 1 31 10 true 290 19 true 590 33
+driver 41 1 31 10 true 290 11 true 390 1 true 490 19 true 590 33
+driver 42 1 31 10 true 290 17 true 410 18 true 495 19 true 590 33
+driver 43 1 31 10 true 290 11 true 390 28 true 595 33
+driver 44 1 31 10 true 290 17 true 410 23 true 470 28 true 595 33
+driver 45 1 31 10 true 290 17 true 410 13 true 525 28 true 595 33
+driver 46 0 30 12 true 465 13 true 525 32
+driver 47 0 30 12 true 465 26 true 585 32
+driver 48 0 30 12 true 465 25 true 645 32
+driver 49 0 30 12 true 465 29 true 665 32
+driver 50 0 30 12 true 465 13 true 525 28 true 595 29 true 665 32
+driver 51 1 31 13 true 525 28 true 595 33
+driver 52 1 31 13 true 525 27 true 650 33
+driver 53 1 31 13 true 525 28 true 595 3 true 675 4 true 775 33
+driver 54 1 31 13 true 525 28 true 595 3 true 675 6 true 900 33
+driver 55 1 31 13 true 525 28 true 595 5 true 840 6 true 900 33
+driver 56 1 31 13 true 525 27 true 650 5 true 840 6 true 900 33
+driver 57 1 31 14 true 145 15 true 235 22 true 375 33
+driver 58 1 31 14 true 145 21 true 260 22 true 375 33
+driver 59 1 31 14 true 145 17 true 410 33
+driver 60 1 31 14 true 145 15 true 235 16 true 320 17 true 410 33
+driver 61 1 31 14 true 145 15 true 235 12 true 465 33
+driver 62 1 31 14 true 145 21 true 260 12 true 465 33
+driver 63 1 31 14 true 145 11 true 390 12 true 465 33
+driver 64 1 31 14 true 145 15 true 235 24 true 560 33
+driver 65 1 31 14 true 145 21 true 260 24 true 560 33
+driver 66 1 31 14 true 145 11 true 390 24 true 560 33
+driver 67 0 30 16 true 320 17 true 410 23 true 470 32
+driver 68 0 30 16 true 320 17 true 410 13 true 525 32
+driver 69 0 30 16 true 320 17 true 410 26 true 585 32
+driver 70 0 30 16 true 320 17 true 410 25 true 645 32
+driver 71 0 30 16 true 320 17 true 410 23 true 470 24 true 560 25 true 645 32
+driver 72 0 30 16 true 320 17 true 410 29 true 665 32
+driver 73 0 30 16 true 320 17 true 410 23 true 470 24 true 560 29 true 665 32
+driver 74 0 30 16 true 320 19 true 590 29 true 665 32
+driver 75 0 30 16 true 320 17 true 410 18 true 495 19 true 590 29 true 665 32
+driver 76 0 30 16 true 320 17 true 410 23 true 470 28 true 595 29 true 665 32
+driver 77 1 31 18 true 495 19 true 590 33
+driver 78 1 31 18 true 495 2 true 600 33
+driver 79 1 31 18 true 495 4 true 775 33
+driver 80 1 31 18 true 495 19 true 590 3 true 675 4 true 775 33
+driver 81 1 31 18 true 495 2 true 600 3 true 675 4 true 775 33
+driver 82 1 31 18 true 495 6 true 900 33
+driver 83 1 31 18 true 495 19 true 590 3 true 675 6 true 900 33
+driver 84 1 31 18 true 495 2 true 600 3 true 675 6 true 900 33
+driver 85 1 31 18 true 495 19 true 590 5 true 840 6 true 900 33
+driver 86 1 31 18 true 495 2 true 600 5 true 840 6 true 900 33
+driver 87 0 30 20 true 155 15 true 235 32
+driver 88 0 30 20 true 155 21 true 260 32
+driver 89 0 30 20 true 155 11 true 390 32
+driver 90 0 30 20 true 155 15 true 235 22 true 375 23 true 470 32
+driver 91 0 30 20 true 155 21 true 260 22 true 375 23 true 470 32
+driver 92 0 30 20 true 155 17 true 410 23 true 470 32
+driver 93 0 30 20 true 155 15 true 235 16 true 320 17 true 410 23 true 470 32
+driver 94 0 30 20 true 155 15 true 235 22 true 375 13 true 525 32
+driver 95 0 30 20 true 155 21 true 260 22 true 375 13 true 525 32
+driver 96 0 30 20 true 155 17 true 410 13 true 525 32
+driver 97 0 30 22 true 375 23 true 470 32
+driver 98 0 30 22 true 375 13 true 525 32
+driver 99 0 30 22 true 375 26 true 585 32
+driver 100 0 30 22 true 375 25 true 645 32
+driver 101 0 30 22 true 375 23 true 470 24 true 560 25 true 645 32
+driver 102 0 30 22 true 375 29 true 665 32
+driver 103 0 30 22 true 375 23 true 470 24 true 560 29 true 665 32
+driver 104 0 30 22 true 375 18 true 495 19 true 590 29 true 665 32
+driver 105 0 30 22 true 375 23 true 470 28 true 595 29 true 665 32
+driver 106 0 30 22 true 375 13 true 525 28 true 595 29 true 665 32
+driver 107 1 31 23 true 470 24 true 560 33
+driver 108 1 31 23 true 470 28 true 595 33
+driver 109 1 31 23 true 470 27 true 650 33
+driver 110 1 31 23 true 470 24 true 560 3 true 675 4 true 775 33
+driver 111 1 31 23 true 470 28 true 595 3 true 675 4 true 775 33
+driver 112 1 31 23 true 470 24 true 560 3 true 675 6 true 900 33
+driver 113 1 31 23 true 470 28 true 595 3 true 675 6 true 900 33
+driver 114 1 31 23 true 470 24 true 560 5 true 840 6 true 900 33
+driver 115 1 31 23 true 470 28 true 595 5 true 840 6 true 900 33
+driver 116 1 31 23 true 470 27 true 650 5 true 840 6 true 900 33
+driver 117 0 30 24 true 560 25 true 645 32
+driver 118 0 30 24 true 560 29 true 665 32
+driver 119 1 31 26 true 585 27 true 650 33
+driver 120 1 31 26 true 585 27 true 650 5 true 840 6 true 900 33
+driver 121 0 30 28 true 595 29 true 665 32
+
+

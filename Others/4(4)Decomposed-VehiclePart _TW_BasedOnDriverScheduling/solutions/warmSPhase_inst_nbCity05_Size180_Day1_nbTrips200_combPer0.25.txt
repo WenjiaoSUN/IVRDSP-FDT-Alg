@@ -1,0 +1,3 @@
+//instance
+nbCities:5; nbDepots:2; size:180 180;nbTrips:200;nbCombinedTrips50;planningHorizon:0-1440;maxDriving:540;maxWorking:720
+

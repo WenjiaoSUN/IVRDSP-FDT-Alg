@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: benchmark.Benchmark
+Class-Path: cplex.jar
+

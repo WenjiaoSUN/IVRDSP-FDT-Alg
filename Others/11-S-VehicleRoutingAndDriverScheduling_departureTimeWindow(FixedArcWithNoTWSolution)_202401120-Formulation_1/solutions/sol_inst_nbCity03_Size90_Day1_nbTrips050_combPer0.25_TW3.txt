@@ -1,0 +1,37 @@
+//instance
+//nbCities:3; nbDepots:2; size:90 90;nbTrips:50;nbCombinedTrips6;maxFolderTimeSlotAsTimeWindow3;planningHorizon:0-1440;maxDriving:540;maxWorking:720
+//nbVehicles in the solution
+//8
+//nbDrivers in the solution
+//9
+//total cost of the solution
+//870750.0
+//vehicle routes in the solution: idVehicle, nbTripsInPath [idTrip departureTime] 
+vehicle 0 10 39 70 9 205 40 290 17 395 41 465 42 530 3 690 4 760 5 825 6 885
+vehicle 1 10 47 155 48 215 49 290 19 350 20 415 23 525 24 605 44 700 45 785 46 865
+vehicle 2 5 0 425 1 505 2 605 3 690 22 750
+vehicle 3 8 14 160 15 220 16 305 17 395 18 510 31 575 32 720 33 795
+vehicle 4 11 7 45 8 120 9 205 10 275 11 375 12 450 13 510 32 720 36 800 37 885 38 945
+vehicle 5 9 30 400 34 510 35 570 43 645 25 705 26 770 27 855 28 915 29 975
+vehicle 6 2 23 525 2 605
+vehicle 7 1 21 505
+//driver schedules in the solution: idDriver, nbTripsInPath [idTrip idVehicleStay, status, departureTime]
+driver 0 7 30 5 true 1 2 false 2 2 false 3 2 false 4 0 true 5 0 true 6 0 true 
+ timeInMinute working: 2470.0 driving: 180.0
+driver 1 8 34 5 true 35 5 true 43 5 true 25 5 true 26 5 true 27 5 true 28 5 true 29 5 true 
+ timeInMinute working: 2385.0 driving: 390.0
+driver 2 5 23 1 true 24 1 true 44 1 true 45 1 true 46 1 true 
+ timeInMinute working: 1760.0 driving: 240.0
+driver 3 6 39 0 true 9 4 false 40 0 true 17 0 true 41 0 true 42 0 true 
+ timeInMinute working: 2345.0 driving: 225.0
+driver 4 4 32 3 false 36 4 true 37 4 true 38 4 true 
+ timeInMinute working: 1185.0 driving: 150.0
+driver 5 8 14 3 true 15 3 true 16 3 true 17 0 false 18 3 true 31 3 true 32 3 true 33 3 true 
+ timeInMinute working: 3220.0 driving: 345.0
+driver 6 5 0 2 true 1 2 true 2 2 true 3 2 true 22 2 true 
+ timeInMinute working: 1670.0 driving: 240.0
+driver 7 6 47 1 true 48 1 true 49 1 true 19 1 true 20 1 true 21 7 true 
+ timeInMinute working: 1795.0 driving: 285.0
+driver 8 7 7 4 true 8 4 true 9 4 true 10 4 true 11 4 true 12 4 true 13 4 true 
+ timeInMinute working: 2370.0 driving: 330.0
+

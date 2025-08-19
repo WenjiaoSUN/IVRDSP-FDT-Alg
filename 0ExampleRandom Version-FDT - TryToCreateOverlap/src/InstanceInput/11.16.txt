@@ -1,0 +1,23 @@
+//******* when it start a new shift, then Add following code to create more over lap between different shift since here modify startHorizon to make the new shift continue to the preShift******************** 11.16
+                            boolean whetherModifyStartHorionForNewShift=false;
+                            int modifyStartHorizon=Integer.MAX_VALUE;
+                            for(int s=0;s<idOfShift;s++){
+                                Shift shift1=this.feasibleSolution.getShifts().get(s);
+                                int endTimeOfFormerShift=shift1.getTrips().getLast().getArrivalTime();
+                                if(endTimeOfFormerShift-minPlanTime<latestDepartureTime) {
+                                    whetherModifyStartHorionForNewShift=true;
+                                    modifyStartHorizon=endTimeOfFormerShift-minPlanTime;
+                                    break;
+                                }
+                                //
+                            }
+                            if (whetherModifyStartHorionForNewShift==true){
+                                startHorizon=modifyStartHorizon;
+                                latestDepartureTime=startHorizon+minPlanTime
+                                System.out.println("New shift_"+idOfShift+" modified the start horizon: " + shift.getTrips().getLast().getArrivalTime());
+                            }else {
+                                startHorizon=this.input.getStartHorizon();
+ latestDepartureTime= t_eHorizon - maxWorkingTime;
+                latestDepartureTime = (int) (Math.floor(latestDepartureTime / timeSlotUnit) * timeSlotUnit);
+                            }
+                            //**********************************above modify 2024.11.16

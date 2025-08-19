@@ -1,0 +1,23 @@
+//instance
+//nbCities:3; nbDepots:2; size:90 90;nbTrips:35;nbCombinedTrips0;maxFolderTimeSlotAsTimeWindow3;planningHorizon:0-1440;maxDriving:540;maxWorking:720
+//nbVehicles in the solution
+//6
+//nbDrivers in the solution
+//6
+//total cost of the solution
+cost 638280.0
+//vehicle routes in the solution: idVehicle, nbTrips, [idTrips departureTime]
+vehicle 0 7 7 20 8 95 20 170 21 255 32 330 33 390 34 450
+vehicle 1 4 9 205 10 275 17 395 23 455
+vehicle 2 5 22 365 0 425 1 485 19 575 25 635
+vehicle 3 7 14 160 15 230 16 305 11 380 12 455 13 515 24 575
+vehicle 4 6 18 510 2 600 3 660 4 760 5 825 6 885
+vehicle 5 6 26 600 27 660 28 745 29 845 30 905 31 995
+//driver schedules in the solution: idDriver, nbTrips, [idTrip idVehicle drivingStatus departureTime]
+driver 0 7 7 0 true 20 8 0 true 95 20 0 true 170 21 0 true 255 32 0 true 330 33 0 true 390 34 0 true 450
+driver 1 7 14 3 true 160 15 3 true 230 16 3 true 305 11 3 true 380 12 3 true 455 13 3 true 515 24 3 true 575
+driver 2 6 18 4 true 510 2 4 true 600 3 4 true 660 4 4 true 760 5 4 true 825 6 4 true 885
+driver 3 5 22 2 true 365 0 2 true 425 1 2 true 485 19 2 true 575 25 2 true 635
+driver 4 4 9 1 true 205 10 1 true 275 17 1 true 395 23 1 true 455
+driver 5 6 26 5 true 600 27 5 true 660 28 5 true 745 29 5 true 845 30 5 true 905 31 5 true 995
+

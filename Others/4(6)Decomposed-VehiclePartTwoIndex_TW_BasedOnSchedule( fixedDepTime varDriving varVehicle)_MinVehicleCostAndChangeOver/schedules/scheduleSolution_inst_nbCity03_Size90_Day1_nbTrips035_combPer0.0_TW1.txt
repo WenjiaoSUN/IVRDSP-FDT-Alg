@@ -1,0 +1,14 @@
+//instance 30 nbCities:3; nbDepots:2; size:90 90;nbTrips:35;nbCombinedTrips0;maxFolderTimeSlotAsTimeWindow1;planningHorizon:0-1440;maxDriving:540;maxWorking:720,
+//nbNodes 41, nbArcs: 233, maxPerCombined: 0.0, timeWindow10, nbDriverAvailable: 6, solution gap: 0.0, 
+//The final integer value is: 24885.0
+//The elapsed time is: 0.0 sec
+//Total time in milli second of cplex solving pricing problem: 0.0 milli sec
+//Schedules: driver idDriver idDepot indexStarting tripWithWorkingStatus indexEnding 
+driver 0 0 35 20 true 160 15 true 235 16 true 315 17 true 405 23 true 465 37
+driver 1 0 35 7 true 35 8 true 110 9 true 185 10 true 285 11 true 385 12 true 460 13 true 520 37
+driver 2 0 35 22 true 380 18 true 490 19 true 585 25 true 645 37
+driver 3 1 36 14 true 150 21 true 255 32 true 340 33 true 400 34 true 460 24 true 555 38
+driver 4 1 36 26 true 590 27 true 650 28 true 755 5 true 835 6 true 895 38
+driver 5 1 36 0 true 415 1 true 485 2 true 595 3 true 670 4 true 770 29 true 830 30 true 905 31 true 1005 38
+
+

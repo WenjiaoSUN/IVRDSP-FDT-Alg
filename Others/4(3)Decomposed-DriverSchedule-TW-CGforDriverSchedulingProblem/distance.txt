@@ -1,0 +1,26 @@
+//Each trip minTime to arrive Depot_Depot{idOfDepot=1, indexOfDepotAsStartingPoint=26, indexOfDepotAsEndingPoint=28, idOfCityAsDepot=2} idTrip   distance
+0 180
+1 85
+2 0
+3 100
+4 0
+5 60
+6 0
+7 145
+8 70
+9 0
+10 120
+11 60
+12 0
+13 9999999
+14 265
+15 160
+16 75
+17 0
+18 95
+19 0
+20 240
+21 190
+22 0
+23 290
+24 215

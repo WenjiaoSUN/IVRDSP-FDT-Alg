@@ -1,0 +1,67 @@
+// The instance basic information 
+nbCities:3; nbDepots:2; size:180 180;nbTrips:100;nbCombinedTrips13;maxFolderTimeSlotAsTimeWindow3;planningHorizon:0-2880;maxDriving:540;maxWorking:720
+// The number of cities is 
+3
+// The number of depots is 
+2
+// The max number of vehicles is 
+2
+// The max number of drivers is 
+2
+// The number of trips is 
+5
+// The minPlanTime is 
+15
+// The short Time for driver is 
+20
+// The short Time for vehicle is 
+20
+// The maximum driving time is 
+540
+// The maximum working time is 
+720
+// The cost of using driver is 
+4000
+// The cost of using vehicle is 
+100000
+// The idle time cost for driver per unit is 
+1
+// The idle time cost for vehicle per unit is 
+20
+// The cost of driver changeover penalty per change is 
+30
+// The max percentage of combined trips is  
+0.0
+//The maxFolderOfTimeSlotAsTimeWindow is 
+1
+// The maxPlanTime is 
+720
+//The time slot Unit is 
+5
+//The scale of distance and duration is 
+0.99
+//The start time of planning horizon
+0
+//The ending time of planning horizon
+1440
+
+//Here are the cities: idOfCity 	 nameOfCity 	 coordinateX 	 coordinateY 
+0 C0 10 10
+1 C1 30 10
+2 C2 26 57
+//Depots:  
+// idOfDepot  	 indexOfDepotAsStartingPoint 	 indexOfDepotAsEndingPoint 	 idCityAsDepot
+0 5 7 0
+1 6 8 2
+//Trips: idOfTrip 	 idOfStartCity 	 idEndCity	 earliestDepartureTime 	 latestDepartureTime 	 nbCombinedVehicleInThisTrip 	 duration
+0 0 1 360 375 1 20
+1 1 0 540 555 1 20
+2 2 1 660 675 1 45
+3 1 0 1100 1115 1 20
+4 0 2 1200 1215 1 45
+//Vehicles: idOfVehicle idOfStartingDepot nbTrips
+0 -1 5
+1 -1 5
+//Drivers :idOfDriver idOfStartingDepot idOfEndingDepot nbTrips
+0 -1 5
+1 -1 5

@@ -1,0 +1,716 @@
+C:\Users\wsun\.jdks\openjdk-18.0.2\bin\java.exe "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.1.4\lib\idea_rt.jar=64646:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.1.4\bin" -Dfile.encoding=UTF-8 -classpath "C:\Users\wsun\IdeaProjects\4(3)Decomposed-VehiclePart\out\production\RoutingAndScheduling;C:\Program Files\IBM\ILOG\CPLEX_Studio221\cplex\lib\cplex.jar" benchmark.Benchmark
+C:\Users\wsun\IdeaProjects\4(3)Decomposed-VehiclePart\schedules\scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.0.txt
+Warning:  Output names have been modified due to duplicate names or characters invalid in LP format.
+Version identifier: 22.1.0.0 | 2022-03-09 | 1a383f8ce
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Strategy_VariableSelect             4
+CPXPARAM_TimeLimit                               3600
+Tried aggregator 3 times.
+MIP Presolve eliminated 98 rows and 426 columns.
+MIP Presolve modified 15 coefficients.
+Aggregator did 47 substitutions.
+Reduced MIP has 107 rows, 297 columns, and 921 nonzeros.
+Reduced MIP has 297 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.21 ticks)
+Found incumbent of value 512270.000000 after 0.00 sec. (3.23 ticks)
+Probing time = 0.00 sec. (1.26 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 107 rows, 297 columns, and 921 nonzeros.
+Reduced MIP has 297 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.78 ticks)
+Probing time = 0.00 sec. (1.26 ticks)
+Clique table members: 618.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.00 sec. (0.57 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                       512270.0000      300.0000            99.94%
+*     0     0      integral     0   509790.0000   509790.0000      107    0.00%
+Elapsed time = 0.00 sec. (7.78 ticks, tree = 0.00 MB, solutions = 2)
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (7.81 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (7.81 ticks)
+problem solved !
+The mini cost of routing and scheduling is 509790.0
+ChangeOver happen between trip_0 and trip_8 for driver_2
+PathForVehicle{ idOfVehicle=0, vehiclePath=[4, 5, 15, 12]
+PathForVehicle{ idOfVehicle=1, vehiclePath=[8, 9, 14]
+PathForVehicle{ idOfVehicle=2, vehiclePath=[0, 1, 2, 3, 6, 7]
+PathForVehicle{ idOfVehicle=3, vehiclePath=[13, 10, 11, 16, 17]
+PathForVehicle{ idOfVehicle=4, vehiclePath=[18, 19]
+C:\Users\wsun\IdeaProjects\4(3)Decomposed-VehiclePart\schedules\scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips020_combPer0.1.txt
+Warning:  Output names have been modified due to duplicate names or characters invalid in LP format.
+Version identifier: 22.1.0.0 | 2022-03-09 | 1a383f8ce
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Strategy_VariableSelect             4
+CPXPARAM_TimeLimit                               3600
+Tried aggregator 3 times.
+MIP Presolve eliminated 129 rows and 495 columns.
+MIP Presolve modified 48 coefficients.
+Aggregator did 92 substitutions.
+Reduced MIP has 113 rows, 272 columns, and 1002 nonzeros.
+Reduced MIP has 272 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (2.90 ticks)
+Found incumbent of value 415000.000000 after 0.00 sec. (3.95 ticks)
+Probing time = 0.00 sec. (1.16 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 113 rows, 272 columns, and 1002 nonzeros.
+Reduced MIP has 272 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (0.86 ticks)
+Probing time = 0.00 sec. (1.15 ticks)
+Clique table members: 599.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.00 sec. (0.54 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                       415000.0000        0.0000           100.00%
+*     0     0      integral     0   411150.0000   411150.0000       91    0.00%
+Elapsed time = 0.00 sec. (8.31 ticks, tree = 0.00 MB, solutions = 2)
+
+Root node processing (before b&c):
+  Real time             =    0.00 sec. (8.34 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.00 sec. (8.34 ticks)
+problem solved !
+The mini cost of routing and scheduling is 411150.0
+ChangeOver happen between trip_13 and trip_5 for driver_0
+vehicle_0 leading Trip_5
+PathForVehicle{ idOfVehicle=0, vehiclePath=[8, 9, 5, 6, 7]
+PathForVehicle{ idOfVehicle=2, vehiclePath=[13, 5]
+PathForVehicle{ idOfVehicle=4, vehiclePath=[0, 1, 2, 3, 14, 15, 18, 19]
+PathForVehicle{ idOfVehicle=5, vehiclePath=[4, 10, 11, 12, 16, 17]
+C:\Users\wsun\IdeaProjects\4(3)Decomposed-VehiclePart\schedules\scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips050_combPer0.0.txt
+Warning:  Output names have been modified due to duplicate names or characters invalid in LP format.
+Version identifier: 22.1.0.0 | 2022-03-09 | 1a383f8ce
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Strategy_VariableSelect             4
+CPXPARAM_TimeLimit                               3600
+Tried aggregator 3 times.
+MIP Presolve eliminated 276 rows and 4748 columns.
+MIP Presolve modified 182 coefficients.
+Aggregator did 329 substitutions.
+Reduced MIP has 452 rows, 2554 columns, and 8399 nonzeros.
+Reduced MIP has 2554 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.03 sec. (18.79 ticks)
+Found incumbent of value 1242090.000000 after 0.05 sec. (45.15 ticks)
+Probing fixed 447 vars, tightened 0 bounds.
+Probing time = 0.06 sec. (45.53 ticks)
+Cover probing fixed 125 vars, tightened 0 bounds.
+Tried aggregator 3 times.
+MIP Presolve eliminated 19 rows and 579 columns.
+MIP Presolve modified 104 coefficients.
+Aggregator did 141 substitutions.
+Reduced MIP has 292 rows, 1834 columns, and 6151 nonzeros.
+Reduced MIP has 1834 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (10.17 ticks)
+Probing time = 0.00 sec. (3.48 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 292 rows, 1834 columns, and 6151 nonzeros.
+Reduced MIP has 1834 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.02 sec. (4.55 ticks)
+Probing time = 0.00 sec. (3.44 ticks)
+Clique table members: 3117.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.00 sec. (17.53 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                      1241880.0000        0.0000           100.00%
+*     0     0      integral     0   732600.0000   732600.0000      723    0.00%
+Elapsed time = 0.16 sec. (136.54 ticks, tree = 0.00 MB, solutions = 3)
+
+Root node processing (before b&c):
+  Real time             =    0.16 sec. (136.85 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.16 sec. (136.85 ticks)
+problem solved !
+The mini cost of routing and scheduling is 732600.0
+ChangeOver happen between trip_24 and trip_6 for driver_1
+ChangeOver happen between trip_17 and trip_28 for driver_4
+PathForVehicle{ idOfVehicle=0, vehiclePath=[25, 26, 27]
+PathForVehicle{ idOfVehicle=2, vehiclePath=[4, 14, 15, 16, 35, 36, 37, 38]
+PathForVehicle{ idOfVehicle=3, vehiclePath=[0, 8, 9, 10, 11, 12, 17, 43, 44, 45, 46]
+PathForVehicle{ idOfVehicle=6, vehiclePath=[18, 19, 20, 13, 5, 6, 7]
+PathForVehicle{ idOfVehicle=7, vehiclePath=[32, 33, 34]
+PathForVehicle{ idOfVehicle=8, vehiclePath=[47, 48, 49, 22, 23, 24, 28, 29, 30, 31]
+PathForVehicle{ idOfVehicle=10, vehiclePath=[21, 1, 2, 3, 39, 40, 41, 42]
+C:\Users\wsun\IdeaProjects\4(3)Decomposed-VehiclePart\schedules\scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips050_combPer0.1.txt
+Warning:  Output names have been modified due to duplicate names or characters invalid in LP format.
+Version identifier: 22.1.0.0 | 2022-03-09 | 1a383f8ce
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Strategy_VariableSelect             4
+CPXPARAM_TimeLimit                               3600
+Tried aggregator 3 times.
+MIP Presolve eliminated 328 rows and 4793 columns.
+MIP Presolve modified 226 coefficients.
+Aggregator did 327 substitutions.
+Reduced MIP has 572 rows, 2625 columns, and 9060 nonzeros.
+Reduced MIP has 2625 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.01 sec. (21.25 ticks)
+Found incumbent of value 1431900.000000 after 0.03 sec. (39.35 ticks)
+Probing fixed 387 vars, tightened 0 bounds.
+Probing time = 0.03 sec. (41.95 ticks)
+Tried aggregator 3 times.
+MIP Presolve eliminated 8 rows and 390 columns.
+MIP Presolve modified 42 coefficients.
+Aggregator did 81 substitutions.
+Reduced MIP has 483 rows, 2154 columns, and 7701 nonzeros.
+Reduced MIP has 2154 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.02 sec. (8.99 ticks)
+Probing time = 0.00 sec. (3.56 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 483 rows, 2154 columns, and 7701 nonzeros.
+Reduced MIP has 2154 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (5.55 ticks)
+Probing time = 0.00 sec. (3.50 ticks)
+Clique table members: 4142.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.02 sec. (13.80 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                      1431810.0000      440.0000            99.97%
+*     0     0      integral     0   834240.0000   834240.0000      749    0.00%
+Elapsed time = 0.11 sec. (123.97 ticks, tree = 0.00 MB, solutions = 3)
+
+Root node processing (before b&c):
+  Real time             =    0.11 sec. (124.29 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.11 sec. (124.29 ticks)
+problem solved !
+The mini cost of routing and scheduling is 834240.0
+ChangeOver happen between trip_13 and trip_5 for driver_0
+ChangeOver happen between trip_12 and trip_16 for driver_2
+ChangeOver happen between trip_28 and trip_11 for driver_2
+ChangeOver happen between trip_15 and trip_29 for driver_4
+vehicle_6 leading Trip_5
+PathForVehicle{ idOfVehicle=2, vehiclePath=[33, 34, 35, 13, 5, 29, 30, 31, 32]
+PathForVehicle{ idOfVehicle=3, vehiclePath=[26, 27, 28, 16, 17]
+PathForVehicle{ idOfVehicle=4, vehiclePath=[4, 10, 11, 12, 48, 49]
+PathForVehicle{ idOfVehicle=5, vehiclePath=[40, 41, 42, 43]
+PathForVehicle{ idOfVehicle=6, vehiclePath=[8, 9, 5, 6, 7]
+PathForVehicle{ idOfVehicle=8, vehiclePath=[18, 19, 20, 21]
+PathForVehicle{ idOfVehicle=9, vehiclePath=[0, 1, 2, 3, 14, 15, 44, 45, 46, 47]
+PathForVehicle{ idOfVehicle=10, vehiclePath=[22, 23, 24, 25, 36, 37, 38, 39]
+C:\Users\wsun\IdeaProjects\4(3)Decomposed-VehiclePart\schedules\scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips100_combPer0.0.txt
+Warning:  Output names have been modified due to duplicate names or characters invalid in LP format.
+Version identifier: 22.1.0.0 | 2022-03-09 | 1a383f8ce
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Strategy_VariableSelect             4
+CPXPARAM_TimeLimit                               3600
+Tried aggregator 3 times.
+MIP Presolve eliminated 548 rows and 35710 columns.
+MIP Presolve modified 567 coefficients.
+Aggregator did 1110 substitutions.
+Reduced MIP has 1863 rows, 16812 columns, and 53908 nonzeros.
+Reduced MIP has 16812 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.13 sec. (144.75 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 1863 rows, 16812 columns, and 53908 nonzeros.
+Reduced MIP has 16812 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.03 sec. (39.91 ticks)
+Probing fixed 1998 vars, tightened 0 bounds.
+Probing time = 0.76 sec. (945.60 ticks)
+Clique table members: 29671.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.19 sec. (278.58 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0     0      integral     0  1270110.0000  1270110.0000     3588    0.00%
+Elapsed time = 1.48 sec. (1920.17 ticks, tree = 0.00 MB, solutions = 1)
+
+Root node processing (before b&c):
+  Real time             =    1.48 sec. (1921.64 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    1.48 sec. (1921.64 ticks)
+problem solved !
+The mini cost of routing and scheduling is 1270110.0
+ChangeOver happen between trip_17 and trip_28 for driver_4
+ChangeOver happen between trip_85 and trip_86 for driver_5
+ChangeOver happen between trip_40 and trip_41 for driver_12
+PathForVehicle{ idOfVehicle=0, vehiclePath=[92, 93, 1, 2, 3, 6, 7, 79, 80]
+PathForVehicle{ idOfVehicle=1, vehiclePath=[84, 85, 0, 8, 9, 5, 48, 16, 17, 43, 44, 45, 46]
+PathForVehicle{ idOfVehicle=4, vehiclePath=[97, 98, 99, 28, 29, 30, 31]
+PathForVehicle{ idOfVehicle=6, vehiclePath=[18, 19, 63, 64, 65, 24, 69, 70, 71, 72]
+PathForVehicle{ idOfVehicle=7, vehiclePath=[4, 14, 91, 77, 78, 81, 82, 83]
+PathForVehicle{ idOfVehicle=11, vehiclePath=[86, 87, 39, 40]
+PathForVehicle{ idOfVehicle=12, vehiclePath=[25, 26, 27]
+PathForVehicle{ idOfVehicle=13, vehiclePath=[62, 20, 13, 10, 11, 49, 50, 54, 42, 56, 57]
+PathForVehicle{ idOfVehicle=14, vehiclePath=[22, 23, 47, 60, 61, 35, 36, 37, 38]
+PathForVehicle{ idOfVehicle=15, vehiclePath=[21, 34, 73, 74, 75, 76, 66, 55]
+PathForVehicle{ idOfVehicle=17, vehiclePath=[32, 33, 58, 59, 15, 12, 95, 96, 41, 67, 68]
+PathForVehicle{ idOfVehicle=19, vehiclePath=[88, 89, 90, 94, 51, 52, 53]
+C:\Users\wsun\IdeaProjects\4(3)Decomposed-VehiclePart\schedules\scheduleSolution_inst_nbCity05_Size180_Day1_nbTrips100_combPer0.1.txt
+Warning:  Output names have been modified due to duplicate names or characters invalid in LP format.
+Version identifier: 22.1.0.0 | 2022-03-09 | 1a383f8ce
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Strategy_VariableSelect             4
+CPXPARAM_TimeLimit                               3600
+Tried aggregator 3 times.
+MIP Presolve eliminated 673 rows and 33458 columns.
+MIP Presolve modified 476 coefficients.
+Aggregator did 813 substitutions.
+Reduced MIP has 2484 rows, 20588 columns, and 66432 nonzeros.
+Reduced MIP has 20588 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.11 sec. (141.75 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 2484 rows, 20588 columns, and 66432 nonzeros.
+Reduced MIP has 20588 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.05 sec. (49.15 ticks)
+Probing fixed 2828 vars, tightened 0 bounds.
+Probing time = 0.95 sec. (1058.24 ticks)
+Clique table members: 39000.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.16 sec. (241.77 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0     0      integral     0  1563550.0000  1563550.0000     3949    0.00%
+Elapsed time = 1.69 sec. (2067.09 ticks, tree = 0.00 MB, solutions = 1)
+
+Root node processing (before b&c):
+  Real time             =    1.69 sec. (2068.61 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    1.69 sec. (2068.61 ticks)
+problem solved !
+The mini cost of routing and scheduling is 1563550.0
+ChangeOver happen between trip_28 and trip_48 for driver_1
+ChangeOver happen between trip_0 and trip_1 for driver_3
+ChangeOver happen between trip_4 and trip_10 for driver_7
+ChangeOver happen between trip_10 and trip_98 for driver_7
+ChangeOver happen between trip_91 and trip_67 for driver_11
+ChangeOver happen between trip_15 and trip_29 for driver_12
+ChangeOver happen between trip_48 and trip_14 for driver_14
+vehicle_19 leading Trip_0
+vehicle_26 leading Trip_5
+PathForVehicle{ idOfVehicle=0, vehiclePath=[90, 79, 55, 56]
+PathForVehicle{ idOfVehicle=1, vehiclePath=[26, 27, 28, 98, 99]
+PathForVehicle{ idOfVehicle=3, vehiclePath=[88, 89, 78, 91, 70, 71, 72, 73]
+PathForVehicle{ idOfVehicle=5, vehiclePath=[63, 64, 65, 2, 3, 49, 50, 51, 80, 81]
+PathForVehicle{ idOfVehicle=8, vehiclePath=[8, 9, 10, 11, 12, 96, 17]
+PathForVehicle{ idOfVehicle=9, vehiclePath=[4, 5, 14, 16, 97]
+PathForVehicle{ idOfVehicle=10, vehiclePath=[18, 19, 20, 21, 82, 83, 84]
+PathForVehicle{ idOfVehicle=14, vehiclePath=[22, 66, 75, 76, 77, 44, 54]
+PathForVehicle{ idOfVehicle=15, vehiclePath=[59, 60, 61, 62, 36, 37, 38, 39]
+PathForVehicle{ idOfVehicle=17, vehiclePath=[0, 1, 23, 24, 25, 52, 53, 93, 94]
+PathForVehicle{ idOfVehicle=18, vehiclePath=[40, 41, 42, 68, 69]
+PathForVehicle{ idOfVehicle=19, vehiclePath=[85, 86, 0, 87, 29, 30, 31, 32]
+PathForVehicle{ idOfVehicle=20, vehiclePath=[33, 34, 35, 74, 48, 6, 7]
+PathForVehicle{ idOfVehicle=21, vehiclePath=[67, 43, 57, 58]
+PathForVehicle{ idOfVehicle=26, vehiclePath=[13, 5, 95, 15, 92, 45, 46, 47]
+C:\Users\wsun\IdeaProjects\4(3)Decomposed-VehiclePart\schedules\scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips040_combPer0.0.txt
+Warning:  Output names have been modified due to duplicate names or characters invalid in LP format.
+Version identifier: 22.1.0.0 | 2022-03-09 | 1a383f8ce
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Strategy_VariableSelect             4
+CPXPARAM_TimeLimit                               3600
+Tried aggregator 4 times.
+MIP Presolve eliminated 200 rows and 2413 columns.
+MIP Presolve modified 132 coefficients.
+Aggregator did 212 substitutions.
+Reduced MIP has 332 rows, 1639 columns, and 5279 nonzeros.
+Reduced MIP has 1639 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (16.12 ticks)
+Found incumbent of value 1154100.000000 after 0.02 sec. (30.23 ticks)
+Probing fixed 143 vars, tightened 0 bounds.
+Probing time = 0.02 sec. (20.41 ticks)
+Cover probing fixed 44 vars, tightened 0 bounds.
+Tried aggregator 3 times.
+MIP Presolve eliminated 11 rows and 192 columns.
+MIP Presolve modified 55 coefficients.
+Aggregator did 55 substitutions.
+Reduced MIP has 266 rows, 1392 columns, and 4488 nonzeros.
+Reduced MIP has 1392 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (6.82 ticks)
+Probing time = 0.00 sec. (3.24 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 266 rows, 1392 columns, and 4488 nonzeros.
+Reduced MIP has 1392 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.02 sec. (3.44 ticks)
+Probing time = 0.00 sec. (3.22 ticks)
+Clique table members: 2443.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.02 sec. (11.61 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                      1153950.0000        0.0000           100.00%
+*     0     0      integral     0   538610.0000   538610.0000      696    0.00%
+Elapsed time = 0.08 sec. (83.91 ticks, tree = 0.00 MB, solutions = 3)
+
+Root node processing (before b&c):
+  Real time             =    0.08 sec. (84.08 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.08 sec. (84.08 ticks)
+problem solved !
+The mini cost of routing and scheduling is 538610.0
+ChangeOver happen between trip_5 and trip_6 for driver_1
+ChangeOver happen between trip_14 and trip_15 for driver_3
+ChangeOver happen between trip_36 and trip_37 for driver_9
+PathForVehicle{ idOfVehicle=1, vehiclePath=[25, 26, 27, 8, 9, 10, 11, 12]
+PathForVehicle{ idOfVehicle=4, vehiclePath=[38, 39, 0, 1, 2, 3, 13, 14, 6, 7, 35, 36]
+PathForVehicle{ idOfVehicle=5, vehiclePath=[32, 33, 34, 21, 22, 23, 24]
+PathForVehicle{ idOfVehicle=6, vehiclePath=[4, 5]
+PathForVehicle{ idOfVehicle=7, vehiclePath=[18, 19, 20]
+C:\Users\wsun\IdeaProjects\4(3)Decomposed-VehiclePart\schedules\scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips040_combPer0.1.txt
+Warning:  Output names have been modified due to duplicate names or characters invalid in LP format.
+Version identifier: 22.1.0.0 | 2022-03-09 | 1a383f8ce
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Strategy_VariableSelect             4
+CPXPARAM_TimeLimit                               3600
+Tried aggregator 4 times.
+MIP Presolve eliminated 200 rows and 2413 columns.
+MIP Presolve modified 132 coefficients.
+Aggregator did 212 substitutions.
+Reduced MIP has 332 rows, 1639 columns, and 5279 nonzeros.
+Reduced MIP has 1639 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (16.12 ticks)
+Found incumbent of value 1154100.000000 after 0.02 sec. (30.23 ticks)
+Probing fixed 143 vars, tightened 0 bounds.
+Probing time = 0.02 sec. (20.41 ticks)
+Cover probing fixed 44 vars, tightened 0 bounds.
+Tried aggregator 3 times.
+MIP Presolve eliminated 11 rows and 192 columns.
+MIP Presolve modified 55 coefficients.
+Aggregator did 55 substitutions.
+Reduced MIP has 266 rows, 1392 columns, and 4488 nonzeros.
+Reduced MIP has 1392 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.02 sec. (6.82 ticks)
+Probing time = 0.00 sec. (3.24 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 266 rows, 1392 columns, and 4488 nonzeros.
+Reduced MIP has 1392 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.00 sec. (3.44 ticks)
+Probing time = 0.00 sec. (3.22 ticks)
+Clique table members: 2443.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.00 sec. (11.61 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0+    0                      1153950.0000        0.0000           100.00%
+*     0     0      integral     0   538610.0000   538610.0000      696    0.00%
+Elapsed time = 0.06 sec. (83.91 ticks, tree = 0.00 MB, solutions = 3)
+
+Root node processing (before b&c):
+  Real time             =    0.06 sec. (84.08 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    0.06 sec. (84.08 ticks)
+problem solved !
+The mini cost of routing and scheduling is 538610.0
+ChangeOver happen between trip_5 and trip_6 for driver_1
+ChangeOver happen between trip_14 and trip_15 for driver_3
+ChangeOver happen between trip_36 and trip_37 for driver_9
+PathForVehicle{ idOfVehicle=1, vehiclePath=[25, 26, 27, 8, 9, 10, 11, 12]
+PathForVehicle{ idOfVehicle=4, vehiclePath=[38, 39, 0, 1, 2, 3, 13, 14, 6, 7, 35, 36]
+PathForVehicle{ idOfVehicle=5, vehiclePath=[32, 33, 34, 21, 22, 23, 24]
+PathForVehicle{ idOfVehicle=6, vehiclePath=[4, 5]
+PathForVehicle{ idOfVehicle=7, vehiclePath=[18, 19, 20]
+C:\Users\wsun\IdeaProjects\4(3)Decomposed-VehiclePart\schedules\scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips100_combPer0.0.txt
+Warning:  Output names have been modified due to duplicate names or characters invalid in LP format.
+Version identifier: 22.1.0.0 | 2022-03-09 | 1a383f8ce
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Strategy_VariableSelect             4
+CPXPARAM_TimeLimit                               3600
+Tried aggregator 4 times.
+MIP Presolve eliminated 530 rows and 25472 columns.
+MIP Presolve modified 513 coefficients.
+Aggregator did 845 substitutions.
+Reduced MIP has 2126 rows, 19854 columns, and 62005 nonzeros.
+Reduced MIP has 19854 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.13 sec. (165.35 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 2126 rows, 19854 columns, and 62005 nonzeros.
+Reduced MIP has 19854 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.03 sec. (45.95 ticks)
+Probing fixed 1863 vars, tightened 0 bounds.
+Probing time = 1.39 sec. (1081.30 ticks)
+Clique table members: 35293.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.28 sec. (450.20 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0     0      integral     0   899040.0000   899040.0000     5585    0.00%
+Elapsed time = 2.26 sec. (2354.04 ticks, tree = 0.00 MB, solutions = 1)
+
+Root node processing (before b&c):
+  Real time             =    2.26 sec. (2355.33 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    2.26 sec. (2355.33 ticks)
+problem solved !
+The mini cost of routing and scheduling is 899040.0
+ChangeOver happen between trip_34 and trip_64 for driver_1
+ChangeOver happen between trip_63 and trip_21 for driver_6
+ChangeOver happen between trip_47 and trip_48 for driver_8
+ChangeOver happen between trip_5 and trip_15 for driver_14
+ChangeOver happen between trip_17 and trip_94 for driver_14
+ChangeOver happen between trip_53 and trip_54 for driver_18
+PathForVehicle{ idOfVehicle=0, vehiclePath=[92, 93, 88, 89, 90, 91, 4, 14, 6, 7, 79, 80, 81, 82, 83]
+PathForVehicle{ idOfVehicle=7, vehiclePath=[34, 21, 22, 23, 24]
+PathForVehicle{ idOfVehicle=8, vehiclePath=[13, 5]
+PathForVehicle{ idOfVehicle=9, vehiclePath=[84, 85, 86, 87, 0, 1, 2, 3, 73, 74, 75, 76, 48, 49, 50, 77, 78, 35, 36, 37, 38, 54, 55, 56, 57]
+PathForVehicle{ idOfVehicle=14, vehiclePath=[32, 33, 62, 63, 64, 65, 58, 59, 60, 61, 47]
+PathForVehicle{ idOfVehicle=17, vehiclePath=[18, 19, 20]
+PathForVehicle{ idOfVehicle=18, vehiclePath=[25, 26, 27, 8, 9, 10, 11, 12, 51, 52, 53]
+PathForVehicle{ idOfVehicle=21, vehiclePath=[97, 98, 99]
+C:\Users\wsun\IdeaProjects\4(3)Decomposed-VehiclePart\schedules\scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips100_combPer0.1.txt
+Warning:  Output names have been modified due to duplicate names or characters invalid in LP format.
+Version identifier: 22.1.0.0 | 2022-03-09 | 1a383f8ce
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Strategy_VariableSelect             4
+CPXPARAM_TimeLimit                               3600
+Tried aggregator 4 times.
+MIP Presolve eliminated 603 rows and 25383 columns.
+MIP Presolve modified 540 coefficients.
+Aggregator did 873 substitutions.
+Reduced MIP has 2183 rows, 19423 columns, and 61657 nonzeros.
+Reduced MIP has 19423 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.11 sec. (163.94 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 2183 rows, 19423 columns, and 61657 nonzeros.
+Reduced MIP has 19423 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.05 sec. (45.50 ticks)
+Probing fixed 1809 vars, tightened 0 bounds.
+Probing time = 0.94 sec. (1016.67 ticks)
+Clique table members: 35955.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 0.30 sec. (462.04 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0     0      integral     0   987980.0000   987980.0000     5830    0.00%
+Elapsed time = 1.83 sec. (2291.71 ticks, tree = 0.00 MB, solutions = 1)
+
+Root node processing (before b&c):
+  Real time             =    1.83 sec. (2292.97 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =    1.83 sec. (2292.97 ticks)
+problem solved !
+The mini cost of routing and scheduling is 987980.0
+ChangeOver happen between trip_80 and trip_81 for driver_0
+ChangeOver happen between trip_76 and trip_48 for driver_4
+ChangeOver happen between trip_53 and trip_54 for driver_10
+ChangeOver happen between trip_95 and trip_96 for driver_12
+ChangeOver happen between trip_5 and trip_6 for driver_16
+ChangeOver happen between trip_8 and trip_13 for driver_16
+ChangeOver happen between trip_21 and trip_22 for driver_17
+ChangeOver happen between trip_23 and trip_58 for driver_17
+ChangeOver happen between trip_14 and trip_15 for driver_18
+ChangeOver happen between trip_17 and trip_50 for driver_18
+vehicle_16 leading Trip_85
+PathForVehicle{ idOfVehicle=5, vehiclePath=[21, 58, 59, 60, 61, 47]
+PathForVehicle{ idOfVehicle=7, vehiclePath=[95, 85]
+PathForVehicle{ idOfVehicle=9, vehiclePath=[25, 26, 27, 8, 9, 10, 11, 12]
+PathForVehicle{ idOfVehicle=13, vehiclePath=[13, 5]
+PathForVehicle{ idOfVehicle=15, vehiclePath=[18, 19, 20]
+PathForVehicle{ idOfVehicle=16, vehiclePath=[84, 85, 86, 87, 0, 1, 2, 3, 73, 74, 75, 76]
+PathForVehicle{ idOfVehicle=17, vehiclePath=[32, 33, 62, 63, 64, 65, 22, 23, 24]
+PathForVehicle{ idOfVehicle=21, vehiclePath=[34, 93, 94, 88, 89, 90, 91, 4, 14, 6, 7, 77, 78, 35, 36, 37, 38, 54, 55, 56, 57]
+PathForVehicle{ idOfVehicle=25, vehiclePath=[92, 96, 97, 98, 99, 51, 52, 53]
+C:\Users\wsun\IdeaProjects\4(3)Decomposed-VehiclePart\schedules\scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips200_combPer0.0.txt
+Warning:  Output names have been modified due to duplicate names or characters invalid in LP format.
+Version identifier: 22.1.0.0 | 2022-03-09 | 1a383f8ce
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Strategy_VariableSelect             4
+CPXPARAM_TimeLimit                               3600
+Tried aggregator 3 times.
+MIP Presolve eliminated 977 rows and 191116 columns.
+MIP Presolve modified 378 coefficients.
+Aggregator did 2214 substitutions.
+Reduced MIP has 9135 rows, 159760 columns, and 490078 nonzeros.
+Reduced MIP has 159760 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.86 sec. (908.58 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 9135 rows, 159760 columns, and 490078 nonzeros.
+Reduced MIP has 159760 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.38 sec. (386.10 ticks)
+Elapsed time = 17.83 sec. (10000.24 ticks) for 29% of probing (13554 vars fixed)
+Probing fixed 13662 vars, tightened 0 bounds.
+Probing time = 27.02 sec. (15974.03 ticks)
+Clique table members: 287008.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 12.28 sec. (17180.03 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+      0     0  1561480.0000   158                1561480.0000    40639         
+*     0+    0                      1561480.0000  1561480.0000             0.00%
+      0     0        cutoff        1561480.0000  1561480.0000    40639    0.00%
+Elapsed time = 49.39 sec. (46969.26 ticks, tree = 0.01 MB, solutions = 1)
+
+Root node processing (before b&c):
+  Real time             =   49.42 sec. (46979.04 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =   49.42 sec. (46979.04 ticks)
+problem solved !
+The mini cost of routing and scheduling is 1561480.0
+ChangeOver happen between trip_5 and trip_6 for driver_1
+ChangeOver happen between trip_14 and trip_15 for driver_3
+ChangeOver happen between trip_33 and trip_34 for driver_8
+ChangeOver happen between trip_47 and trip_48 for driver_12
+ChangeOver happen between trip_97 and trip_98 for driver_26
+ChangeOver happen between trip_102 and trip_103 for driver_27
+ChangeOver happen between trip_105 and trip_106 for driver_28
+ChangeOver happen between trip_115 and trip_116 for driver_31
+ChangeOver happen between trip_168 and trip_169 for driver_44
+ChangeOver happen between trip_171 and trip_172 for driver_45
+PathForVehicle{ idOfVehicle=0, vehiclePath=[108, 109, 110, 111, 112, 113, 114]
+PathForVehicle{ idOfVehicle=4, vehiclePath=[84, 85, 86, 87, 182, 183, 184, 185, 186, 187]
+PathForVehicle{ idOfVehicle=9, vehiclePath=[169, 148, 149, 150, 124, 125, 126, 127, 128, 15, 16, 17, 170, 171, 119, 120, 121, 122, 123, 43, 44, 45, 46]
+PathForVehicle{ idOfVehicle=11, vehiclePath=[18, 19, 20, 197, 198, 199, 13, 14, 6, 7]
+PathForVehicle{ idOfVehicle=12, vehiclePath=[92, 93]
+PathForVehicle{ idOfVehicle=19, vehiclePath=[25, 26, 27, 8, 9, 10, 11, 12, 175, 176, 177, 178, 35, 36, 37, 38, 141, 142, 143]
+PathForVehicle{ idOfVehicle=23, vehiclePath=[106, 107, 155, 156, 157, 158, 159, 137, 138, 139, 140]
+PathForVehicle{ idOfVehicle=25, vehiclePath=[32, 33]
+PathForVehicle{ idOfVehicle=33, vehiclePath=[62, 63, 64, 65, 115, 94, 95, 96]
+PathForVehicle{ idOfVehicle=36, vehiclePath=[58, 59, 60, 61, 47, 103]
+PathForVehicle{ idOfVehicle=38, vehiclePath=[151, 152, 153, 154, 190, 191, 192, 193]
+PathForVehicle{ idOfVehicle=42, vehiclePath=[104, 105, 34, 0, 1, 2, 3, 164, 165, 166, 144, 145, 146, 147, 97]
+PathForVehicle{ idOfVehicle=48, vehiclePath=[167, 168, 88, 89, 90, 91, 4, 5, 194, 195, 196, 39, 40, 41, 42, 133, 134, 135, 136]
+PathForVehicle{ idOfVehicle=52, vehiclePath=[179, 180, 181, 21, 22, 23, 24, 73, 74, 75, 76, 48, 49, 50, 77, 78, 79, 80]
+C:\Users\wsun\IdeaProjects\4(3)Decomposed-VehiclePart\schedules\scheduleSolution_inst_nbCity05_Size180_Day2_nbTrips200_combPer0.1.txt
+Warning:  Output names have been modified due to duplicate names or characters invalid in LP format.
+Version identifier: 22.1.0.0 | 2022-03-09 | 1a383f8ce
+CPXPARAM_Threads                                 1
+CPXPARAM_Parallel                                1
+CPXPARAM_MIP_Strategy_VariableSelect             4
+CPXPARAM_TimeLimit                               3600
+Tried aggregator 3 times.
+MIP Presolve eliminated 1185 rows and 186013 columns.
+MIP Presolve modified 275 coefficients.
+Aggregator did 2200 substitutions.
+Reduced MIP has 9640 rows, 164923 columns, and 509561 nonzeros.
+Reduced MIP has 164923 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.94 sec. (905.97 ticks)
+Tried aggregator 1 time.
+Detecting symmetries...
+Reduced MIP has 9640 rows, 164923 columns, and 509561 nonzeros.
+Reduced MIP has 164923 binaries, 0 generals, 0 SOSs, and 0 indicators.
+Presolve time = 0.36 sec. (402.12 ticks)
+Probing time = 0.14 sec. (58.63 ticks)
+Clique table members: 297303.
+MIP emphasis: balance optimality and feasibility.
+MIP search method: dynamic search.
+Parallel mode: none, using 1 thread.
+Root relaxation solution time = 15.78 sec. (20123.13 ticks)
+
+        Nodes                                         Cuts/
+   Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+
+*     0     0      integral     0  1451570.0000  1451570.0000    38737    0.00%
+Elapsed time = 19.11 sec. (23367.35 ticks, tree = 0.00 MB, solutions = 1)
+
+Root node processing (before b&c):
+  Real time             =   19.14 sec. (23377.14 ticks)
+Sequential b&c:
+  Real time             =    0.00 sec. (0.00 ticks)
+                          ------------
+Total (root+branch&cut) =   19.14 sec. (23377.14 ticks)
+problem solved !
+The mini cost of routing and scheduling is 1451570.0
+ChangeOver happen between trip_33 and trip_34 for driver_8
+ChangeOver happen between trip_36 and trip_37 for driver_9
+ChangeOver happen between trip_47 and trip_48 for driver_12
+ChangeOver happen between trip_85 and trip_93 for driver_24
+ChangeOver happen between trip_92 and trip_85 for driver_24
+ChangeOver happen between trip_123 and trip_124 for driver_33
+ChangeOver happen between trip_134 and trip_135 for driver_36
+vehicle_38 leading Trip_85
+PathForVehicle{ idOfVehicle=3, vehiclePath=[116, 117, 118, 119, 182, 183]
+PathForVehicle{ idOfVehicle=4, vehiclePath=[92, 85, 21, 22, 23, 24]
+PathForVehicle{ idOfVehicle=7, vehiclePath=[112, 113, 114, 115, 197, 198, 199, 184, 185, 186, 187]
+PathForVehicle{ idOfVehicle=10, vehiclePath=[25, 26, 27]
+PathForVehicle{ idOfVehicle=15, vehiclePath=[58, 59, 60, 61, 47, 194, 195, 196, 39, 40, 41, 42, 133, 134]
+PathForVehicle{ idOfVehicle=20, vehiclePath=[179, 180, 181, 0, 1, 2, 3, 73, 74, 75, 76, 48, 49, 50, 97, 98, 99, 100]
+PathForVehicle{ idOfVehicle=23, vehiclePath=[18, 19, 20, 155, 156, 157, 158, 159, 137, 138, 139, 140]
+PathForVehicle{ idOfVehicle=29, vehiclePath=[151, 152, 153, 154, 190, 191, 192, 193, 110, 111, 35, 36, 123, 130, 131, 132]
+PathForVehicle{ idOfVehicle=32, vehiclePath=[167, 168, 169, 127, 128, 129, 164, 165, 166]
+PathForVehicle{ idOfVehicle=33, vehiclePath=[95, 96]
+PathForVehicle{ idOfVehicle=36, vehiclePath=[32, 33, 62, 63, 64, 65, 8, 9, 10, 11, 12, 175, 176, 177, 178, 51, 52, 53, 124, 125, 126, 135, 136]
+PathForVehicle{ idOfVehicle=38, vehiclePath=[84, 85, 86, 87, 148, 149, 150, 13, 14, 15, 16, 17]
+PathForVehicle{ idOfVehicle=49, vehiclePath=[34, 93, 94, 88, 89, 90, 91, 4, 5, 6, 7, 106, 107, 108, 109]
+
+Process finished with exit code 0

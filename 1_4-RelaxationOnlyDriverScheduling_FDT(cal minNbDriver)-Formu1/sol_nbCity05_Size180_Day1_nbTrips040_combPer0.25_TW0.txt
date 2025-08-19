@@ -1,0 +1,16 @@
+The mini cost is including :20650.0
+The fixed cost for vehicle and driver :20000.0
+The idle cost for vehicle and driver :650.0
+The idle cost for all drivers :650.0
+THe idle cost for all vehicles 0.0
+The changover cost for all drivers:0.0
+PathForDriver{ idOfDriver=0, driverPath=[TripWithDriveInfos{trip_0, v_2147483647, driving=true, departureTimeUnit=435}, TripWithDriveInfos{trip_1, v_2147483647, driving=true, departureTimeUnit=515}, TripWithDriveInfos{trip_2, v_2147483647, driving=true, departureTimeUnit=625}, TripWithDriveInfos{trip_3, v_2147483647, driving=true, departureTimeUnit=700}, TripWithDriveInfos{trip_4, v_2147483647, driving=true, departureTimeUnit=800}, TripWithDriveInfos{trip_5, v_2147483647, driving=true, departureTimeUnit=865}, TripWithDriveInfos{trip_6, v_2147483647, driving=true, departureTimeUnit=925}] };
+	 workingTimeInThisShift: 2495.0 minutes, drivingTimeInThisShift: 330.0 minutes
+PathForDriver{ idOfDriver=1, driverPath=[TripWithDriveInfos{trip_7, v_2147483647, driving=true, departureTimeUnit=0}, TripWithDriveInfos{trip_8, v_2147483647, driving=true, departureTimeUnit=75}, TripWithDriveInfos{trip_9, v_2147483647, driving=true, departureTimeUnit=160}, TripWithDriveInfos{trip_10, v_2147483647, driving=true, departureTimeUnit=260}, TripWithDriveInfos{trip_11, v_2147483647, driving=true, departureTimeUnit=360}, TripWithDriveInfos{trip_12, v_2147483647, driving=true, departureTimeUnit=435}, TripWithDriveInfos{trip_13, v_2147483647, driving=true, departureTimeUnit=495}] };
+	 workingTimeInThisShift: 2520.0 minutes, drivingTimeInThisShift: 330.0 minutes
+PathForDriver{ idOfDriver=2, driverPath=[TripWithDriveInfos{trip_14, v_2147483647, driving=true, departureTimeUnit=525}, TripWithDriveInfos{trip_15, v_2147483647, driving=true, departureTimeUnit=615}, TripWithDriveInfos{trip_16, v_2147483647, driving=true, departureTimeUnit=700}, TripWithDriveInfos{trip_17, v_2147483647, driving=true, departureTimeUnit=790}, TripWithDriveInfos{trip_18, v_2147483647, driving=true, departureTimeUnit=875}, TripWithDriveInfos{trip_19, v_2147483647, driving=true, departureTimeUnit=935}] };
+	 workingTimeInThisShift: 2095.0 minutes, drivingTimeInThisShift: 285.0 minutes
+PathForDriver{ idOfDriver=3, driverPath=[TripWithDriveInfos{trip_20, v_2147483647, driving=true, departureTimeUnit=30}, TripWithDriveInfos{trip_21, v_2147483647, driving=true, departureTimeUnit=125}, TripWithDriveInfos{trip_22, v_2147483647, driving=true, departureTimeUnit=200}] };
+	 workingTimeInThisShift: 895.0 minutes, drivingTimeInThisShift: 150.0 minutes
+PathForDriver{ idOfDriver=4, driverPath=[TripWithDriveInfos{trip_23, v_2147483647, driving=true, departureTimeUnit=240}, TripWithDriveInfos{trip_24, v_2147483647, driving=true, departureTimeUnit=345}] };
+	 workingTimeInThisShift: 585.0 minutes, drivingTimeInThisShift: 105.0 minutes

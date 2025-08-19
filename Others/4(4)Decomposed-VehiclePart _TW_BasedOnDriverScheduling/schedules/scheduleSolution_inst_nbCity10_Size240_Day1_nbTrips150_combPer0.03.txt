@@ -1,0 +1,39 @@
+//instance 69 nbCities:10; nbDepots:3; size:240 240;nbTrips:150;nbCombinedTrips4;planningHorizon:0-1440;maxDriving:540;maxWorking:720;
+//nbNodes 158, nbArcs: 1126, maxPerCombined: 0.03, nbDriverAvailable: 35, solution gap: 1.0751665080875357; 
+//The final integer value is: 136630.0//The elapsed time is: 15.0 sec//Total time in milli second of labeling algorithm solving pricing problem: 0.0 milli sec//Total time in milli second of labeling algorithm solving pricing problem: 2445.0 milli sec
+//Schedules: driver idDriver idDepot indexStarting tripWithWorkingStatus indexEnding 
+driver 0 2 152 5 true 6 true 7 true 8 true 9 true 155
+driver 1 0 150 25 true 26 true 27 true 28 true 153
+driver 2 2 152 51 true 52 true 53 true 54 true 155
+driver 3 1 151 55 true 56 true 57 true 58 true 59 true 154
+driver 4 2 152 63 true 64 true 65 true 66 true 67 true 155
+driver 5 0 150 73 true 74 true 75 true 76 true 153
+driver 6 2 152 77 true 78 true 79 true 80 true 155
+driver 7 1 151 104 true 105 true 106 true 107 true 108 true 109 true 154
+driver 8 1 151 110 true 111 true 112 true 113 true 114 true 154
+driver 9 0 150 115 true 116 true 117 true 153
+driver 10 2 152 118 true 119 true 120 true 121 true 122 true 155
+driver 11 1 151 126 true 127 true 128 true 129 true 154
+driver 12 0 150 148 true 149 true 153
+driver 13 2 152 10 true 11 false 12 true 155
+driver 14 1 151 19 true 20 true 146 true 22 true 154
+driver 15 1 151 60 true 11 true 61 true 62 true 154
+driver 16 2 152 81 true 82 true 94 true 95 true 155
+driver 17 0 150 135 true 136 true 137 true 153
+driver 18 1 151 142 true 143 true 102 true 103 true 154
+driver 19 1 151 47 true 2 true 48 true 49 true 50 true 154
+driver 20 2 152 43 true 23 true 24 true 13 true 44 true 45 true 46 true 83 true 84 true 155
+driver 21 1 151 0 true 1 true 101 true 144 true 18 true 154
+driver 22 1 151 96 true 97 true 98 true 99 true 100 true 70 true 154
+driver 23 2 152 38 true 39 true 40 true 4 true 41 true 42 true 155
+driver 24 2 152 21 true 147 true 88 true 89 true 90 true 93 true 155
+driver 25 2 152 130 true 68 true 69 true 45 false 46 false 155
+driver 26 1 151 131 true 132 true 133 true 134 true 3 true 4 false 154
+driver 27 1 151 85 true 86 true 87 true 91 true 92 true 71 true 72 true 154
+driver 28 1 151 13 false 14 true 15 true 16 true 17 true 145 true 154
+driver 29 0 150 29 true 30 true 31 true 32 true 153
+driver 30 0 150 33 true 34 true 35 true 36 true 37 true 153
+driver 31 1 151 138 true 139 true 140 true 141 true 154
+driver 32 0 150 123 true 124 true 125 true 153
+
+

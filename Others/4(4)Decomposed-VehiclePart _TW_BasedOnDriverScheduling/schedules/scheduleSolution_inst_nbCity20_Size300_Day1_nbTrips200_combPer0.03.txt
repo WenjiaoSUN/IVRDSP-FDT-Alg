@@ -1,0 +1,44 @@
+//instance 122 nbCities:20; nbDepots:4; size:300 300;nbTrips:200;nbCombinedTrips6;planningHorizon:0-1440;maxDriving:540;maxWorking:720;
+//nbNodes 210, nbArcs: 1154, maxPerCombined: 0.03, nbDriverAvailable: 39, solution gap: 1.1334693412065842; 
+//The final integer value is: 157834.0//The elapsed time is: 32.0 sec//Total time in milli second of labeling algorithm solving pricing problem: 0.0 milli sec//Total time in milli second of labeling algorithm solving pricing problem: 2866.0 milli sec
+//Schedules: driver idDriver idDepot indexStarting tripWithWorkingStatus indexEnding 
+driver 0 3 203 4 true 5 true 6 true 7 true 8 true 207
+driver 1 2 202 23 true 24 true 25 true 26 true 206
+driver 2 1 201 143 true 144 true 145 true 146 true 147 true 148 true 205
+driver 3 3 203 195 true 196 true 197 true 207
+driver 4 2 202 132 true 133 true 134 true 135 true 136 true 206
+driver 5 0 200 171 true 172 true 173 true 174 true 175 true 204
+driver 6 3 203 63 true 64 true 65 true 66 true 67 true 68 true 207
+driver 7 1 201 27 true 28 true 29 true 30 true 62 true 205
+driver 8 2 202 126 true 127 true 128 true 129 true 130 true 131 true 206
+driver 9 3 203 32 true 33 true 34 true 35 true 36 true 207
+driver 10 3 203 105 true 106 true 107 true 108 true 109 true 207
+driver 11 0 200 42 true 43 true 21 true 44 true 45 true 204
+driver 12 0 200 78 true 79 true 80 true 204
+driver 13 2 202 98 true 99 true 100 true 101 true 102 true 198 true 199 true 206
+driver 14 2 202 13 true 14 true 15 true 16 true 17 true 206
+driver 15 2 202 69 true 70 true 71 true 72 true 73 true 206
+driver 16 2 202 159 true 160 true 161 true 162 true 163 true 164 true 165 true 206
+driver 17 3 203 0 true 1 true 2 true 3 true 207
+driver 18 3 203 92 true 93 true 94 true 95 true 96 true 97 true 207
+driver 19 1 201 166 true 167 true 168 true 169 true 170 true 205
+driver 20 1 201 189 true 190 true 191 true 192 true 193 true 194 true 205
+driver 21 0 200 182 true 183 true 184 true 185 true 186 true 187 true 188 true 204
+driver 22 1 201 153 true 154 true 155 true 156 true 157 true 158 true 205
+driver 23 0 200 9 true 10 true 11 true 12 true 204
+driver 24 1 201 58 true 59 true 60 true 61 false 30 false 31 true 205
+driver 25 2 202 81 true 82 true 83 true 84 true 85 true 86 true 206
+driver 26 2 202 110 true 111 true 112 true 113 true 114 true 115 true 206
+driver 27 0 200 149 true 150 true 151 true 152 true 204
+driver 28 0 200 178 true 179 true 180 true 181 true 204
+driver 29 0 200 116 true 117 true 118 true 119 true 120 true 204
+driver 30 0 200 137 true 138 true 139 true 140 true 141 true 142 true 204
+driver 31 1 201 37 true 38 true 39 true 40 true 41 true 205
+driver 32 1 201 87 true 176 true 177 true 61 true 75 true 55 false 205
+driver 33 3 203 121 true 122 true 123 true 124 true 125 true 207
+driver 34 1 201 52 true 53 true 54 true 55 true 56 true 57 true 205
+driver 35 1 201 74 true 14 false 88 true 89 true 90 true 91 true 76 true 77 true 205
+driver 36 2 202 18 true 19 true 20 true 21 false 0 false 22 true 103 true 104 true 206
+driver 37 3 203 46 true 47 true 48 true 49 true 50 true 51 true 207
+
+

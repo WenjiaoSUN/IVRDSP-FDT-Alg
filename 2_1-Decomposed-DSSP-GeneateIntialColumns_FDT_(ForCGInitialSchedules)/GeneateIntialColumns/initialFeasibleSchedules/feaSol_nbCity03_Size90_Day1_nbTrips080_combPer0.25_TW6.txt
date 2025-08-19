@@ -1,0 +1,18 @@
+//Here for varDriving  idOfDriver idOfDepot indexDepotAsStartPoint [idOfTrip whetherDrive startingTime]  indexDepotAsEndPoint
+driver 0 1 81 0 true 410 1 true 490 2 true 600 3 true 675 4 true 775 5 true 840 6 true 900 83
+driver 1 0 80 7 true 30 8 true 105 9 true 190 10 true 290 11 true 390 12 true 465 13 true 525 82
+driver 2 1 81 14 true 145 15 true 235 16 true 320 17 true 410 18 true 495 2 false 600 83
+driver 3 1 81 19 true 365 20 true 430 21 true 520 3 false 675 22 true 765 83
+driver 4 0 80 23 true 510 24 true 620 25 true 690 26 true 755 27 true 870 28 true 930 29 true 990 82
+driver 5 1 81 30 true 385 23 false 510 31 true 590 32 true 705 33 true 810 83
+driver 6 0 80 34 true 495 35 true 555 32 false 705 36 true 815 37 true 900 38 true 960 82
+driver 7 1 81 39 true 55 9 false 190 40 true 275 17 false 410 41 true 480 42 true 545 83
+driver 8 0 80 43 true 630 44 true 715 45 true 800 46 true 880 47 true 980 48 true 1065 82
+driver 9 1 81 49 true 455 24 false 620 50 true 695 51 true 780 52 true 840 53 true 940 83
+driver 10 0 80 54 true 460 55 true 575 44 false 715 56 true 795 57 true 870 82
+driver 11 0 80 58 true 475 59 true 560 43 false 630 60 true 705 36 false 815 61 true 880 62 true 940 82
+driver 12 0 80 63 true 230 64 true 310 21 false 520 65 true 585 66 true 675 82
+driver 13 0 80 67 true 485 55 false 575 68 true 675 33 false 810 69 true 875 82
+driver 14 0 80 70 true 255 71 true 370 18 false 495 72 true 585 50 false 695 82
+driver 15 0 80 73 true 565 66 false 675 74 true 775 57 false 870 75 true 940 76 true 1000 82
+driver 16 0 80 77 true 90 78 true 150 79 true 210 82

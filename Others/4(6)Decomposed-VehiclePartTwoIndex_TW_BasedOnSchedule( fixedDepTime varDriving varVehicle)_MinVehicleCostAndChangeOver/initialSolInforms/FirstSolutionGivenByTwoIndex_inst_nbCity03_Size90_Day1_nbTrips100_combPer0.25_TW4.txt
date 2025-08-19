@@ -1,0 +1,77 @@
+//instance
+//nbCities:3; nbDepots:2; size:90 90;nbTrips:100;nbCombinedTrips25;maxFolderTimeSlotAsTimeWindow4;planningHorizon:0-1440;maxDriving:540;maxWorking:720
+//nbVehicles in the solution
+//18
+//nbDrivers in the solution
+//22
+//total cost of the solution
+//1967420.0
+//vehicle routes in the solution: idVehicle, nbTrips, idStDepot, [idTrips depTime], idEnDepot
+vehicle 0 2 0 1 510 80 585 1
+vehicle 1 13 0 7 50 8 125 9 200 10 270 97 345 12 445 13 515 73 575 36 800 61 860 62 920 47 995 48 1070 0
+vehicle 2 7 0 9 200 40 260 64 320 58 455 18 515 2 610 25 670 0
+vehicle 3 9 0 16 320 17 405 18 515 66 660 26 735 33 810 57 870 75 930 95 990 0
+vehicle 4 3 0 21 500 65 585 83 650 0
+vehicle 5 4 0 32 705 88 945 89 1010 90 1070 1
+vehicle 6 7 0 63 230 11 390 67 485 31 570 32 705 92 780 52 850 0
+vehicle 7 6 0 70 275 82 390 54 465 55 555 50 700 51 760 1
+vehicle 8 4 0 73 575 66 660 56 780 57 870 0
+vehicle 9 9 0 91 520 59 580 43 640 3 655 22 760 5 820 6 880 28 940 29 1000 0
+vehicle 10 9 1 14 160 15 220 23 490 2 610 44 715 45 780 27 855 37 915 38 975 0
+vehicle 11 7 1 30 385 23 490 24 620 44 715 74 775 87 835 46 895 0
+vehicle 12 11 1 39 75 98 135 15 220 96 295 71 370 0 430 21 500 86 560 24 620 68 680 4 755 1
+vehicle 13 2 1 41 480 42 540 1
+vehicle 14 12 1 77 115 99 205 78 305 19 365 20 425 79 500 72 575 3 655 36 800 69 860 53 920 76 980 0
+vehicle 15 6 1 81 345 17 405 49 465 55 555 60 685 22 760 1
+vehicle 16 10 1 84 215 71 370 0 430 34 490 35 555 43 640 50 700 56 780 93 840 94 905 1
+vehicle 17 4 1 85 450 72 575 60 685 33 810 1
+//driver schedules in the solution: idDriver, nbTrips, idStDepot, [idTrips idVehicle status depTime]
+driver 0 2 1 30 11 true 385 21 12 true 500
+driver 1 2 1 44 11 true 715 74 11 true 775
+driver 2 2 0 63 6 true 230 11 6 true 390
+driver 3 10 1 14 10 true 160 15 12 true 220 96 12 true 295 71 16 false 370 0 16 true 430 34 16 true 490 86 12 true 560 24 12 true 620 68 12 true 680 36 14 true 800
+driver 4 8 1 81 15 true 345 17 15 true 405 49 15 true 465 2 10 true 610 25 2 false 670 56 16 true 780 93 16 true 840 94 16 true 905
+driver 5 8 0 91 9 true 520 59 9 true 580 43 16 true 640 50 16 true 700 45 10 true 780 27 10 true 855 37 10 true 915 38 10 true 975
+driver 6 8 0 70 7 true 275 82 7 true 390 54 7 true 465 55 15 true 555 60 17 true 685 4 12 true 755 87 11 true 835 46 11 true 895
+driver 7 8 0 1 0 true 510 80 0 true 585 3 14 true 655 22 15 true 760 5 9 true 820 6 9 true 880 28 9 true 940 29 9 true 1000
+driver 8 3 0 16 3 true 320 17 15 false 405 35 16 true 555
+driver 9 2 1 65 4 true 585 22 15 false 760
+driver 10 4 1 84 16 true 215 71 16 false 370 85 17 true 450 72 17 false 575
+driver 11 7 1 77 14 true 115 99 14 true 205 78 14 true 305 19 14 true 365 20 14 true 425 79 14 true 500 80 0 false 585
+driver 12 7 0 7 1 true 50 8 1 false 125 9 2 false 200 10 1 true 270 97 1 true 345 12 1 true 445 13 1 true 515
+driver 13 8 0 23 11 true 490 72 17 true 575 25 2 true 670 51 7 false 760 61 1 false 860 62 1 true 920 47 1 true 995 48 1 true 1070
+driver 14 2 0 67 6 true 485 31 6 true 570
+driver 15 3 1 39 12 true 75 98 12 true 135 71 16 true 370
+driver 16 2 1 41 13 true 480 42 13 true 540
+driver 17 4 0 51 7 true 760 69 14 true 860 53 14 true 920 76 14 true 980
+driver 18 3 0 32 6 true 705 92 6 true 780 52 6 true 850
+driver 19 4 1 61 1 true 860 88 5 true 945 89 5 true 1010 90 5 true 1070
+driver 20 7 0 73 8 true 575 66 8 true 660 26 3 true 735 33 17 true 810 57 8 true 870 75 3 true 930 95 3 true 990
+driver 21 8 0 7 1 false 50 8 1 true 125 9 2 true 200 40 2 true 260 64 2 true 320 58 2 true 455 18 3 true 515 83 4 true 650
+//combine parts: idTrip  idDrivingDriver idLeadingVehicle
+combine 0 3 16
+combine 2 4 10
+combine 3 7 14
+combine 9 21 2
+combine 15 3 12
+combine 17 4 15
+combine 18 21 3
+combine 21 0 12
+combine 22 7 15
+combine 23 13 11
+combine 24 3 12
+combine 32 18 6
+combine 33 20 17
+combine 36 3 14
+combine 43 5 16
+combine 44 1 11
+combine 50 5 16
+combine 55 6 15
+combine 56 4 16
+combine 57 20 8
+combine 60 6 17
+combine 66 20 8
+combine 71 15 16
+combine 72 13 17
+combine 73 20 8
+

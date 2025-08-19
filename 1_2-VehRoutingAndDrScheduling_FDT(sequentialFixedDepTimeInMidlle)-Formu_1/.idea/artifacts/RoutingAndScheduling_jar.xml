@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="RoutingAndScheduling:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/RoutingAndScheduling_jar</output-path>
+    <root id="archive" name="RoutingAndScheduling.jar">
+      <element id="module-output" name="RoutingAndScheduling" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Drivers/WSDownload/cplex/lib/cplex.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

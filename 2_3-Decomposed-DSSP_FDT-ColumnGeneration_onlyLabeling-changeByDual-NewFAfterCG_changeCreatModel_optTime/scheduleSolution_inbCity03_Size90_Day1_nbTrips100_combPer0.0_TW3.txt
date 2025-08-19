@@ -1,0 +1,16 @@
+//DriverScheduling solution from column generation: idOfDriver idOfDepot indexStartingDepot List<TripWithWorkingStatus> indexEndingDepot
+driver 0 0 100 7 true 45 8 true 120 65 true 195 78 true 255 79 true 325 95 true 385 75 true 445 97 true 510 102
+driver 1 1 101 38 true 35 39 true 95 20 true 170 34 true 245 46 true 305 22 true 365 60 true 425 86 true 485 103
+driver 2 1 101 32 true 15 91 true 75 92 true 150 93 true 210 94 true 285 0 true 395 12 true 455 13 true 515 24 true 575 103
+driver 3 0 100 33 true 145 21 true 245 16 true 320 17 true 395 23 true 455 102
+driver 4 1 101 84 true 325 47 true 385 48 true 455 49 true 540 77 true 615 3 true 675 4 true 760 29 true 820 6 true 885 103
+driver 5 0 100 40 true 225 41 true 300 42 true 360 43 true 425 61 true 505 62 true 575 50 true 635 51 true 695 102
+driver 6 1 101 14 true 160 15 true 220 58 true 295 59 true 370 80 true 430 1 true 490 19 true 575 98 true 635 99 true 695 103
+driver 7 0 100 9 true 200 66 true 260 67 true 320 68 true 395 69 true 470 76 true 530 2 true 590 25 true 650 102
+driver 8 1 101 26 true 585 27 true 660 28 true 760 103
+driver 9 0 100 36 true 395 44 true 500 70 true 575 102
+driver 10 1 101 52 true 450 53 true 545 54 true 625 55 true 710 56 true 785 57 true 860 103
+driver 11 0 100 72 true 230 10 true 290 11 true 390 102
+driver 12 1 101 71 true 155 45 true 215 73 true 275 74 true 335 96 true 430 18 true 490 82 true 570 83 true 650 103
+driver 13 1 101 35 true 320 85 true 380 37 true 470 87 true 540 88 true 600 63 true 675 64 true 735 90 true 795 5 true 855 30 true 915 31 true 995 103
+driver 14 0 100 81 true 480 89 true 680 102

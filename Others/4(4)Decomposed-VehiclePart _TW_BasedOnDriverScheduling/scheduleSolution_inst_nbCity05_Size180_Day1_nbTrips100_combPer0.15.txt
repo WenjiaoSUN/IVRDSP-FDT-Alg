@@ -1,0 +1,22 @@
+//instance 2 nbCities:5; nbDepots:2; size:180 180;nbTrips:100;nbCombinedTrips15;planningHorizon:0-1440;maxDriving:540;maxWorking:720;
+//nbNodes 106, nbArcs: 948, maxPerCombined: 0.15, nbDriverAvailable: 20, solution gap: 0.0; 
+//The final integer value is: 67900.0//The elapsed time is: 14.0 sec//Total time in milli second of labeling algorithm solving pricing problem: 0.0 milli sec//Total time in milli second of labeling algorithm solving pricing problem: 10204.0 milli sec
+//Schedules: driver idDriver idDepot indexStarting tripWithWorkingStatus indexEnding 
+driver 0 1 101 14 true 15 true 103
+driver 1 1 101 69 true 70 true 81 true 82 true 83 true 8 true 9 true 77 true 103
+driver 2 1 101 65 true 24 true 35 true 13 true 37 true 38 true 62 true 63 true 103
+driver 3 1 101 98 true 99 true 90 true 91 true 92 true 93 true 94 true 103
+driver 4 1 101 44 true 45 true 46 true 47 true 61 true 39 true 52 true 103
+driver 5 0 100 95 true 96 true 97 true 53 true 51 true 54 true 48 true 78 true 102
+driver 6 1 101 30 true 31 true 32 false 33 false 65 false 66 true 2 true 67 true 68 true 103
+driver 7 0 100 40 true 32 true 41 false 42 false 43 true 102
+driver 8 1 101 0 true 1 true 75 true 27 true 28 true 29 true 103
+driver 9 1 101 64 true 33 true 23 true 34 true 25 true 26 true 27 false 103
+driver 10 1 101 71 true 72 true 73 true 74 true 76 true 10 true 55 true 56 true 12 true 103
+driver 11 0 100 36 true 49 true 50 true 60 true 61 false 39 false 102
+driver 12 0 100 2 false 3 true 4 true 5 true 6 true 7 true 11 true 57 true 58 true 102
+driver 13 0 100 84 true 85 true 86 true 87 true 88 true 89 true 102
+driver 14 1 101 79 true 80 true 41 true 42 true 59 true 72 false 103
+driver 15 0 100 16 true 17 true 18 true 19 true 20 true 21 true 22 true 102
+
+

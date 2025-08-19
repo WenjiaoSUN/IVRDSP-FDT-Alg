@@ -1,0 +1,29 @@
+//instance
+//nbCities:3; nbDepots:2; size:90 90;nbTrips:40;nbCombinedTrips4;maxFolderTimeSlotAsTimeWindow5;planningHorizon:0-1440;maxDriving:540;maxWorking:720
+//nbVehicles in the solution
+//7
+//nbDrivers in the solution
+//6
+//total cost of the solution
+//746620.0
+//vehicle routes in the solution: idVehicle, nbTrips, idStDepot, [idTrips depTime], idEnDepot
+vehicle 0 15 0 7 35 8 110 9 185 38 245 39 305 19 365 17 425 18 485 31 565 32 680 4 755 5 815 27 875 28 935 29 995 0
+vehicle 1 4 0 23 520 2 605 3 665 6 905 1
+vehicle 2 4 0 23 520 24 595 3 665 22 740 1
+vehicle 3 6 1 0 435 21 495 35 555 32 680 36 790 37 850 0
+vehicle 4 4 1 10 275 20 405 34 480 13 540 0
+vehicle 5 5 1 14 170 15 230 16 305 11 380 12 455 1
+vehicle 6 6 1 30 410 1 495 2 605 25 665 26 730 33 805 1
+//driver schedules in the solution: idDriver, nbTrips, idStDepot, [idTrips idVehicle status depTime]
+driver 0 9 0 7 0 true 35 8 0 true 110 9 0 true 185 38 0 true 245 39 0 true 305 19 0 true 365 17 0 true 425 18 0 true 485 31 0 true 565
+driver 1 8 0 23 2 true 520 2 6 true 605 3 2 true 665 22 2 true 740 5 0 true 815 27 0 true 875 28 0 true 935 29 0 true 995
+driver 2 5 1 14 5 true 170 15 5 true 230 16 5 true 305 11 5 true 380 12 5 true 455
+driver 3 8 0 9 0 false 185 10 4 true 275 20 4 true 405 34 4 true 480 13 4 true 540 32 3 false 680 36 3 true 790 37 3 true 850
+driver 4 6 1 30 6 true 410 1 6 true 495 24 2 true 595 25 6 true 665 26 6 true 730 33 6 true 805
+driver 5 7 1 0 3 true 435 21 3 true 495 35 3 true 555 32 3 true 680 4 0 true 755 5 0 false 815 6 1 true 905
+//combine parts: idTrip  idDrivingDriver idLeadingVehicle
+combine 2 1 6
+combine 3 1 2
+combine 23 1 2
+combine 32 5 3
+

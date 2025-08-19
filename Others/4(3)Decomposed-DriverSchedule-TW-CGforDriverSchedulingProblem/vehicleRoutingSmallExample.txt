@@ -1,0 +1,170 @@
+//number of vehicles
+3
+
+//number of divers
+7
+
+//number of trips
+19
+
+//minplan time 
+0.5
+
+//short connection time 
+0.75
+
+//legs: id startString endString depatureTime arrivalTime
+0 B F 6.00 6.50
+1 B C 7.00 8.25
+2 F C 7.50 8.50
+3 A C 7.50 8.75
+4 C E 9.50 10.50
+5 C D 9.75 10.25
+6 D E 11.25 12.00
+7 E B 11.50 14.00
+8 E B 12.75 13.25
+9 E A 13.00 14.75
+10 B D 15.25 17.25
+11 B E 15.50 16.50
+12 A E 15.75 16.75
+13 E F 18.25 19.50
+14 D F 18.50 19.50
+15 E F 18.50 20.50
+16 F A 20.25 22.00
+17 F B 21.50 22.50
+18 F A 21.75 22.75
+
+//vehicles: idOfVehicle startPoint endPoint setIdStartPoint setIdEndPoint nbOfTrip
+0 A A 19 20 19
+1 B B 21 22 19
+2 B A 23 24 19
+
+//drivers: idOfDriver startPoint endPoint setIdStartPoint setIdEndPoint nbOfTrip
+0 A A 25 26 19
+1 A A 27 28 19
+2 A A 29 30 19
+3 B B 31 32 19
+4 B B 33 34 19
+5 B B 35 36 19
+6 B B 37 38 19
+
+//definition of graph for the trips
+//idTripStart  idTripEnd costForVehicle costForDriver
+0 2 1 1
+0 17 5 5
+0 18 5 5
+1 4 2 1
+1 5 1 2
+2 4 1 1
+2 5 2 2
+3 5 1 1
+3 4 2 2
+4 7 1 1
+4 8 1 1
+4 13 5 5
+4 15 3 3
+5 6 1 1
+5 14 5 5
+6 9 1 1
+6 13 5 5
+6 15 5 5
+7 10 1 1
+7 11 2 2
+8 11 1 1 
+8 10 2 2
+9 12 1 1
+10 14 1 1
+11 15 1 1
+11 13 2 2
+12 13 1 1
+12 15 2 2 
+13 17 1 1
+13 18 1 1 
+13 16 1 1
+14 16 1 1
+14 17 1 1 
+14 18 5 5 
+15 17 1 1
+15 18 1 1
+
+//definition of graph for vehicles
+//idVehicle  idTripStart
+0 3
+0 12
+1 0
+1 1
+1 10
+1 11
+2 0
+2 1
+2 10
+2 11
+
+//idVehicle idTripEnd
+0 9
+0 16
+0 18
+1 7
+1 8
+1 17
+2 7
+2 8
+2 17
+
+//defination of graph  for drivers
+//idDriver idTripStart
+0 3 
+0 12
+1 3
+1 12
+2 3
+2 12
+3 0
+3 1
+3 10
+3 11
+4 0
+4 1
+4 10
+4 11
+5 0
+5 1
+5 10
+5 11
+6 0
+6 1
+6 10
+6 11
+
+//idDriver idTripEnd
+0 9
+0 16
+0 18
+1 9
+1 16
+1 18
+2 9
+2 16
+2 18
+3 7
+3 8
+3 17
+4 7
+4 8
+4 17
+5 7
+5 8 
+5 17
+6 7
+6 8
+6 17
+
+//feasible path for drivers
+//idOfDriver idTrip1 idTrip2 idTrip3
+0 3 5 6 9
+1 12 13 18
+2 12 13 16
+3 1 4 7
+4 0 2 4 8
+5 10 14 17
+6 11 15 17

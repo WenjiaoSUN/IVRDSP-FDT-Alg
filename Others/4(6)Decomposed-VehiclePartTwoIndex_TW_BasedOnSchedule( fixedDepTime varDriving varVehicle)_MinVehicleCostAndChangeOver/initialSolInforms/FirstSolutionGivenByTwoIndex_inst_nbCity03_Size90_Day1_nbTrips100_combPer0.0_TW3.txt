@@ -1,0 +1,41 @@
+//instance
+//nbCities:3; nbDepots:2; size:90 90;nbTrips:100;nbCombinedTrips0;maxFolderTimeSlotAsTimeWindow3;planningHorizon:0-1440;maxDriving:540;maxWorking:720
+//nbVehicles in the solution
+//14
+//nbDrivers in the solution
+//16
+//total cost of the solution
+//1518045.0
+//vehicle routes in the solution: idVehicle, nbTrips, idStDepot, [idTrips depTime], idEnDepot
+vehicle 0 8 0 7 30 8 105 9 190 78 255 79 340 0 410 1 490 2 600 1
+vehicle 1 9 0 20 170 21 260 22 375 52 450 53 545 54 625 55 710 56 785 57 860 1
+vehicle 2 7 0 45 215 46 290 47 370 48 470 49 555 50 630 51 690 0
+vehicle 3 7 0 58 290 59 370 60 440 61 520 62 590 63 675 64 735 0
+vehicle 4 8 0 72 215 73 275 74 345 75 445 76 545 77 610 3 675 4 775 1
+vehicle 5 7 0 91 75 92 150 93 215 94 300 95 385 96 445 97 525 0
+vehicle 6 4 1 10 290 11 390 12 465 13 525 0
+vehicle 7 7 1 14 160 15 235 16 320 17 410 23 470 24 560 25 645 0
+vehicle 8 2 1 18 495 19 590 1
+vehicle 9 8 1 32 45 33 130 34 235 35 305 36 395 37 485 98 630 99 695 1
+vehicle 10 9 1 38 35 39 100 65 185 66 255 67 320 68 395 69 475 70 575 83 650 1
+vehicle 11 12 1 71 140 40 210 41 290 42 375 43 440 44 515 26 585 27 650 28 760 29 830 30 910 31 995 1
+vehicle 12 3 1 80 420 81 480 82 555 0
+vehicle 13 9 1 84 325 85 395 86 475 87 540 88 615 89 695 90 780 5 840 6 900 1
+//driver schedules in the solution: idDriver, nbTrips, idStDepot, [idTrips idVehicle status depTime]
+driver 0 7 1 0 0 true 410 1 0 true 490 2 0 true 600 3 4 true 675 4 4 true 775 5 13 true 840 6 13 true 900
+driver 1 7 0 7 0 true 30 8 0 true 105 9 0 true 190 10 6 true 290 11 6 true 390 12 6 true 465 13 6 true 525
+driver 2 7 0 58 3 true 290 59 3 true 370 60 3 true 440 61 3 true 520 62 3 true 590 63 3 true 675 64 3 true 735
+driver 3 6 1 14 7 true 160 15 7 true 235 16 7 true 320 17 7 true 410 18 8 true 495 19 8 true 590
+driver 4 6 0 20 1 true 170 21 1 true 260 22 1 true 375 23 7 true 470 24 7 true 560 25 7 true 645
+driver 5 6 1 26 11 true 585 27 11 true 650 28 11 true 760 29 11 true 830 30 11 true 910 31 11 true 995
+driver 6 6 1 32 9 true 45 33 9 true 130 34 9 true 235 35 9 true 305 36 9 true 395 37 9 true 485
+driver 7 7 1 38 10 true 35 39 10 true 100 40 11 true 210 41 11 true 290 42 11 true 375 43 11 true 440 44 11 true 515
+driver 8 7 0 45 2 true 215 46 2 true 290 47 2 true 370 48 2 true 470 49 2 true 555 50 2 true 630 51 2 true 690
+driver 9 6 1 52 1 true 450 53 1 true 545 54 1 true 625 55 1 true 710 56 1 true 785 57 1 true 860
+driver 10 6 0 65 10 true 185 66 10 true 255 67 10 true 320 68 10 true 395 69 10 true 475 70 10 true 575
+driver 11 7 1 71 11 true 140 72 4 true 215 73 4 true 275 74 4 true 345 75 4 true 445 76 4 true 545 77 4 true 610
+driver 12 6 1 78 0 true 255 79 0 true 340 80 12 true 420 81 12 true 480 82 12 true 555 83 10 true 650
+driver 13 7 1 84 13 true 325 85 13 true 395 86 13 true 475 87 13 true 540 88 13 true 615 89 13 true 695 90 13 true 780
+driver 14 7 0 91 5 true 75 92 5 true 150 93 5 true 215 94 5 true 300 95 5 true 385 96 5 true 445 97 5 true 525
+driver 15 2 1 98 9 true 630 99 9 true 695
+

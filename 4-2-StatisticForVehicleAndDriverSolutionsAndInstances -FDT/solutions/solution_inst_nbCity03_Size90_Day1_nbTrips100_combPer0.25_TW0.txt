@@ -1,0 +1,73 @@
+//instance
+//nbCities:3; nbDepots:2; size:90 90;nbTrips:100;nbCombinedTrips25;maxFolderTimeSlotAsTimeWindow0;planningHorizon:0-1440;maxDriving:540;maxWorking:720
+//nbVehicles in the solution
+//19
+//nbDrivers in the solution
+//17
+//total cost of the solution
+cost 2074575.0
+//vehicle routes in the solution: idVehicle, nbTrips, [idTrips departureTime]
+vehicle 0 9 7 30 8 105 9 190 0 410 73 565 66 675 56 795 87 855 62 940
+vehicle 1 8 9 190 0 410 73 565 66 675 56 795 93 860 94 925 95 985
+vehicle 2 7 23 510 72 585 60 705 22 765 57 870 75 940 76 1000
+vehicle 3 4 34 495 35 555 43 630 25 690
+vehicle 4 6 63 230 64 310 67 485 80 570 68 675 4 775
+vehicle 5 9 70 255 71 370 49 455 55 575 50 695 26 755 27 870 28 930 29 990
+vehicle 6 10 78 325 30 385 54 460 2 600 3 675 36 815 61 880 88 945 89 1010 90 1070
+vehicle 7 6 79 495 55 575 50 695 51 780 5 840 6 900
+vehicle 8 3 91 525 65 585 83 650
+vehicle 9 8 96 285 82 410 1 490 2 600 3 675 36 815 69 875 53 940
+vehicle 10 8 10 290 71 370 85 450 31 590 32 705 33 810 37 900 38 960
+vehicle 11 5 14 145 15 235 21 520 86 580 33 810
+vehicle 12 7 19 365 20 430 23 510 72 585 60 705 22 765 57 870
+vehicle 13 4 39 55 98 135 15 235 21 520
+vehicle 14 7 40 275 97 365 12 465 13 525 32 705 92 780 52 840
+vehicle 15 2 41 480 42 545
+vehicle 16 11 77 95 99 225 16 320 17 410 18 495 24 620 44 715 45 800 46 880 47 980 48 1065
+vehicle 17 5 81 325 11 390 58 475 59 560 43 630
+vehicle 18 6 84 215 17 410 18 495 24 620 44 715 74 775
+//driver schedules in the solution: idDriver, nbTrips, [idTrip idVehicle drivingStatus departureTime]
+driver 0 2 63 4 true 230 64 4 true 310
+driver 1 2 84 18 true 215 71 5 false 370
+driver 2 7 79 7 true 495 24 16 true 620 44 16 true 715 56 1 true 795 93 1 true 860 94 1 true 925 95 1 true 985
+driver 3 8 18 16 true 495 55 7 true 575 50 7 true 695 51 7 true 780 61 6 true 880 88 6 true 945 89 6 true 1010 90 6 true 1070
+driver 4 7 70 5 true 255 71 10 true 370 85 10 true 450 31 10 true 590 32 10 true 705 92 14 true 780 52 14 true 840
+driver 5 5 21 11 true 520 86 11 true 580 33 10 true 810 37 10 true 900 38 10 true 960
+driver 6 8 96 9 true 285 82 9 true 410 1 9 true 490 2 9 true 600 3 9 true 675 4 4 true 775 87 0 true 855 62 0 true 940
+driver 7 8 19 12 true 365 20 12 true 430 23 12 true 510 72 12 true 585 68 4 true 675 36 9 true 815 69 9 true 875 53 9 true 940
+driver 8 6 77 16 true 95 99 16 true 225 16 16 true 320 17 16 true 410 41 15 true 480 42 15 true 545
+driver 9 8 34 3 true 495 35 3 true 555 43 3 true 630 25 3 true 690 45 16 true 800 46 16 true 880 47 16 true 980 48 16 true 1065
+driver 10 7 39 13 true 55 98 13 true 135 15 13 true 235 78 6 true 325 30 6 true 385 54 6 true 460 42 15 false 545
+driver 11 6 14 11 true 145 15 11 false 235 78 6 false 325 0 0 true 410 67 4 true 485 80 4 true 570
+driver 12 7 7 0 true 30 8 0 true 105 9 0 true 190 40 14 true 275 97 14 true 365 12 14 true 465 13 14 true 525
+driver 13 6 73 0 true 565 83 8 true 650 26 5 true 755 27 5 true 870 28 5 true 930 29 5 true 990
+driver 14 7 91 8 true 525 65 8 true 585 66 0 true 675 74 18 true 775 57 2 true 870 75 2 true 940 76 2 true 1000
+driver 15 9 81 17 true 325 11 17 true 390 58 17 true 475 59 17 true 560 43 17 false 630 60 2 true 705 22 2 true 765 5 7 true 840 6 7 true 900
+driver 16 4 10 10 true 290 71 5 false 370 49 5 true 455 42 15 false 545
+//combine parts: idTrip  idDrivingDriver idLeadingVehicle
+combine 0 11 0
+combine 2 6 9
+combine 3 6 9
+combine 9 12 0
+combine 15 10 13
+combine 17 8 16
+combine 18 3 16
+combine 21 5 11
+combine 22 15 2
+combine 23 7 12
+combine 24 2 16
+combine 32 4 10
+combine 33 5 10
+combine 36 7 9
+combine 43 9 3
+combine 44 2 16
+combine 50 3 7
+combine 55 3 7
+combine 56 2 1
+combine 57 14 2
+combine 60 15 2
+combine 66 14 0
+combine 71 4 10
+combine 72 7 12
+combine 73 13 0
+

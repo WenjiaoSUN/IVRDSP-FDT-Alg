@@ -1,0 +1,24 @@
+//DriverScheduling solution from column generation: idOfDriver idOfDepot indexStartingDepot List<TripWithWorkingStatus> indexEndingDepot
+driver 0 1 101 19 true 365 20 true 430 21 true 520 3 false 675 22 true 765 103
+driver 1 0 100 34 true 495 35 true 555 32 false 705 36 true 815 37 true 900 38 true 960 102
+driver 2 0 100 54 true 460 55 true 575 44 false 715 56 true 795 57 true 870 102
+driver 3 1 101 77 true 95 15 false 235 78 true 325 0 false 410 79 true 495 80 true 570 103
+driver 4 1 101 39 true 75 98 true 135 99 true 210 70 true 285 11 true 360 12 true 435 41 true 495 72 true 555 103
+driver 5 0 100 96 true 285 17 false 405 13 true 525 102
+driver 6 0 100 58 true 475 59 true 560 43 false 645 60 true 705 36 false 815 61 true 880 62 true 940 102
+driver 7 1 101 10 true 290 71 false 360 103
+driver 8 1 101 0 true 410 1 true 490 2 true 600 3 true 675 4 true 755 5 true 840 6 true 900 103
+driver 9 1 101 14 true 145 15 true 235 16 true 320 17 true 405 18 true 495 2 false 600 103
+driver 10 0 100 23 true 510 24 true 620 25 true 690 26 true 755 27 true 840 28 true 930 29 true 990 102
+driver 11 1 101 30 true 385 23 false 510 31 true 600 32 true 705 33 true 810 103
+driver 12 1 101 85 true 450 42 true 515 103
+driver 13 0 100 43 true 645 44 true 715 45 true 800 46 true 880 47 true 980 48 true 1065 102
+driver 14 1 101 49 true 455 24 false 620 50 true 695 51 true 780 52 true 840 53 true 910 103
+driver 15 0 100 63 true 230 64 true 335 21 false 520 65 true 585 66 true 675 102
+driver 16 0 100 67 true 485 55 false 575 68 true 645 33 false 810 69 true 875 102
+driver 17 1 101 84 true 215 71 true 360 103
+driver 18 0 100 73 true 565 66 false 675 74 true 750 57 false 870 75 true 940 76 true 1000 102
+driver 19 1 101 81 true 325 82 true 410 73 false 565 83 true 670 56 false 795 103
+driver 20 1 101 86 true 610 22 false 765 87 true 855 88 true 945 89 true 1010 90 true 1070 103
+driver 21 0 100 91 true 525 60 false 705 92 true 780 93 true 855 94 true 925 95 true 985 102
+driver 22 0 100 7 true 30 8 true 105 9 true 190 40 true 275 97 true 335 102

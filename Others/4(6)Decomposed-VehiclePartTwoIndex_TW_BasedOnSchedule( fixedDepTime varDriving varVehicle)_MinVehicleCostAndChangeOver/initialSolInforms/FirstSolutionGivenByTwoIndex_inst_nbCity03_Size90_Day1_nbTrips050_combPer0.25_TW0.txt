@@ -1,0 +1,35 @@
+//instance
+//nbCities:3; nbDepots:2; size:90 90;nbTrips:50;nbCombinedTrips6;maxFolderTimeSlotAsTimeWindow0;planningHorizon:0-1440;maxDriving:540;maxWorking:720
+//nbVehicles in the solution
+//8
+//nbDrivers in the solution
+//9
+//total cost of the solution
+//875000.0
+//vehicle routes in the solution: idVehicle, nbTrips, idStDepot, [idTrips depTime], idEnDepot
+vehicle 0 9 0 7 30 8 105 9 190 10 290 17 410 18 495 31 590 32 705 33 810 1
+vehicle 1 1 0 21 520 1
+vehicle 2 6 0 23 510 2 600 3 675 4 775 5 840 6 900 1
+vehicle 3 3 1 0 410 1 490 2 600 1
+vehicle 4 8 1 14 145 15 235 16 320 17 410 41 480 42 545 3 675 22 765 1
+vehicle 5 9 1 30 385 34 495 35 555 43 630 25 690 26 755 27 870 28 930 29 990 0
+vehicle 6 10 1 39 55 9 190 40 275 11 390 12 465 13 525 32 705 36 815 37 900 38 960 0
+vehicle 7 10 1 47 140 48 200 49 275 19 365 20 430 23 510 24 620 44 715 45 800 46 880 0
+//driver schedules in the solution: idDriver, nbTrips, idStDepot, [idTrips idVehicle status depTime]
+driver 0 7 1 0 3 true 410 1 3 true 490 2 3 true 600 3 4 true 675 4 2 true 775 5 2 true 840 6 2 true 900
+driver 1 5 0 23 7 true 510 24 7 true 620 44 7 true 715 45 7 true 800 46 7 true 880
+driver 2 8 0 34 5 true 495 35 5 true 555 43 5 true 630 25 5 true 690 26 5 true 755 27 5 true 870 28 5 true 930 29 5 true 990
+driver 3 7 0 7 0 true 30 8 0 true 105 9 6 true 190 40 6 true 275 11 6 true 390 12 6 true 465 13 6 true 525
+driver 4 6 1 47 7 true 140 48 7 true 200 49 7 true 275 19 7 true 365 20 7 true 430 21 1 true 520
+driver 5 4 0 32 6 false 705 36 6 true 815 37 6 true 900 38 6 true 960
+driver 6 8 1 14 4 true 145 15 4 true 235 16 4 true 320 17 4 false 410 18 0 true 495 31 0 true 590 32 6 true 705 33 0 true 810
+driver 7 5 1 30 5 true 385 1 3 false 490 2 3 false 600 3 4 false 675 22 4 true 765
+driver 8 6 1 39 6 true 55 9 6 false 190 10 0 true 290 17 4 true 410 41 4 true 480 42 4 true 545
+//combine parts: idTrip  idDrivingDriver idLeadingVehicle
+combine 2 0 3
+combine 3 0 4
+combine 9 3 6
+combine 17 8 4
+combine 23 1 7
+combine 32 6 6
+

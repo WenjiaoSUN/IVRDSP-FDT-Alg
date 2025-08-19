@@ -1,0 +1,7 @@
+//Here for varDriving  idOfDriver idOfDepot indexDepotAsStartPoint [idOfTrip whetherDrive startingTime]  indexDepotAsEndPoint
+driver 0 1 31 0 true 410 1 true 490 2 true 600 3 true 675 4 true 775 5 true 840 6 true 900 33
+driver 1 0 30 7 true 30 8 true 105 9 true 190 10 true 290 11 true 390 12 true 465 13 true 525 32
+driver 2 1 31 14 true 145 15 true 235 16 true 320 17 true 410 18 true 495 2 false 600 33
+driver 3 1 31 19 true 365 20 true 430 21 true 520 3 false 675 22 true 765 33
+driver 4 0 30 23 true 510 24 true 620 25 true 690 26 true 755 27 true 870 32
+driver 5 1 31 28 true 455 29 true 550 33

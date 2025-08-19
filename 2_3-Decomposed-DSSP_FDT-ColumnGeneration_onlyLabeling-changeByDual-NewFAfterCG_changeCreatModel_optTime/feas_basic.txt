@@ -1,0 +1,6 @@
+//Schedules: driver idDriver idDepot indexStarting tripWithWorkingStatus indexEnding 
+driver 0 1 11 0 true 310 2 true 440 4 true 540 13
+driver 1 1 11 5 true 645 7 true 750 8 true 920 13
+driver 2 0 10 1 true 370 3 true 500 12
+driver 3 0 10 6 true 650 9 true 935 12
+driver 4 0 10 4 true 540 5 true 645 12

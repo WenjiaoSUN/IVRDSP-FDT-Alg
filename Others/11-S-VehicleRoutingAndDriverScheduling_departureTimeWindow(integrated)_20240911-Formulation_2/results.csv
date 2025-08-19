@@ -1,0 +1,1 @@
+name,minPlanTime,maxPlanTime,shortConTimeDriver,shortConTimeVehicle,maxDrivingTime,maxWorkingTime,nbCities,nbTrips,nbNodes,maxPercentCombine,maxFolderOfTimeSlotAsTimeWindow,maxNbDriverAvailable,maxNbVehicleAvailable,lb,ub,gap(%),fixedCost,idleTimeCost,changeOverCost,nbDrivers,nbVehicles,elapsedTime(s),

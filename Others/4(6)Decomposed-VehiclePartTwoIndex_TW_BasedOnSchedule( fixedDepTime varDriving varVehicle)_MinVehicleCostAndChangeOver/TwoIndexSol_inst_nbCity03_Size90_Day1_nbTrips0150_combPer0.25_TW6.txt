@@ -1,0 +1,17 @@
+//The mini cost is including :431950.0
+//The fixed cost for vehicle and driver :420000.0
+//The idle cost for vehicle and driver :11800.0
+//The idle cost for all drivers :600.0
+//THe idle cost for all vehicles 11200.0
+//The changeover cost for all drivers: 150.0
+//Routes for all vehicles: idVehicle nbTripsInRoutes  [idTrip departureTime]
+vehicle 0 13 0 7 60 8 135 9 210 10 270 11 360 12 435 18 495 31 560 32 640 3 700 22 760 5 820 6 880 1
+vehicle 1 2 0 21 490 13 550 0
+vehicle 2 10 1 14 170 15 230 16 305 17 380 0 440 1 500 2 575 33 635 26 725 4 800 1
+vehicle 3 9 1 19 395 20 455 23 530 24 605 25 665 26 725 27 840 28 900 29 960 0
+//Schedules for all drivers: idDriver nbTripsInRoutes  [idTrip idVehicle status departureTime]
+driver 0 8 1 30 2147483647 true 415 21 1 true 490 13 1 true 550 32 0 true 640 3 0 true 700 22 0 true 760 5 0 true 820 6 0 true 880
+driver 1 7 1 19 3 true 395 20 3 true 455 23 3 true 530 24 3 true 605 25 3 true 665 26 3 true 725 4 2 true 800
+driver 2 8 0 7 0 true 60 8 0 true 135 9 0 true 210 10 0 true 270 11 0 true 360 12 0 true 435 18 0 true 495 31 0 true 560
+driver 3 9 1 14 2 true 170 15 2 true 230 16 2 true 305 17 2 true 380 0 2 true 440 1 2 true 500 2 2 true 575 33 2 true 635 34 2147483647 true 710
+driver 4 4 0 26 3 false 725 27 3 true 840 28 3 true 900 29 3 true 960
